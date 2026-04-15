@@ -15,8 +15,9 @@ const { links } = Astro.props;
 	<div class="hero-bg hero-bg-3" aria-hidden="true"></div>
 	<div class="hero-overlay" aria-hidden="true"></div>
 
+	<Header links={links} />
+
 	<div class="container hero-content">
-		<Header links={links} />
 		<div class="hero-text">
 			<p class="eyebrow">Northamptonshire Electrical Contractors</p>
 			<h1>Professional Design & Build Electrical Services</h1>
@@ -75,9 +76,9 @@ const { links } = Astro.props;
 	.hero-content {
 		position: relative;
 		z-index: 1;
-		min-height: 85vh;
-		display: grid;
-		grid-template-rows: auto 1fr;
+		min-height: calc(85vh - 6.5rem);
+		display: flex;
+		align-items: center;
 	}
 
 	.hero-text {

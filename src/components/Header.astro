@@ -3,38 +3,87 @@ import type { NavLink } from '../data/home';
 
 interface Props {
 	links: NavLink[];
+	topBarLabel?: string;
+	topBarAddress?: string;
 }
 
-const { links } = Astro.props;
+const {
+	links,
+	topBarLabel = 'Northamptonshire Electrical Contractors',
+	topBarAddress = '81A Charles Street, Kettering, Northants, NN16 9RL',
+} = Astro.props;
 ---
 
-<nav class="top-nav" aria-label="Main navigation">
-	<a href="/" class="brand" aria-label="NEC Ltd Electrical home">
-		<img src="/images/logo-blue.svg" alt="NEC Ltd Electrical" width="240" height="40" />
-	</a>
+<div class="site-header">
+	<div class="top-bar">
+		<div class="top-bar-inner">
+			<p>{topBarLabel}</p>
+			<p>{topBarAddress}</p>
+		</div>
+	</div>
 
-	<ul class="nav-list">
-		{
-			links.map((link) => (
-				<li>
-					<a href={link.href}>{link.label}</a>
-				</li>
-			))
-		}
-	</ul>
+	<div class="nav-wrap">
+		<nav class="top-nav" aria-label="Main navigation">
+			<a href="/" class="brand" aria-label="NEC Ltd Electrical home">
+				<img src="/images/logo-blue.svg" alt="NEC Ltd Electrical" width="240" height="40" />
+			</a>
 
-	<a href="#contact" class="btn btn-primary">Get a Quote</a>
-</nav>
+			<ul class="nav-list">
+				{
+					links.map((link) => (
+						<li>
+							<a href={link.href}>{link.label}</a>
+						</li>
+					))
+				}
+			</ul>
+
+			<a href="#contact" class="btn btn-primary">Get a Quote</a>
+		</nav>
+	</div>
+</div>
 
 <style>
-	.top-nav {
-		margin-top: 1rem;
+	.site-header {
+		position: relative;
+		z-index: 5;
+	}
+
+	.top-bar {
+		background: var(--blue);
+		color: var(--white);
+	}
+
+	.top-bar-inner {
+		width: min(100% - 2rem, 1400px);
+		margin-inline: auto;
+		min-height: 2.05rem;
 		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		font: 600 0.8rem/1 'League Spartan', Arial, sans-serif;
+		letter-spacing: 0.02em;
+	}
+
+	.top-bar-inner p {
+		margin: 0;
+	}
+
+	.nav-wrap {
+		width: min(100% - 2rem, 1400px);
+		margin: 0.85rem auto 0;
+	}
+
+	.top-nav {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
 		align-items: center;
 		gap: 2rem;
 		background: rgba(255, 255, 255, 0.95);
-		padding: 0.8rem 1rem;
-		border-radius: 999px;
+		padding: 0.9rem 1rem;
+		border-radius: 0.85rem;
+		border: 1px solid rgba(255, 255, 255, 0.65);
 	}
 
 	.brand {
@@ -49,16 +98,18 @@ const { links } = Astro.props;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
+		justify-content: center;
 		gap: 1.2rem;
 		font: 600 1.05rem/1 'League Spartan', Arial, sans-serif;
+		justify-self: center;
 	}
 
 	.nav-list a:hover {
 		color: var(--blue);
 	}
 
-	.top-nav .btn {
-		margin-left: auto;
+	.top-nav > .btn {
+		justify-self: end;
 	}
 
 	@media (max-width: 1120px) {
@@ -68,19 +119,37 @@ const { links } = Astro.props;
 	}
 
 	@media (max-width: 900px) {
+		.top-bar-inner {
+			font-size: 0.75rem;
+		}
+
 		.top-nav {
+			grid-template-columns: auto auto;
 			gap: 1rem;
+			justify-content: space-between;
 		}
 
 		.top-nav .btn {
-			margin-left: 0;
+			justify-self: auto;
 		}
 	}
 
 	@media (max-width: 640px) {
+		.top-bar-inner {
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: center;
+			padding: 0.4rem 0;
+			gap: 0.3rem;
+		}
+
+		.nav-wrap {
+			width: min(100% - 1rem, 1400px);
+		}
+
 		.top-nav {
-			border-radius: 0.8rem;
-			justify-content: space-between;
+			padding: 0.75rem;
+			border-radius: 0.6rem;
 		}
 
 		.top-nav .btn {
