@@ -91,6 +91,7 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 	h6 {
 		margin: 0;
 		font-family: 'League Spartan', Arial, sans-serif;
+		font-weight: 400;
 		color: var(--charcoal-100);
 	}
 
@@ -138,7 +139,7 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		gap: 0.4rem;
 		border: 1px solid transparent;
 		padding: 0.9rem 1.35rem;
-		border-radius: 0.55rem;
+		border-radius: 0;
 		font: 600 1rem/1 'League Spartan', Arial, sans-serif;
 		letter-spacing: 0.01em;
 		transition: all 0.2s ease;
@@ -177,7 +178,7 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		background: var(--white);
 		color: var(--charcoal-100);
 		padding: 0.5rem 0.85rem;
-		border-radius: 0.3rem;
+		border-radius: 0;
 		z-index: 1000;
 	}
 </style>

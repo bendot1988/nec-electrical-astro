@@ -54,10 +54,15 @@ const { posts } = Astro.props;
 	.news-card {
 		background: var(--white);
 		border: 1px solid #eceef5;
-		border-radius: 0.85rem;
 		padding: 0;
-		overflow: clip;
+		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
 		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.05);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.news-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 18px 34px rgba(21, 27, 44, 0.14);
 	}
 
 	.news-card img {
