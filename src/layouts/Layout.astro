@@ -121,6 +121,7 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 			const bootMotion = () => {
 				if (document.body?.dataset.motionBooted === 'true') return;
 				document.body.dataset.motionBooted = 'true';
+				document.documentElement.classList.add('motion-ready');
 				setupMotion();
 			};
 
@@ -258,6 +259,11 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 	}
 
 	[data-animate] {
+		opacity: 1;
+		transform: none;
+	}
+
+	.motion-ready [data-animate] {
 		opacity: 0;
 		transform: translate3d(0, var(--motion-distance), 0);
 		transition: opacity var(--motion-duration) var(--motion-ease), transform var(--motion-duration)
@@ -265,19 +271,19 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		will-change: opacity, transform;
 	}
 
-	[data-animate='fade-left'] {
+	.motion-ready [data-animate='fade-left'] {
 		transform: translate3d(calc(var(--motion-distance) * -1), 0, 0);
 	}
 
-	[data-animate='fade-right'] {
+	.motion-ready [data-animate='fade-right'] {
 		transform: translate3d(var(--motion-distance), 0, 0);
 	}
 
-	[data-animate='zoom-in'] {
+	.motion-ready [data-animate='zoom-in'] {
 		transform: scale(0.95);
 	}
 
-	[data-animate].is-visible {
+	.motion-ready [data-animate].is-visible {
 		opacity: 1;
 		transform: none;
 	}
