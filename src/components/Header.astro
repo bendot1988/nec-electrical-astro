@@ -62,7 +62,7 @@ const {
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
-		font: 600 0.8rem/1 'League Spartan', Arial, sans-serif;
+		font: 400 0.8rem/1 'League Spartan', Arial, sans-serif;
 		letter-spacing: 0.02em;
 	}
 
@@ -100,12 +100,25 @@ const {
 		align-items: center;
 		justify-content: center;
 		gap: 1.2rem;
-		font: 600 1.05rem/1 'League Spartan', Arial, sans-serif;
+		font: 400 1.05rem/1 'League Spartan', Arial, sans-serif;
 		justify-self: center;
 	}
 
+	.nav-list a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.52rem 0.75rem;
+		color: var(--charcoal-100);
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+		transition: background-color 0.2s var(--motion-ease), color 0.2s var(--motion-ease), transform 0.2s
+			var(--motion-ease);
+	}
+
 	.nav-list a:hover {
-		color: var(--blue);
+		background: var(--blue);
+		color: var(--white);
+		transform: translateY(-1px);
 	}
 
 	.top-nav > .btn {
