@@ -1,0 +1,106 @@
+---
+interface Props {
+	formAction?: string;
+}
+
+const { formAction = '#' } = Astro.props;
+---
+
+<form class="contact-form" method="post" action={formAction}>
+	<h3>Get in touch</h3>
+	<p>The quickest way to start your project is by using the form below.</p>
+
+	<!-- Placeholder for SendForm endpoint/token wiring -->
+	<input type="hidden" name="_provider" value="sendform" />
+
+	<label for="name">Name</label>
+	<input id="name" name="name" type="text" autocomplete="name" required />
+
+	<label for="email">Email</label>
+	<input id="email" name="email" type="email" autocomplete="email" required />
+
+	<label for="phone">Phone</label>
+	<input id="phone" name="phone" type="tel" autocomplete="tel" />
+
+	<label for="company">Company (optional)</label>
+	<input id="company" name="company" type="text" autocomplete="organization" />
+
+	<label for="service">Service required</label>
+	<select id="service" name="service">
+		<option value="Design & Technical">Design & Technical</option>
+		<option value="Power Infrastructure">Power Infrastructure</option>
+		<option value="Lighting Systems">Lighting Systems</option>
+		<option value="Security & Safety">Security & Safety</option>
+		<option value="Data & Communications">Data & Communications</option>
+		<option value="General Enquiry">General Enquiry</option>
+	</select>
+
+	<label for="message">Project details</label>
+	<textarea id="message" name="message" rows={4} required></textarea>
+
+	<label class="consent">
+		<input type="checkbox" name="consent" required />
+		<span>I consent to NEC Ltd Electrical storing my enquiry details to respond to this request.</span>
+	</label>
+
+	<button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<style>
+	.contact-form {
+		background: var(--blue);
+		padding: 1.35rem;
+		border-radius: 0.9rem;
+		display: grid;
+		gap: 0.6rem;
+	}
+
+	.contact-form p {
+		font-size: 0.95rem;
+		color: #e3e5ff;
+	}
+
+	.contact-form label {
+		font: 600 0.85rem/1 'League Spartan', Arial, sans-serif;
+		color: #f2f3ff;
+	}
+
+	.contact-form input,
+	.contact-form textarea,
+	.contact-form select {
+		border: 1px solid rgba(255, 255, 255, 0.35);
+		border-radius: 0.45rem;
+		padding: 0.7rem 0.75rem;
+		background: rgba(3, 3, 145, 0.3);
+		color: var(--white);
+		font: 400 0.95rem/1.3 'Open Sans', Arial, sans-serif;
+	}
+
+	.contact-form option {
+		color: var(--charcoal-100);
+	}
+
+	.contact-form input::placeholder,
+	.contact-form textarea::placeholder {
+		color: rgba(255, 255, 255, 0.72);
+	}
+
+	.contact-form button {
+		margin-top: 0.35rem;
+		background: var(--charcoal-100);
+	}
+
+	.consent {
+		display: flex;
+		gap: 0.5rem;
+		align-items: flex-start;
+	}
+
+	.consent input {
+		margin-top: 0.22rem;
+	}
+
+	.consent span {
+		font: 400 0.82rem/1.45 'Open Sans', Arial, sans-serif;
+	}
+</style>

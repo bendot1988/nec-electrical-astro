@@ -1,0 +1,70 @@
+---
+import type { ServiceCardItem } from '../data/home';
+
+interface Props {
+	service: ServiceCardItem;
+}
+
+const { service } = Astro.props;
+---
+
+<article class="service-card" data-service-card data-category={service.category}>
+	<img src={service.image} alt={service.title} loading="lazy" width="600" height="400" />
+	<div class="service-body">
+		<h3>{service.title}</h3>
+		<p>{service.description}</p>
+		<ul>
+			{service.points.map((point) => <li>{point}</li>)}
+		</ul>
+	</div>
+</article>
+
+<style>
+	.service-card {
+		background: var(--white);
+		border-radius: 0.85rem;
+		overflow: hidden;
+		box-shadow: 0 10px 30px rgba(20, 24, 38, 0.08);
+		border: 1px solid #eceef5;
+	}
+
+	.service-body {
+		padding: 1.05rem;
+	}
+
+	h3 {
+		font-size: 1.35rem;
+	}
+
+	p {
+		margin-top: 0.4rem;
+		font-size: 0.95rem;
+		color: var(--charcoal-400);
+	}
+
+	ul {
+		margin: 0.8rem 0 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	li {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.45rem;
+		font-size: 0.88rem;
+		line-height: 1.4;
+	}
+
+	li::before {
+		content: '';
+		width: 0.58rem;
+		height: 0.58rem;
+		border-radius: 50%;
+		background: var(--blue);
+		margin-top: 0.26rem;
+		flex-shrink: 0;
+	}
+</style>

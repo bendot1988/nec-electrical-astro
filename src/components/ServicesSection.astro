@@ -1,0 +1,112 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import ServiceFilter from './ServiceFilter.astro';
+import type { ServiceCardItem } from '../data/home';
+
+interface Props {
+	services: ServiceCardItem[];
+}
+
+const { services } = Astro.props;
+---
+
+<section id="services" class="section services">
+	<div class="container">
+		<h2 class="section-title">Comprehensive Electrical Services</h2>
+		<p class="section-subtitle">
+			We&apos;ve organized our extensive range of services to better serve your specific needs, from initial design
+			to final commissioning.
+		</p>
+
+		<ServiceFilter />
+
+		<div class="service-grid" data-service-grid>
+			{services.map((service) => <ServiceCard service={service} />)}
+		</div>
+		<p class="empty-state" data-service-empty hidden>No services match this filter.</p>
+	</div>
+</section>
+
+<script is:inline>
+	const filterRoots = document.querySelectorAll('[data-service-filter]');
+
+	filterRoots.forEach((root) => {
+		const section = root.closest('#services');
+		if (!section) return;
+
+		const buttons = root.querySelectorAll('[data-filter]');
+		const cards = section.querySelectorAll('[data-service-card]');
+		const emptyState = section.querySelector('[data-service-empty]');
+
+		const setFilter = (filter) => {
+			let visibleCount = 0;
+
+			cards.forEach((card) => {
+				const category = card.getAttribute('data-category');
+				const showCard = filter === 'all' || category === filter;
+				card.hidden = !showCard;
+				if (showCard) visibleCount += 1;
+			});
+
+			if (emptyState) {
+				emptyState.hidden = visibleCount > 0;
+			}
+		};
+
+		buttons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const filter = button.getAttribute('data-filter') || 'all';
+
+				buttons.forEach((item) => {
+					item.classList.remove('is-active');
+					item.setAttribute('aria-pressed', 'false');
+				});
+
+				button.classList.add('is-active');
+				button.setAttribute('aria-pressed', 'true');
+				setFilter(filter);
+			});
+		});
+
+		const defaultButton = root.querySelector('[data-filter="all"]');
+		if (defaultButton) {
+			defaultButton.classList.add('is-active');
+		}
+	});
+</script>
+
+<style>
+	.services {
+		background: var(--ghost-white);
+	}
+
+	.service-grid {
+		margin-top: 1.25rem;
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 1.2rem;
+	}
+
+	.empty-state {
+		margin-top: 1rem;
+		color: var(--charcoal-400);
+	}
+
+	@media (max-width: 1120px) {
+		.service-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 900px) {
+		.service-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 640px) {
+		.service-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

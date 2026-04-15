@@ -1,0 +1,83 @@
+---
+import type { NavLink } from '../data/home';
+
+interface Props {
+	links: NavLink[];
+}
+
+const { links } = Astro.props;
+---
+
+<footer id="locations" class="site-footer">
+	<div class="container footer-grid">
+		<div>
+			<img src="/images/logo-white.svg" alt="NEC Ltd Electrical" width="170" height="42" />
+			<p>
+				NICEIC Approved Contractor delivering high-quality design and build electrical services for the
+				industrial, commercial, and educational sectors.
+			</p>
+		</div>
+		<div>
+			<h3>Useful Links</h3>
+			<ul>
+				<li><a href="/">Home</a></li>
+				{
+					links.map((link) => (
+						<li>
+							<a href={link.href}>{link.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+		<div>
+			<h3>Contact Us</h3>
+			<ul>
+				<li><a href="tel:+441536417807">01536 417 807</a></li>
+				<li>81A Charles Street, Kettering, Northants, NN16 9RL</li>
+			</ul>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		background: #171824;
+		padding: 3rem 0;
+		color: #d1d4e1;
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		gap: 1.5rem;
+	}
+
+	h3 {
+		color: var(--white);
+		font-size: 1.05rem;
+	}
+
+	p {
+		margin-top: 0.9rem;
+		max-width: 44ch;
+	}
+
+	ul {
+		margin: 0.9rem 0 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	a:hover {
+		color: var(--white);
+	}
+
+	@media (max-width: 900px) {
+		.footer-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,0 +1,89 @@
+---
+import type { InfoCardItem } from '../data/home';
+
+interface Props {
+	items: InfoCardItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section id="safety" class="section">
+	<div class="container">
+		<p class="section-kicker">Compliance, Quality, and Safety</p>
+		<h2 class="section-title">Accreditations</h2>
+		<div class="card-grid">
+			{
+				items.map((item) => (
+					<article class="info-card">
+						{
+							item.image && (
+								<div class="badge-image-wrap">
+									<img src={item.image} alt={item.title} loading="lazy" width="96" height="96" class="badge-image" />
+								</div>
+							)
+						}
+						<h3>{item.title}</h3>
+						<p>{item.description}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.section-kicker {
+		font: 600 0.73rem/1 'Open Sans', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--blue);
+	}
+
+	.card-grid {
+		margin-top: 2rem;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.2rem;
+	}
+
+	.info-card {
+		background: var(--white);
+		border: 1px solid #eceef5;
+		border-radius: 0.85rem;
+		padding: 1.25rem;
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.05);
+	}
+
+	.badge-image-wrap {
+		display: inline-flex;
+		background: var(--ghost-white);
+		border-radius: 999px;
+		padding: 0.5rem;
+		border: 1px solid #eceef5;
+	}
+
+	.badge-image {
+		border-radius: 999px;
+	}
+
+	h3 {
+		margin-top: 0.9rem;
+		font-size: 1.45rem;
+		line-height: 1.08;
+		letter-spacing: -0.02em;
+	}
+
+	p {
+		margin-top: 0.8rem;
+		color: var(--charcoal-400);
+		font-size: 0.95rem;
+		line-height: 1.75;
+	}
+
+	@media (max-width: 900px) {
+		.card-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

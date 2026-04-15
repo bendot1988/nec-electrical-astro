@@ -1,0 +1,91 @@
+---
+import type { NavLink } from '../data/home';
+
+interface Props {
+	links: NavLink[];
+}
+
+const { links } = Astro.props;
+---
+
+<nav class="top-nav" aria-label="Main navigation">
+	<a href="/" class="brand" aria-label="NEC Ltd Electrical home">
+		<img src="/images/logo-blue.svg" alt="NEC Ltd Electrical" width="240" height="40" />
+	</a>
+
+	<ul class="nav-list">
+		{
+			links.map((link) => (
+				<li>
+					<a href={link.href}>{link.label}</a>
+				</li>
+			))
+		}
+	</ul>
+
+	<a href="#contact" class="btn btn-primary">Get a Quote</a>
+</nav>
+
+<style>
+	.top-nav {
+		margin-top: 1rem;
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		background: rgba(255, 255, 255, 0.95);
+		padding: 0.8rem 1rem;
+		border-radius: 999px;
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.nav-list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1.2rem;
+		font: 600 1.05rem/1 'League Spartan', Arial, sans-serif;
+	}
+
+	.nav-list a:hover {
+		color: var(--blue);
+	}
+
+	.top-nav .btn {
+		margin-left: auto;
+	}
+
+	@media (max-width: 1120px) {
+		.nav-list {
+			display: none;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.top-nav {
+			gap: 1rem;
+		}
+
+		.top-nav .btn {
+			margin-left: 0;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.top-nav {
+			border-radius: 0.8rem;
+			justify-content: space-between;
+		}
+
+		.top-nav .btn {
+			font-size: 0.9rem;
+			padding-inline: 1rem;
+		}
+	}
+</style>

@@ -1,0 +1,70 @@
+---
+const filters = [
+	{ value: 'all', label: 'All Services' },
+	{ value: 'design', label: 'Design & Technical' },
+	{ value: 'power', label: 'Power Infrastructure' },
+	{ value: 'lighting', label: 'Lighting Systems' },
+	{ value: 'security', label: 'Security & Safety' },
+	{ value: 'data', label: 'Data & Communications' },
+];
+---
+
+<div class="filter-wrap" data-service-filter>
+	<p class="filter-label">Filter services</p>
+	<div class="filter-buttons" role="toolbar" aria-label="Service categories">
+		{
+			filters.map((filter, index) => (
+				<button
+					type="button"
+					class="filter-btn"
+					data-filter={filter.value}
+					aria-pressed={index === 0 ? 'true' : 'false'}
+				>
+					{filter.label}
+				</button>
+			))
+		}
+	</div>
+</div>
+
+<style>
+	.filter-wrap {
+		margin-top: 1.25rem;
+	}
+
+	.filter-label {
+		font: 600 0.9rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--charcoal-400);
+	}
+
+	.filter-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.55rem;
+		margin-top: 0.7rem;
+	}
+
+	.filter-btn {
+		border: 1px solid #ced4e2;
+		background: var(--white);
+		color: var(--charcoal-300);
+		font: 600 0.9rem/1 'League Spartan', Arial, sans-serif;
+		padding: 0.6rem 0.8rem;
+		border-radius: 999px;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.filter-btn:hover {
+		border-color: var(--blue);
+		color: var(--blue);
+	}
+
+	.filter-btn.is-active {
+		background: var(--blue);
+		color: var(--white);
+		border-color: var(--blue);
+	}
+</style>

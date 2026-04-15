@@ -1,0 +1,92 @@
+---
+import type { NewsPostItem } from '../data/home';
+
+interface Props {
+	posts: NewsPostItem[];
+}
+
+const { posts } = Astro.props;
+---
+
+<section class="section news">
+	<div class="container">
+		<p class="section-kicker">News</p>
+		<h2 class="section-title">Latest Company News</h2>
+		<div class="news-grid">
+			{
+				posts.map((post) => (
+					<article class="news-card">
+						<a href={post.href} aria-label={post.title}>
+							<img src={post.image} alt={post.title} loading="lazy" width="640" height="420" />
+						</a>
+						<div class="news-body">
+							<h3>
+								<a href={post.href}>{post.title}</a>
+							</h3>
+							<p>{post.readTime}</p>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.news {
+		background: var(--ghost-white);
+	}
+
+	.section-kicker {
+		font: 600 0.73rem/1 'Open Sans', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--blue);
+	}
+
+	.news-grid {
+		margin-top: 2rem;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.2rem;
+	}
+
+	.news-card {
+		background: var(--white);
+		border: 1px solid #eceef5;
+		border-radius: 0.85rem;
+		padding: 0;
+		overflow: clip;
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.05);
+	}
+
+	.news-card img {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+	}
+
+	.news-body {
+		padding: 1rem;
+	}
+
+	h3 {
+		font-size: 1.2rem;
+	}
+
+	h3 a:hover {
+		color: var(--blue);
+	}
+
+	p {
+		margin-top: 0.5rem;
+		font: 400 0.9rem/1 'Open Sans', Arial, sans-serif;
+		color: var(--charcoal-400);
+	}
+
+	@media (max-width: 900px) {
+		.news-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

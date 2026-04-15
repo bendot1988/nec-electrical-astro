@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import WhyChooseSection from '../components/WhyChooseSection.astro';
+import AccreditationsSection from '../components/AccreditationsSection.astro';
+import NewsSection from '../components/NewsSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Footer from '../components/Footer.astro';
+import {
+	pageTitle,
+	pageDescription,
+	navLinks,
+	serviceCards,
+	differentiators,
+	accreditations,
+	newsPosts,
+	localBusinessSchema,
+	websiteSchema,
+} from '../data/home';
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical="https://dotwall.dev/nec/" ogImage="/images/hero-1.jpg">
+	<Fragment slot="head">
+		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+		<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+	</Fragment>
+
+	<Hero links={navLinks} />
+
+	<main id="main-content">
+		<ServicesSection services={serviceCards} />
+		<WhyChooseSection items={differentiators} />
+		<AccreditationsSection items={accreditations} />
+		<NewsSection posts={newsPosts} />
+		<ContactSection />
+	</main>
+
+	<Footer links={navLinks} />
+</Layout>
+
+<style>
+	@media (max-width: 900px) {
+		.section {
+			padding: 4rem 0;
+		}
+	}
+</style>

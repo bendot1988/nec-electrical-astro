@@ -1,0 +1,81 @@
+---
+import ContactForm from './ContactForm.astro';
+---
+
+<section id="contact" class="section contact">
+	<div class="container contact-grid">
+		<div class="contact-content">
+			<h2 class="section-title">Have a project in mind? Let&apos;s talk.</h2>
+			<p class="section-subtitle">
+				We are a commercially competitive and reliable NICEIC Approved Contractor based in the heart of the UK.
+				Get in touch with our professional team today to discuss your next project&apos;s needs, priorities, and
+				budget.
+			</p>
+			<ul class="contact-list">
+				<li>
+					<strong>Address</strong>
+					<span>81A Charles St, Kettering NN16 9RL, United Kingdom</span>
+				</li>
+				<li>
+					<strong>Phone Number</strong>
+					<a href="tel:+441536417807">01536 417 807</a>
+				</li>
+				<li>
+					<strong>Email</strong>
+					<a href="mailto:enquries@necltd.net">enquries@necltd.net</a>
+				</li>
+			</ul>
+		</div>
+
+		<ContactForm />
+	</div>
+</section>
+
+<style>
+	.contact {
+		background: var(--charcoal-100);
+		color: var(--ghost-white);
+	}
+
+	.contact .section-title,
+	.contact h3 {
+		color: var(--white);
+	}
+
+	.contact .section-subtitle {
+		color: #d5d8e2;
+	}
+
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr 0.85fr;
+		gap: 1.6rem;
+	}
+
+	.contact-list {
+		margin: 1.3rem 0 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.9rem;
+	}
+
+	.contact-list li {
+		display: grid;
+		gap: 0.12rem;
+	}
+
+	.contact-list strong {
+		font: 600 1rem/1 'League Spartan', Arial, sans-serif;
+	}
+
+	.contact-list a {
+		color: var(--white);
+	}
+
+	@media (max-width: 900px) {
+		.contact-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
