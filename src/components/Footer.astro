@@ -79,7 +79,7 @@ const currentYear = new Date().getFullYear();
 		background-size: cover;
 		padding: 0;
 		color: #d1d4e1;
-		border-top: 1px solid var(--footer-divider);
+		margin-top: -1px;
 	}
 
 	.site-footer::before {
@@ -89,6 +89,18 @@ const currentYear = new Date().getFullYear();
 		background: linear-gradient(145deg, rgba(19, 20, 33, 0.96), rgba(24, 24, 44, 0.96));
 		pointer-events: none;
 		z-index: 0;
+	}
+
+	.site-footer::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: -2px;
+		height: 3px;
+		background: linear-gradient(145deg, rgba(19, 20, 33, 0.96), rgba(24, 24, 44, 0.96));
+		pointer-events: none;
+		z-index: 1;
 	}
 
 	.footer-grid,
