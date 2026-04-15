@@ -47,7 +47,9 @@ const filters = [
 	}
 
 	.filter-btn {
-		border: 1px solid #ced4e2;
+		position: relative;
+		isolation: isolate;
+		border: 0;
 		background: var(--white);
 		color: var(--charcoal-300);
 		font: 600 0.9rem/1 'League Spartan', Arial, sans-serif;
@@ -59,8 +61,17 @@ const filters = [
 			var(--motion-ease), color 0.2s var(--motion-ease);
 	}
 
+	.filter-btn::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+		border: 1px solid var(--filter-border, #ced4e2);
+		pointer-events: none;
+	}
+
 	.filter-btn:hover {
-		border-color: var(--blue);
+		--filter-border: var(--blue);
 		background: var(--blue);
 		color: var(--white);
 		transform: translateY(-1px);
@@ -69,6 +80,6 @@ const filters = [
 	.filter-btn.is-active {
 		background: var(--blue);
 		color: var(--white);
-		border-color: var(--blue);
+		--filter-border: var(--blue);
 	}
 </style>

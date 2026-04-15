@@ -226,7 +226,8 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		align-items: center;
 		justify-content: center;
 		gap: 0.4rem;
-		border: 1px solid transparent;
+		position: relative;
+		isolation: isolate;
 		padding: 0.9rem 1.35rem;
 		border-radius: 0;
 		clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
@@ -237,7 +238,18 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		cursor: pointer;
 	}
 
+	.btn::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+		border: 1px solid var(--btn-border, transparent);
+		pointer-events: none;
+		z-index: 1;
+	}
+
 	.btn-primary {
+		--btn-border: transparent;
 		background: var(--blue);
 		color: var(--white);
 		box-shadow: 0 8px 18px rgba(0, 0, 254, 0.24);
@@ -249,14 +261,14 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 	}
 
 	.btn-outline {
-		border-color: rgba(255, 255, 255, 0.45);
+		--btn-border: rgba(255, 255, 255, 0.45);
 		color: var(--white);
 		background: transparent;
 	}
 
 	.btn-outline:hover {
 		transform: translateY(-1px);
-		border-color: var(--blue);
+		--btn-border: var(--blue);
 		background: var(--blue);
 		color: var(--white);
 	}

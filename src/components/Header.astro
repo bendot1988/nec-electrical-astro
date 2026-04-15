@@ -28,17 +28,19 @@ const {
 				<img src="/images/logo-blue.svg" alt="NEC Ltd Electrical" width="240" height="40" />
 			</a>
 
-			<ul class="nav-list">
-				{
-					links.map((link) => (
-						<li>
-							<a href={link.href}>{link.label}</a>
-						</li>
-					))
-				}
-			</ul>
+			<div class="nav-actions">
+				<ul class="nav-list">
+					{
+						links.map((link) => (
+							<li>
+								<a href={link.href}>{link.label}</a>
+							</li>
+						))
+					}
+				</ul>
 
-			<a href="#contact" class="btn btn-primary">Get a Quote</a>
+				<a href="#contact" class="btn btn-primary">Get a Quote</a>
+			</div>
 		</nav>
 	</div>
 </div>
@@ -77,7 +79,7 @@ const {
 
 	.top-nav {
 		display: grid;
-		grid-template-columns: auto 1fr auto;
+		grid-template-columns: auto 1fr;
 		align-items: center;
 		gap: 2rem;
 		background: rgba(255, 255, 255, 0.95);
@@ -91,6 +93,13 @@ const {
 		align-items: center;
 	}
 
+	.nav-actions {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.7rem;
+		justify-self: end;
+	}
+
 	.nav-list {
 		margin: 0;
 		padding: 0;
@@ -101,7 +110,7 @@ const {
 		justify-content: center;
 		gap: 1.2rem;
 		font: 400 1.05rem/1 'League Spartan', Arial, sans-serif;
-		justify-self: center;
+		justify-self: end;
 	}
 
 	.nav-list a {
@@ -121,10 +130,6 @@ const {
 		transform: translateY(-1px);
 	}
 
-	.top-nav > .btn {
-		justify-self: end;
-	}
-
 	@media (max-width: 1120px) {
 		.nav-list {
 			display: none;
@@ -137,13 +142,13 @@ const {
 		}
 
 		.top-nav {
-			grid-template-columns: auto auto;
+			grid-template-columns: auto 1fr;
 			gap: 1rem;
 			justify-content: space-between;
 		}
 
-		.top-nav .btn {
-			justify-self: auto;
+		.nav-actions {
+			justify-self: end;
 		}
 	}
 
