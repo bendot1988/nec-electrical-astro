@@ -48,8 +48,7 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		<a class="skip-link" href="#main-content">Skip to content</a>
 		<slot />
 		<script is:inline>
-			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-			const selectors = [
+			const MOTION_SELECTORS = [
 				'.section .section-kicker',
 				'.section .section-title',
 				'.section .section-subtitle',
@@ -60,44 +59,78 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 				'.footer-col',
 			];
 
-			for (const selector of selectors) {
-				const nodes = document.querySelectorAll(selector);
-				nodes.forEach((node) => {
-					if (!node.hasAttribute('data-animate')) {
-						node.setAttribute('data-animate', 'fade-up');
-					}
-				});
-			}
+			const applyDefaultMotionTargets = () => {
+				for (const selector of MOTION_SELECTORS) {
+					const nodes = document.querySelectorAll(selector);
+					nodes.forEach((node) => {
+						if (!node.hasAttribute('data-animate')) {
+							node.setAttribute('data-animate', 'fade-up');
+						}
+					});
+				}
+			};
 
-			const animatedNodes = document.querySelectorAll('[data-animate]');
-			if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-				animatedNodes.forEach((node) => node.classList.add('is-visible'));
-			} else {
+			const applyStaggerDelays = () => {
+				const staggerParents = document.querySelectorAll('[data-animate-stagger]');
+				staggerParents.forEach((parent) => {
+					const step = Number.parseFloat(parent.getAttribute('data-animate-stagger') ?? '0.08');
+					const children = parent.querySelectorAll(':scope > [data-animate]');
+					children.forEach((child, index) => {
+						if (!child.hasAttribute('data-animate-delay')) {
+							child.setAttribute('data-animate-delay', `${index * step}`);
+						}
+					});
+				});
+			};
+
+			const revealNode = (node) => {
+				const delay = Number.parseFloat(node.getAttribute('data-animate-delay') ?? '0');
+				if (Number.isFinite(delay) && delay > 0) {
+					node.style.transitionDelay = `${delay}s`;
+				}
+				node.classList.add('is-visible');
+			};
+
+			const setupMotion = () => {
+				applyDefaultMotionTargets();
+				applyStaggerDelays();
+
+				const animatedNodes = document.querySelectorAll('[data-animate]');
+				if (!('IntersectionObserver' in window)) {
+					animatedNodes.forEach((node) => revealNode(node));
+					return;
+				}
+
 				const observer = new IntersectionObserver(
 					(entries, instance) => {
 						entries.forEach((entry) => {
 							if (!entry.isIntersecting) return;
-							const node = entry.target;
-							const delay = Number.parseFloat(node.getAttribute('data-animate-delay') ?? '0');
-							if (delay > 0) {
-								node.style.transitionDelay = `${delay}s`;
-							}
-							node.classList.add('is-visible');
-							instance.unobserve(node);
+							revealNode(entry.target);
+							instance.unobserve(entry.target);
 						});
 					},
-					{ threshold: 0.2, rootMargin: '0px 0px -8% 0px' },
+					{ threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
 				);
 
-				animatedNodes.forEach((node, index) => {
-					const parent = node.parentElement;
-					if (parent?.hasAttribute('data-animate-stagger') && !node.hasAttribute('data-animate-delay')) {
-						const step = Number.parseFloat(parent.getAttribute('data-animate-stagger') ?? '0.08');
-						node.setAttribute('data-animate-delay', `${index * step}`);
-					}
+				animatedNodes.forEach((node) => {
+					if (node.classList.contains('is-visible')) return;
 					observer.observe(node);
 				});
+			};
+
+			const bootMotion = () => {
+				if (document.body?.dataset.motionBooted === 'true') return;
+				document.body.dataset.motionBooted = 'true';
+				setupMotion();
+			};
+
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', bootMotion, { once: true });
+			} else {
+				bootMotion();
 			}
+			document.addEventListener('astro:page-load', setupMotion);
+			window.addEventListener('pageshow', setupMotion);
 		</script>
 	</body>
 </html>
@@ -253,16 +286,6 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		html,
 		body {
 			scroll-behavior: auto;
-		}
-
-		[data-animate] {
-			opacity: 1;
-			transform: none;
-			transition: none;
-		}
-
-		.btn {
-			transition: none;
 		}
 	}
 
