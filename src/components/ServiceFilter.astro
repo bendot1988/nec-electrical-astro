@@ -53,13 +53,17 @@ const filters = [
 		font: 600 0.9rem/1 'League Spartan', Arial, sans-serif;
 		padding: 0.6rem 0.8rem;
 		border-radius: 0;
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: transform 0.2s var(--motion-ease), background-color 0.2s var(--motion-ease), border-color 0.2s
+			var(--motion-ease), color 0.2s var(--motion-ease);
 	}
 
 	.filter-btn:hover {
 		border-color: var(--blue);
-		color: var(--blue);
+		background: var(--blue);
+		color: var(--white);
+		transform: translateY(-1px);
 	}
 
 	.filter-btn.is-active {
