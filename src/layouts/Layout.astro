@@ -166,6 +166,27 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		background: rgba(255, 255, 255, 0.12);
 	}
 
+	.brand-line-box {
+		position: relative;
+	}
+
+	.brand-line-box::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 5px;
+		background: var(--blue);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.28s ease;
+	}
+
+	.brand-line-box:hover::after {
+		transform: scaleX(1);
+	}
+
 	.skip-link {
 		position: absolute;
 		left: -1000px;

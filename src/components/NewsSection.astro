@@ -15,7 +15,7 @@ const { posts } = Astro.props;
 		<div class="news-grid">
 			{
 				posts.map((post) => (
-					<article class="news-card">
+					<article class="news-card brand-line-box">
 						<a href={post.href} aria-label={post.title}>
 							<img src={post.image} alt={post.title} loading="lazy" width="640" height="420" />
 						</a>

@@ -8,7 +8,7 @@ interface Props {
 const { service } = Astro.props;
 ---
 
-<article class="service-card" data-service-card data-category={service.category}>
+<article class="service-card brand-line-box" data-service-card data-category={service.category}>
 	<img src={service.image} alt={service.title} loading="lazy" width="600" height="400" />
 	<div class="service-body">
 		<h3>{service.title}</h3>
@@ -21,7 +21,6 @@ const { service } = Astro.props;
 
 <style>
 	.service-card {
-		position: relative;
 		background: var(--white);
 		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
 		box-shadow: 0 10px 30px rgba(20, 24, 38, 0.08);
@@ -29,26 +28,9 @@ const { service } = Astro.props;
 		transition: transform 0.25s ease, box-shadow 0.25s ease;
 	}
 
-	.service-card::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		height: 5px;
-		background: var(--blue);
-		transform: scaleX(0);
-		transform-origin: left;
-		transition: transform 0.28s ease;
-	}
-
 	.service-card:hover {
 		transform: translateY(-6px);
 		box-shadow: 0 18px 36px rgba(20, 24, 38, 0.15);
-	}
-
-	.service-card:hover::after {
-		transform: scaleX(1);
 	}
 
 	.service-card img {

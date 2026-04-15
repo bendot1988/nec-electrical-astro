@@ -5,6 +5,7 @@ import ContactForm from './ContactForm.astro';
 <section id="contact" class="section contact">
 	<div class="container contact-grid">
 		<div class="contact-content">
+			<p class="section-kicker">Contact</p>
 			<h2 class="section-title">Have a project in mind? Let&apos;s talk.</h2>
 			<p class="section-subtitle">
 				We are a commercially competitive and reliable NICEIC Approved Contractor based in the heart of the UK.
@@ -13,16 +14,39 @@ import ContactForm from './ContactForm.astro';
 			</p>
 			<ul class="contact-list">
 				<li>
-					<strong>Address</strong>
-					<span>81A Charles St, Kettering NN16 9RL, United Kingdom</span>
+					<div class="icon-box" aria-hidden="true">
+						<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8">
+							<path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" />
+							<circle cx="12" cy="10" r="2.3" />
+						</svg>
+					</div>
+					<div>
+						<strong>Address</strong>
+						<span>81A Charles St, Kettering NN16 9RL, United Kingdom</span>
+					</div>
 				</li>
 				<li>
-					<strong>Phone Number</strong>
-					<a href="tel:+441536417807">01536 417 807</a>
+					<div class="icon-box" aria-hidden="true">
+						<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8">
+							<path d="M22 16.92V20a2 2 0 0 1-2.18 2A19.86 19.86 0 0 1 11.2 18.8 19.5 19.5 0 0 1 5.2 12.8 19.86 19.86 0 0 1 2 4.18 2 2 0 0 1 4 2h3.09a2 2 0 0 1 2 1.72c.12.9.34 1.79.66 2.63a2 2 0 0 1-.45 2.11L8 9.8a16 16 0 0 0 6.2 6.2l1.34-1.3a2 2 0 0 1 2.11-.45c.84.32 1.73.54 2.63.66A2 2 0 0 1 22 16.92Z" />
+						</svg>
+					</div>
+					<div>
+						<strong>Phone Number</strong>
+						<a href="tel:+441536417807">01536 417 807</a>
+					</div>
 				</li>
 				<li>
-					<strong>Email</strong>
-					<a href="mailto:enquries@necltd.net">enquries@necltd.net</a>
+					<div class="icon-box" aria-hidden="true">
+						<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8">
+							<rect x="3" y="5" width="18" height="14" />
+							<path d="m3 7 9 6 9-6" />
+						</svg>
+					</div>
+					<div>
+						<strong>Email</strong>
+						<a href="mailto:enquries@necltd.net">enquries@necltd.net</a>
+					</div>
 				</li>
 			</ul>
 		</div>
@@ -33,8 +57,14 @@ import ContactForm from './ContactForm.astro';
 
 <style>
 	.contact {
-		background: var(--charcoal-100);
+		position: relative;
 		color: var(--ghost-white);
+		background:
+			linear-gradient(140deg, rgba(18, 20, 34, 0.96), rgba(27, 27, 44, 0.95)),
+			url('/images/uk-dots-map.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
 	}
 
 	.contact .section-title,
@@ -44,6 +74,13 @@ import ContactForm from './ContactForm.astro';
 
 	.contact .section-subtitle {
 		color: #d5d8e2;
+	}
+
+	.section-kicker {
+		font: 600 0.73rem/1 'Open Sans', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--blue);
 	}
 
 	.contact-grid {
@@ -62,20 +99,48 @@ import ContactForm from './ContactForm.astro';
 
 	.contact-list li {
 		display: grid;
-		gap: 0.12rem;
+		grid-template-columns: 78px 1fr;
+		align-items: center;
+		gap: 0.75rem;
 	}
 
 	.contact-list strong {
 		font: 600 1rem/1 'League Spartan', Arial, sans-serif;
+		display: block;
 	}
 
 	.contact-list a {
 		color: var(--white);
 	}
 
+	.contact-list span,
+	.contact-list a {
+		display: block;
+		margin-top: 0.25rem;
+	}
+
+	.icon-box {
+		width: 78px;
+		height: 78px;
+		display: grid;
+		place-items: center;
+		background: var(--blue);
+		color: var(--white);
+		clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+	}
+
 	@media (max-width: 900px) {
 		.contact-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.contact-list li {
+			grid-template-columns: 64px 1fr;
+		}
+
+		.icon-box {
+			width: 64px;
+			height: 64px;
 		}
 	}
 </style>

@@ -52,6 +52,7 @@ const { links } = Astro.props;
 		background-position: center;
 		opacity: 0;
 		animation: heroFade 18s linear infinite;
+		will-change: opacity;
 	}
 
 	.hero-bg-1 {
@@ -114,15 +115,14 @@ const { links } = Astro.props;
 	}
 
 	@keyframes heroFade {
-		0%,
-		33.333% {
+		0% {
 			opacity: 0;
 		}
 		8%,
-		25% {
+		30% {
 			opacity: 1;
 		}
-		33.334%,
+		41.333%,
 		100% {
 			opacity: 0;
 		}
