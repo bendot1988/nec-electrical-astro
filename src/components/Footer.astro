@@ -9,7 +9,7 @@ const { links } = Astro.props;
 ---
 
 <footer id="locations" class="site-footer">
-	<div class="container footer-grid">
+	<div class="container footer-grid" data-animate="fade-up" data-animate-stagger="0.08">
 		<div class="footer-col">
 			<img src="/images/logo-white.svg" alt="NEC Ltd Electrical" width="170" height="42" />
 			<p>
@@ -53,7 +53,7 @@ const { links } = Astro.props;
 			</ul>
 		</div>
 	</div>
-	<div class="container footer-bottom">
+	<div class="container footer-bottom" data-animate="fade-up" data-animate-delay="0.24">
 		<p>dotwall</p>
 		<p>Terms of Use | Privacy Policy</p>
 	</div>
@@ -61,15 +61,30 @@ const { links } = Astro.props;
 
 <style>
 	.site-footer {
-		background:
-			linear-gradient(145deg, rgba(19, 20, 33, 0.96), rgba(24, 24, 44, 0.96)),
-			url('/images/uk-dots-map.png');
+		position: relative;
+		isolation: isolate;
+		background: #111320 url('/images/uk-dots-map.png');
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: cover;
 		padding: 0;
 		color: #d1d4e1;
 		border-top: 1px solid rgba(255, 255, 255, 0.12);
+	}
+
+	.site-footer::before {
+		content: '';
+		position: absolute;
+		inset: -1px;
+		background: linear-gradient(145deg, rgba(19, 20, 33, 0.96), rgba(24, 24, 44, 0.96));
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.footer-grid,
+	.footer-bottom {
+		position: relative;
+		z-index: 1;
 	}
 
 	.footer-grid {

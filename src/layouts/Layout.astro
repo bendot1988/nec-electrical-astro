@@ -47,6 +47,58 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 	<body>
 		<a class="skip-link" href="#main-content">Skip to content</a>
 		<slot />
+		<script is:inline>
+			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			const selectors = [
+				'.section .section-kicker',
+				'.section .section-title',
+				'.section .section-subtitle',
+				'.service-card',
+				'.info-card',
+				'.news-card',
+				'.contact-form',
+				'.footer-col',
+			];
+
+			for (const selector of selectors) {
+				const nodes = document.querySelectorAll(selector);
+				nodes.forEach((node) => {
+					if (!node.hasAttribute('data-animate')) {
+						node.setAttribute('data-animate', 'fade-up');
+					}
+				});
+			}
+
+			const animatedNodes = document.querySelectorAll('[data-animate]');
+			if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+				animatedNodes.forEach((node) => node.classList.add('is-visible'));
+			} else {
+				const observer = new IntersectionObserver(
+					(entries, instance) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+							const node = entry.target;
+							const delay = Number.parseFloat(node.getAttribute('data-animate-delay') ?? '0');
+							if (delay > 0) {
+								node.style.transitionDelay = `${delay}s`;
+							}
+							node.classList.add('is-visible');
+							instance.unobserve(node);
+						});
+					},
+					{ threshold: 0.2, rootMargin: '0px 0px -8% 0px' },
+				);
+
+				animatedNodes.forEach((node, index) => {
+					const parent = node.parentElement;
+					if (parent?.hasAttribute('data-animate-stagger') && !node.hasAttribute('data-animate-delay')) {
+						const step = Number.parseFloat(parent.getAttribute('data-animate-stagger') ?? '0.08');
+						node.setAttribute('data-animate-delay', `${index * step}`);
+					}
+					observer.observe(node);
+				});
+			}
+		</script>
 	</body>
 </html>
 
@@ -61,6 +113,9 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		--white: #ffffff;
 		--blue: #0000fe;
 		--page-max: 1200px;
+		--motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+		--motion-duration: 0.72s;
+		--motion-distance: 26px;
 	}
 
 	*,
@@ -142,7 +197,8 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		border-radius: 0;
 		font: 600 1rem/1 'League Spartan', Arial, sans-serif;
 		letter-spacing: 0.01em;
-		transition: all 0.2s ease;
+		transition: transform 0.22s var(--motion-ease), filter 0.22s var(--motion-ease), background-color 0.22s
+			var(--motion-ease), border-color 0.22s var(--motion-ease), color 0.22s var(--motion-ease);
 		cursor: pointer;
 	}
 
@@ -152,6 +208,7 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 	}
 
 	.btn-primary:hover {
+		transform: translateY(-1px);
 		filter: brightness(1.08);
 	}
 
@@ -162,8 +219,51 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 	}
 
 	.btn-outline:hover {
+		transform: translateY(-1px);
 		border-color: var(--white);
 		background: rgba(255, 255, 255, 0.12);
+	}
+
+	[data-animate] {
+		opacity: 0;
+		transform: translate3d(0, var(--motion-distance), 0);
+		transition: opacity var(--motion-duration) var(--motion-ease), transform var(--motion-duration)
+			var(--motion-ease);
+		will-change: opacity, transform;
+	}
+
+	[data-animate='fade-left'] {
+		transform: translate3d(calc(var(--motion-distance) * -1), 0, 0);
+	}
+
+	[data-animate='fade-right'] {
+		transform: translate3d(var(--motion-distance), 0, 0);
+	}
+
+	[data-animate='zoom-in'] {
+		transform: scale(0.95);
+	}
+
+	[data-animate].is-visible {
+		opacity: 1;
+		transform: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html,
+		body {
+			scroll-behavior: auto;
+		}
+
+		[data-animate] {
+			opacity: 1;
+			transform: none;
+			transition: none;
+		}
+
+		.btn {
+			transition: none;
+		}
 	}
 
 	.brand-line-box {

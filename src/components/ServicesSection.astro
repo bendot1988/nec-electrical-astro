@@ -20,7 +20,7 @@ const { services } = Astro.props;
 
 		<ServiceFilter />
 
-		<div class="service-grid" data-service-grid>
+		<div class="service-grid" data-service-grid data-animate-stagger="0.07">
 			{services.map((service) => <ServiceCard service={service} />)}
 		</div>
 		<p class="empty-state" data-service-empty hidden>No services match this filter.</p>

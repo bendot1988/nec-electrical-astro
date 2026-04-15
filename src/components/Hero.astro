@@ -18,14 +18,14 @@ const { links } = Astro.props;
 	<Header links={links} />
 
 	<div class="container hero-content">
-		<div class="hero-text">
-			<p class="eyebrow">Northamptonshire Electrical Contractors</p>
-			<h1>Professional Design & Build Electrical Services</h1>
-			<p>
+		<div class="hero-text" data-animate="fade-left">
+			<p class="eyebrow" data-animate="fade-up" data-animate-delay="0.08">Northamptonshire Electrical Contractors</p>
+			<h1 data-animate="fade-up" data-animate-delay="0.14">Professional Design & Build Electrical Services</h1>
+			<p data-animate="fade-up" data-animate-delay="0.2">
 				Delivering fully supported electrical installations from design to completion for industrial, commercial,
 				and educational sectors.
 			</p>
-			<div class="hero-actions">
+			<div class="hero-actions" data-animate="fade-up" data-animate-delay="0.26">
 				<a href="#contact" class="btn btn-primary">Start Your Project Enquiry</a>
 				<a href="#services" class="btn btn-outline">Our Expertise</a>
 			</div>
