@@ -1,0 +1,298 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceWhyChooseSection from '../../components/ServiceWhyChooseSection.astro';
+import ServiceFaqSection from '../../components/ServiceFaqSection.astro';
+import { navLinks } from '../../data/home';
+
+const pageTitle = 'Power Infrastructure Services | NEC Ltd Electrical';
+const pageDescription =
+	'Complete power infrastructure services from NEC Ltd Electrical, including HV/LV distribution, power installation, cable management, PV systems, and lightning protection.';
+const homeAnchors = navLinks.map((link) => ({ ...link, href: link.href.startsWith('/') ? link.href : `/${link.href}` }));
+
+const powerHighlights = [
+	{
+		title: 'HV Distribution & Switchgear',
+		description:
+			'Design and installation of high-voltage distribution systems including substations, ring main units, transformers, and HV switchgear in full compliance with Electricity at Work Regulations and DNO requirements.',
+		icon: 'bolt',
+	},
+	{
+		title: 'LV Distribution & Switchgear',
+		description:
+			'Full low-voltage distribution design including main switchboards, distribution boards, metering panels, and busbar systems for new-build, refurbishment, and upgrade projects.',
+		icon: 'pen',
+	},
+	{
+		title: 'Power Installation',
+		description:
+			'General power installation across commercial and industrial sites including three-phase supplies, motor circuits, containment systems, and dedicated power for plant and equipment.',
+		icon: 'check',
+	},
+	{
+		title: 'Cable Management',
+		description:
+			'Specification and installation of cable management systems including trunking, tray, basket, and conduit designed to BS 7671 and coordinated with other building services.',
+		icon: 'docs',
+	},
+	{
+		title: 'PV Installation',
+		description:
+			'Commercial photovoltaic design and installation including grid-tied systems, string and microinverter setups, generation metering, and G99 DNO applications to maximise savings.',
+		icon: 'docs',
+	},
+	{
+		title: 'Lightning Protection',
+		description:
+			'BS EN 62305-compliant lightning protection systems including risk assessments, air termination networks, down conductors, earthing, and surge protection devices.',
+		icon: 'docs',
+	},
+];
+
+const whyChooseItems = [
+	{
+		number: '01',
+		title: 'Single Team Delivery',
+		description:
+			'From HV strategy to final commissioning, one coordinated team handles design and installation to reduce handover risk and keep delivery consistent.',
+	},
+	{
+		number: '02',
+		title: 'Compliance from Day One',
+		description:
+			'All systems are designed and installed to current standards, with documented testing, certification, and practical compliance support throughout the project.',
+	},
+	{
+		number: '03',
+		title: 'Programme & Cost Control',
+		description:
+			'Early design coordination and value engineering help avoid clashes, limit rework, and keep power infrastructure packages on programme and on budget.',
+	},
+	{
+		number: '04',
+		title: 'Commercial-Scale Capability',
+		description:
+			'We support industrial, commercial, and educational projects with scalable power solutions that remain reliable as operational demands grow.',
+	},
+];
+
+const faqItems = [
+	{
+		question: 'Do you provide both HV and LV design as part of one package?',
+		answer:
+			'Yes. We deliver coordinated HV and LV design under one scope, including switchgear strategy, containment routes, metering, and commissioning requirements.',
+	},
+	{
+		question: 'Can you deliver PV installations alongside core power infrastructure?',
+		answer:
+			'Absolutely. We integrate PV design and installation with the wider electrical package, including generation metering, network applications, and final commissioning.',
+	},
+	{
+		question: 'How do you ensure power systems remain compliant and documented?',
+		answer:
+			'We complete full testing, inspection, and certification in line with applicable standards, then provide structured O&M documentation at handover for ongoing maintenance.',
+	},
+	{
+		question: 'Do you support phased projects and live operational sites?',
+		answer:
+			'Yes. We regularly plan phased delivery for occupied or live environments, with clear sequencing and temporary supply considerations to minimise disruption.',
+	},
+];
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonical="https://dotwall.dev/nec/services/power-infrastructure/"
+	ogImage="/images/service-power-hero.png"
+>
+	<Header links={homeAnchors} ctaHref="/#contact" />
+
+	<main id="main-content">
+		<section class="service-hero">
+			<div class="service-hero-bg" aria-hidden="true"></div>
+			<div class="service-hero-overlay" aria-hidden="true"></div>
+			<div class="container service-hero-content">
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<a href="/#services">Service</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">Power Infrastructure</span>
+				</nav>
+				<h1>Power Infrastructure</h1>
+			</div>
+		</section>
+
+		<section class="section service-intro">
+			<div class="container">
+				<p class="section-kicker">
+					<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+						<path
+							fill="currentColor"
+							d="M13.2 2.8c.2-.5-.5-.9-.8-.4L6.7 12.1a.5.5 0 0 0 .4.8h3.1L9.5 21c-.1.6.6.9.9.4l6.8-10.7a.5.5 0 0 0-.4-.8h-3.4l-.2-7.1Z"
+						></path>
+					</svg>
+					What we provide
+				</p>
+				<h2 class="section-title">Complete Power Infrastructure Services</h2>
+				<p class="section-subtitle">
+					From HV substation design through to cable management and PV installation, we deliver the full electrical
+					power package under one roof, eliminating coordination risks from multiple contractors.
+				</p>
+
+				<div class="highlight-grid" data-animate-stagger="0.07">
+					{
+						powerHighlights.map((item) => (
+							<article class="highlight-card brand-line-box" data-animate="fade-up">
+								<div class="icon-wrap" aria-hidden="true">
+									{
+										item.icon === 'bolt' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="M12 2 7 12h4l-1 10 7-12h-4l1-8Z"></path>
+											</svg>
+										)
+									}
+									{
+										item.icon === 'pen' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="m3 21 3.8-1 11-11a2.1 2.1 0 1 0-3-3l-11 11L3 21Z"></path>
+												<path d="m13.5 6.5 3 3"></path>
+											</svg>
+										)
+									}
+									{
+										item.icon === 'check' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="m5 13 4 4L19 7"></path>
+											</svg>
+										)
+									}
+									{
+										item.icon === 'docs' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<rect x="6" y="3" width="12" height="18" rx="2"></rect>
+												<path d="M9 8h6"></path>
+												<path d="M9 12h6"></path>
+												<path d="M9 16h4"></path>
+											</svg>
+										)
+									}
+								</div>
+								<h3>{item.title}</h3>
+								<p>{item.description}</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="section power-package">
+			<div class="container">
+				<div class="power-top">
+					<figure class="media-tile media-top-left brand-line-box" data-animate="fade-up">
+						<img
+							src="/images/service-power-partnership-top-left.png"
+							alt="Commercial rooftop solar array installation"
+							loading="lazy"
+							width="900"
+							height="900"
+						/>
+					</figure>
+					<figure class="media-tile media-top-right brand-line-box" data-animate="fade-up">
+						<img
+							src="/images/service-power-partnership-top-right.png"
+							alt="Cable containment and power distribution routes in an industrial facility"
+							loading="lazy"
+							width="900"
+							height="900"
+						/>
+					</figure>
+				</div>
+
+				<div class="power-main">
+					<figure class="media-tile media-bottom-left brand-line-box" data-animate="fade-left">
+						<img
+							src="/images/service-power-partnership-bottom-left.png"
+							alt="Completed commercial building supported by full NEC power infrastructure package"
+							loading="lazy"
+							width="900"
+							height="900"
+						/>
+					</figure>
+
+					<div class="power-copy" data-animate="fade-right">
+						<h2 class="section-title">A Single Contractor for Your Entire Power Package</h2>
+						<p>
+							When your HV design, LV distribution, containment, and PV system all come from the same team,
+							projects move faster, risks are reduced, and you get a single, clear point of accountability from
+							tender to handover.
+						</p>
+
+						<ul>
+							<li>Full in-house HV and LV design coordination</li>
+							<li>Substation, switchgear, and cable route planning</li>
+							<li>Integrated containment and power installation delivery</li>
+							<li>PV system design, approvals, and commissioning</li>
+							<li>O&amp;M documentation and test certification provided</li>
+							<li>NICEIC Approved - independently assessed</li>
+							<li>CHAS Accredited - health and safety assured</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<ServiceWhyChooseSection
+			title="Why Choose NEC Electrical for Your Design & Build?"
+			description="Choosing a partner who manages both technical design and physical installation gives your project a clear commercial advantage at every stage."
+			items={whyChooseItems}
+		/>
+
+		<ServiceFaqSection items={faqItems} />
+	</main>
+
+	<Footer links={homeAnchors} />
+</Layout>
+
+<style>
+	.service-hero { position: relative; min-height: clamp(290px, 42vw, 380px); display: grid; align-items: end; overflow: clip; }
+	.service-hero-bg, .service-hero-overlay { position: absolute; inset: 0; }
+	.service-hero-bg { background: center / cover no-repeat url('/images/service-power-hero.png'); }
+	.service-hero-overlay { background: linear-gradient(115deg, rgba(10, 18, 42, 0.62), rgba(10, 18, 42, 0.35)); }
+	.service-hero-content { position: relative; z-index: 1; color: var(--white); padding-bottom: clamp(1.4rem, 3vw, 2.5rem); }
+	.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.42rem; font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif; }
+	.crumbs a { color: rgba(255, 255, 255, 0.86); transition: color 0.2s var(--motion-ease); }
+	.crumbs a:hover { color: var(--white); }
+	h1 { margin-top: 0.85rem; font-size: clamp(2.1rem, 6.8vw, 4.2rem); letter-spacing: -0.03em; line-height: 0.98; max-width: 10ch; color: var(--white); }
+	.service-intro { background: var(--ghost-white); }
+	.section-kicker { display: inline-flex; align-items: center; gap: 0.5rem; font: 600 0.86rem/1 'League Spartan', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.07em; color: var(--blue); }
+	.highlight-grid { margin-top: 2.5rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.95rem; }
+	.highlight-card { position: relative; background: #ffffff; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); padding: 1.35rem 1.35rem 1.4rem; box-shadow: 0 10px 26px rgba(21, 27, 44, 0.06); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+	.highlight-card:hover { transform: translateY(-6px); box-shadow: 0 18px 34px rgba(21, 27, 44, 0.14); }
+	.icon-wrap { display: inline-flex; align-items: center; justify-content: center; width: 3.35rem; height: 3.35rem; border-radius: 50%; color: var(--white); background: linear-gradient(145deg, #2a34ff, #0000fe); transition: transform 0.25s ease; }
+	.highlight-card:hover .icon-wrap { transform: translateY(-2px) scale(1.04); }
+	.icon-wrap svg { width: 1.45rem; height: 1.45rem; }
+	h3 { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid rgba(0, 0, 254, 0.2); font-size: clamp(1.45rem, 2vw, 2rem); line-height: 1; letter-spacing: -0.02em; }
+	.highlight-card p { margin-top: 0.85rem; font-size: 0.98rem; line-height: 1.72; color: var(--charcoal-400); }
+	@media (max-width: 1060px) { .highlight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+	@media (max-width: 640px) { .highlight-grid { grid-template-columns: 1fr; } }
+
+	.power-package { background: var(--white); }
+	.power-top { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+	.media-tile { margin: 0; clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%); overflow: clip; background: #e8edf8; }
+	.media-tile img { width: 100%; height: 100%; display: block; object-fit: cover; }
+	.media-top-left img, .media-top-right img, .media-bottom-left img { aspect-ratio: 1.25 / 1; object-position: center; }
+	.power-main { margin-top: 1.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: stretch; }
+	.power-copy { background: var(--white); padding: 1.2rem 0.2rem 0.8rem; max-width: 36rem; }
+	.power-copy .section-title { font-size: clamp(2rem, 3.8vw, 3.35rem); line-height: 1.02; max-width: 12ch; }
+	.power-copy p { margin-top: 1.2rem; max-width: 50ch; font-size: 1.03rem; line-height: 1.72; color: var(--charcoal-400); }
+	.power-copy ul { margin: 1.1rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.52rem; }
+	.power-copy li { position: relative; padding-left: 1.72rem; font-size: 0.97rem; line-height: 1.42; color: var(--charcoal-300); }
+	.power-copy li::before { content: ''; position: absolute; left: 0; top: 0.25rem; width: 1rem; height: 1rem; border-radius: 50%; background: var(--blue); }
+	.power-copy li::after { content: ''; position: absolute; left: 0.33rem; top: 0.53rem; width: 0.35rem; height: 0.2rem; border-left: 2px solid var(--white); border-bottom: 2px solid var(--white); transform: rotate(-45deg); }
+	@media (max-width: 980px) { .power-main { grid-template-columns: 1fr; gap: 1.25rem; } .power-copy { max-width: 100%; } }
+	@media (max-width: 700px) { .power-top { grid-template-columns: 1fr; } }
+</style>

@@ -1,17 +1,34 @@
 ---
 import type { NavLink } from '../data/home';
+import { serviceCards } from '../data/home';
 
 interface Props {
 	links: NavLink[];
 	topBarLabel?: string;
 	topBarAddress?: string;
+	ctaHref?: string;
 }
 
 const {
 	links,
 	topBarLabel = 'Northamptonshire Electrical Contractors',
 	topBarAddress = '81A Charles Street, Kettering, Northants, NN16 9RL',
+	ctaHref = '#contact',
 } = Astro.props;
+
+const serviceMenuItems = serviceCards.map((service) => ({
+	title: service.title,
+	description: service.description,
+	href: service.href ?? '/#services',
+	image: service.image,
+}));
+
+serviceMenuItems.push({
+	title: 'Custom Electrical Work',
+	description: 'Submit a custom project request.',
+	href: '/custom-electrical-work/',
+	image: '/images/service-design-technical.jpg',
+});
 ---
 
 <div class="site-header">
@@ -31,19 +48,81 @@ const {
 			<div class="nav-actions">
 				<ul class="nav-list">
 					{
-						links.map((link) => (
-							<li>
-								<a href={link.href}>{link.label}</a>
-							</li>
-						))
+						links.map((link) =>
+							link.label === 'Services' ? (
+								<li class="has-mega-menu" data-services-menu>
+									<a href={link.href} class="services-trigger" aria-haspopup="true" aria-expanded="false" data-services-trigger>Services</a>
+									<div class="mega-menu" role="group" aria-label="Service overview menu" data-services-panel>
+										<p class="mega-title">Service Overview</p>
+										<div class="mega-grid">
+											{
+												serviceMenuItems.map((item) => (
+													<article class="mega-item">
+														<a class:list={['mega-link', item.href === '/custom-electrical-work/' && 'mega-link-featured']} href={item.href}>
+															<img class="mega-thumb" src={item.image} alt="" loading="lazy" width="80" height="56" />
+															<span class="mega-copy">
+																<span class="mega-item-title">{item.title}</span>
+																<span class="mega-item-desc">{item.description}</span>
+															</span>
+														</a>
+													</article>
+												))
+											}
+										</div>
+									</div>
+								</li>
+							) : (
+								<li>
+									<a href={link.href}>{link.label}</a>
+								</li>
+							),
+						)
 					}
 				</ul>
 
-				<a href="#contact" class="btn btn-primary">Get a Quote</a>
+				<a href={ctaHref} class="btn btn-primary">Get a Quote</a>
 			</div>
 		</nav>
 	</div>
 </div>
+
+<script is:inline>
+	const serviceMenus = document.querySelectorAll('[data-services-menu]');
+
+	serviceMenus.forEach((menu) => {
+		const trigger = menu.querySelector('[data-services-trigger]');
+		const panel = menu.querySelector('[data-services-panel]');
+		if (!trigger || !panel) return;
+
+		let closeTimer;
+
+		const openMenu = () => {
+			if (closeTimer) {
+				window.clearTimeout(closeTimer);
+				closeTimer = undefined;
+			}
+			menu.classList.add('is-open');
+			trigger.setAttribute('aria-expanded', 'true');
+		};
+
+		const closeMenu = () => {
+			closeTimer = window.setTimeout(() => {
+				menu.classList.remove('is-open');
+				trigger.setAttribute('aria-expanded', 'false');
+			}, 260);
+		};
+
+		trigger.addEventListener('mouseenter', openMenu);
+		panel.addEventListener('mouseenter', openMenu);
+		menu.addEventListener('mouseleave', closeMenu);
+		menu.addEventListener('focusin', openMenu);
+		menu.addEventListener('focusout', (event) => {
+			const next = event.relatedTarget;
+			if (next && menu.contains(next)) return;
+			closeMenu();
+		});
+	});
+</script>
 
 <style>
 	.site-header {
@@ -82,6 +161,7 @@ const {
 		grid-template-columns: auto 1fr;
 		align-items: center;
 		gap: 2rem;
+		position: relative;
 		background: rgba(255, 255, 255, 0.95);
 		padding: 0.9rem 1rem;
 		border-radius: 0.85rem;
@@ -105,7 +185,7 @@ const {
 		padding: 0;
 		list-style: none;
 		display: flex;
-		flex-wrap: wrap;
+		flex-wrap: nowrap;
 		align-items: center;
 		justify-content: center;
 		gap: 1.2rem;
@@ -113,7 +193,7 @@ const {
 		justify-self: end;
 	}
 
-	.nav-list a {
+	.nav-list > li > a {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -124,10 +204,170 @@ const {
 			var(--motion-ease);
 	}
 
-	.nav-list a:hover {
+	.nav-list > li > a:hover {
 		background: var(--blue);
 		color: var(--white);
 		transform: translateY(-1px);
+	}
+
+	.has-mega-menu {
+		position: static;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.services-trigger::after {
+		content: '';
+		width: 0.4rem;
+		height: 0.4rem;
+		margin-left: 0.4rem;
+		border-right: 2px solid currentColor;
+		border-bottom: 2px solid currentColor;
+		transform: rotate(45deg) translateY(-1px);
+	}
+
+	.services-trigger {
+		font: 400 1.05rem/1 'League Spartan', Arial, sans-serif;
+		letter-spacing: normal;
+	}
+
+	.mega-menu {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%) translateY(4px);
+		width: min(860px, calc(100vw - 2.5rem));
+		background: var(--white);
+		border: 1px solid rgba(18, 22, 38, 0.08);
+		box-shadow: 0 18px 42px rgba(18, 22, 38, 0.16);
+		padding: 1rem;
+		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+		transition: opacity 0.2s var(--motion-ease), transform 0.2s var(--motion-ease),
+			visibility 0.2s var(--motion-ease);
+		z-index: 20;
+	}
+
+	/* Invisible bridge to keep hover alive from trigger to panel */
+	.mega-menu::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: -14px;
+		height: 14px;
+	}
+
+	.has-mega-menu:hover .mega-menu,
+	.has-mega-menu.is-open .mega-menu,
+	.has-mega-menu:focus-within .mega-menu {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+		transform: translateX(-50%) translateY(0);
+	}
+
+	.mega-title {
+		margin: 0;
+		font: 600 0.82rem/1 'Open Sans', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--blue);
+	}
+
+	.mega-grid {
+		margin-top: 0.75rem;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.6rem;
+	}
+
+	.mega-item {
+		margin: 0;
+	}
+
+	.mega-link {
+		display: block;
+		margin: 0;
+		padding: 0.62rem 0.66rem;
+		display: grid;
+		grid-template-columns: 76px 1fr;
+		align-items: start;
+		gap: 0.72rem;
+		background: #f5f7fb;
+		color: var(--charcoal-200);
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+		transition: transform 0.2s var(--motion-ease), background-color 0.2s var(--motion-ease), color 0.2s
+			var(--motion-ease);
+	}
+
+	.mega-item-title {
+		display: block;
+		font: 700 1.06rem/1.08 'League Spartan', Arial, sans-serif;
+		color: var(--charcoal-100);
+	}
+
+	.mega-copy {
+		display: block;
+	}
+
+	.mega-item-desc {
+		display: block;
+		margin-top: 0.33rem;
+		font: 400 0.95rem/1.45 'Open Sans', Arial, sans-serif;
+		color: var(--charcoal-400);
+		max-width: 31ch;
+	}
+
+	.mega-thumb {
+		width: 100%;
+		height: 3.8rem;
+		object-fit: cover;
+		object-position: center;
+		clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+	}
+
+	@media (max-width: 900px) {
+		.mega-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.mega-link:hover {
+		background: var(--blue);
+		color: var(--white);
+		transform: translateY(-1px);
+	}
+
+	.mega-link:hover .mega-item-desc {
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	.mega-link:hover .mega-item-title {
+		color: var(--white);
+	}
+
+	.mega-link-featured {
+		background: var(--blue);
+		color: var(--white);
+	}
+
+	.mega-link-featured .mega-item-title {
+		color: var(--white);
+	}
+
+	.mega-link-featured .mega-item-desc {
+		color: rgba(255, 255, 255, 0.92);
+	}
+
+	.mega-link-featured .mega-thumb {
+		border: 1px solid rgba(255, 255, 255, 0.28);
+	}
+
+	.mega-link-featured:hover {
+		background: #1b22ff;
 	}
 
 	@media (max-width: 1120px) {

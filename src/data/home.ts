@@ -9,6 +9,7 @@ export interface ServiceCardItem {
 	description: string;
 	points: string[];
 	category: 'design' | 'power' | 'lighting' | 'security' | 'data';
+	href?: string;
 }
 
 export interface InfoCardItem {
@@ -31,7 +32,7 @@ export const pageDescription =
 export const navLinks: NavLink[] = [
 	{ href: '#about', label: 'About Us' },
 	{ href: '#services', label: 'Services' },
-	{ href: '#safety', label: 'Health & Safety' },
+	{ href: '/health-safety/', label: 'Health & Safety' },
 	{ href: '#locations', label: 'Locations' },
 	{ href: '#contact', label: 'Contact' },
 ];
@@ -43,6 +44,7 @@ export const serviceCards: ServiceCardItem[] = [
 		description: 'Comprehensive planning and documentation services.',
 		points: ['Full in house design services', 'AutoCad drawings', 'Testing & commissioning', 'O&M documentation'],
 		category: 'design',
+		href: '/services/design-technical/',
 	},
 	{
 		title: 'Power Infrastructure',
@@ -57,6 +59,7 @@ export const serviceCards: ServiceCardItem[] = [
 			'Lightning protection',
 		],
 		category: 'power',
+		href: '/services/power-infrastructure/',
 	},
 	{
 		title: 'Lighting Systems',
@@ -64,6 +67,7 @@ export const serviceCards: ServiceCardItem[] = [
 		description: 'Modern, efficient lighting solutions.',
 		points: ['Lighting and emergency lighting', 'Lighting control', 'External lighting'],
 		category: 'lighting',
+		href: '/services/lighting-systems/',
 	},
 	{
 		title: 'Security & Safety',
@@ -71,6 +75,7 @@ export const serviceCards: ServiceCardItem[] = [
 		description: 'Protecting your assets and people.',
 		points: ['Fire alarms', 'Security alarms', 'CCTV systems', 'Access door entry systems'],
 		category: 'security',
+		href: '/services/security-safety/',
 	},
 	{
 		title: 'Data & Communications',
@@ -78,6 +83,7 @@ export const serviceCards: ServiceCardItem[] = [
 		description: 'Connectivity and specialized systems.',
 		points: ['Data containment', 'TV system', 'Hearing & Induction Loops'],
 		category: 'data',
+		href: '/services/data-communications/',
 	},
 ];
 

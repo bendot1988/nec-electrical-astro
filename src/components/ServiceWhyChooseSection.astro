@@ -1,0 +1,111 @@
+---
+interface WhyChooseItem {
+	number: string;
+	title: string;
+	description: string;
+}
+
+interface Props {
+	kicker?: string;
+	title: string;
+	description: string;
+	items: WhyChooseItem[];
+}
+
+const { kicker = 'What we provide', title, description, items } = Astro.props;
+---
+
+<section class="section why-choose-services">
+	<div class="container">
+		<p class="section-kicker">
+			<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+				<path
+					fill="currentColor"
+					d="M13.2 2.8c.2-.5-.5-.9-.8-.4L6.7 12.1a.5.5 0 0 0 .4.8h3.1L9.5 21c-.1.6.6.9.9.4l6.8-10.7a.5.5 0 0 0-.4-.8h-3.4l-.2-7.1Z"
+				></path>
+			</svg>
+			{kicker}
+		</p>
+		<h2 class="section-title">{title}</h2>
+		<p class="section-subtitle">{description}</p>
+
+		<div class="why-grid" data-animate-stagger="0.07">
+			{
+				items.map((item) => (
+					<article class="why-card" data-animate="fade-up">
+						<p class="why-number">{item.number}</p>
+						<h3>{item.title}</h3>
+						<p>{item.description}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.why-choose-services {
+		background: var(--white);
+	}
+
+	.section-kicker {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font: 600 0.86rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
+		color: var(--blue);
+	}
+
+	.why-grid {
+		margin-top: 1.35rem;
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.75rem;
+	}
+
+	.why-card {
+		background: #f5f6fb;
+		padding: 1rem 1.05rem 1.2rem;
+		border-left: 3px solid var(--blue);
+		transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.why-card:hover {
+		background: var(--white);
+		transform: translateY(-4px);
+		box-shadow: 0 14px 30px rgba(20, 24, 38, 0.14);
+	}
+
+	.why-number {
+		font: 700 clamp(2.2rem, 3.2vw, 3.2rem) / 1 'League Spartan', Arial, sans-serif;
+		letter-spacing: -0.03em;
+		color: rgba(0, 0, 254, 0.2);
+	}
+
+	h3 {
+		margin-top: 0.75rem;
+		font-size: clamp(1.1rem, 1.45vw, 1.35rem);
+		line-height: 1.1;
+	}
+
+	.why-card p:last-child {
+		margin-top: 0.65rem;
+		font-size: 0.95rem;
+		line-height: 1.66;
+		color: var(--charcoal-400);
+	}
+
+	@media (max-width: 1080px) {
+		.why-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 640px) {
+		.why-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

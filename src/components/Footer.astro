@@ -113,7 +113,7 @@ const currentYear = new Date().getFullYear();
 	.footer-grid {
 		display: grid;
 		grid-template-columns: 2fr 1fr 1fr;
-		gap: 0;
+		gap: 1.4rem;
 		border-bottom: 1px solid var(--footer-divider);
 	}
 
@@ -136,8 +136,10 @@ const currentYear = new Date().getFullYear();
 	}
 
 	.footer-col:last-child li {
-		display: flex;
-		align-items: flex-start;
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: start;
+		column-gap: 0.7rem;
 	}
 
 	.site-footer a {
@@ -158,18 +160,19 @@ const currentYear = new Date().getFullYear();
 	}
 
 	.footer-col {
-		padding: 2.5rem 1.6rem;
-	}
-
-	.footer-col + .footer-col {
-		border-left: 1px solid var(--footer-divider);
+		padding: 2.5rem 0;
 	}
 
 	.contact-icon {
-		color: var(--blue);
+		color: #9cb8ff;
 		display: inline-flex;
 		align-items: center;
-		margin-right: 0.4rem;
+		justify-content: center;
+		width: 1.9rem;
+		height: 1.9rem;
+		background: rgba(156, 184, 255, 0.14);
+		border: 1px solid rgba(156, 184, 255, 0.28);
+		clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
 	}
 
 	.footer-bottom {
@@ -177,7 +180,7 @@ const currentYear = new Date().getFullYear();
 		justify-content: space-between;
 		align-items: center;
 		gap: 1rem;
-		padding: 0.9rem 1.6rem;
+		padding: 0.9rem 0;
 		font-size: 0.95rem;
 		color: var(--white);
 		border-top: 1px solid var(--footer-divider);

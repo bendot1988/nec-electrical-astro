@@ -16,15 +16,22 @@ const { service } = Astro.props;
 		<ul>
 			{service.points.map((point) => <li>{point}</li>)}
 		</ul>
+		{
+			service.href && (
+				<a class="service-inline-link" href={service.href} aria-label={`View ${service.title} service page`}>
+					View {service.title} <span aria-hidden="true">→</span>
+				</a>
+			)
+		}
 	</div>
 </article>
 
 <style>
 	.service-card {
+		position: relative;
 		background: var(--white);
 		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
 		box-shadow: 0 10px 30px rgba(20, 24, 38, 0.08);
-		border: 1px solid #eceef5;
 		transition: transform 0.25s ease, box-shadow 0.25s ease;
 	}
 
@@ -78,5 +85,26 @@ const { service } = Astro.props;
 		background: var(--blue);
 		margin-top: 0.26rem;
 		flex-shrink: 0;
+	}
+
+	.service-inline-link {
+		margin-top: 1.25rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.5rem 0.8rem;
+		font: 600 0.92rem/1 'League Spartan', Arial, sans-serif;
+		letter-spacing: 0.01em;
+		color: var(--blue);
+		background: rgba(0, 0, 254, 0.06);
+		clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+		transition: color 0.2s var(--motion-ease), background-color 0.2s var(--motion-ease), transform 0.2s
+			var(--motion-ease);
+	}
+
+	.service-inline-link:hover {
+		color: var(--white);
+		background: var(--blue);
+		transform: translateX(2px);
 	}
 </style>

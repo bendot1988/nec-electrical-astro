@@ -1,0 +1,286 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { navLinks } from '../../data/home';
+
+const pageTitle = 'Lighting Systems Services | NEC Ltd Electrical';
+const pageDescription =
+	'Complete lighting design and installation services from NEC Ltd Electrical, including LED upgrades, emergency lighting, controls, and external lighting.';
+const homeAnchors = navLinks.map((link) => ({ ...link, href: link.href.startsWith('/') ? link.href : `/${link.href}` }));
+
+const lightingHighlights = [
+	{
+		title: 'General & LED Lighting',
+		description:
+			'Full replacement and new-build LED lighting across commercial, industrial, and educational premises. We specify high-efficacy luminaires that reduce energy bills and meet current building regulations.',
+		icon: 'bulb',
+	},
+	{
+		title: 'Emergency Lighting',
+		description:
+			'BS 5266-compliant emergency and escape route lighting systems. We design, install, and commission self-contained and central battery systems with full test and maintenance records.',
+		icon: 'shield',
+	},
+	{
+		title: 'Lighting Control Systems',
+		description:
+			'Smart lighting controls including DALI, PIR occupancy sensors, daylight harvesting, and scene-setting panels for precise control over energy use and zoning.',
+		icon: 'sliders',
+	},
+	{
+		title: 'External Lighting',
+		description:
+			'Car parks, perimeter security lighting, facade uplighting, and floodlighting. Weatherproof fittings designed and installed to illuminate and protect your site 24 hours a day.',
+		icon: 'sun',
+	},
+];
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonical="https://dotwall.dev/nec/services/lighting-systems/"
+	ogImage="/images/service-lighting-hero.png"
+>
+	<Header links={homeAnchors} ctaHref="/#contact" />
+
+	<main id="main-content">
+		<section class="service-hero">
+			<div class="service-hero-bg" aria-hidden="true"></div>
+			<div class="service-hero-overlay" aria-hidden="true"></div>
+			<div class="container service-hero-content">
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<a href="/#services">Service</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">Lighting Systems</span>
+				</nav>
+				<h1>Lighting Systems</h1>
+			</div>
+		</section>
+
+		<section class="section service-intro">
+			<div class="container">
+				<p class="section-kicker">
+					<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+						<path
+							fill="currentColor"
+							d="M13.2 2.8c.2-.5-.5-.9-.8-.4L6.7 12.1a.5.5 0 0 0 .4.8h3.1L9.5 21c-.1.6.6.9.9.4l6.8-10.7a.5.5 0 0 0-.4-.8h-3.4l-.2-7.1Z"
+						></path>
+					</svg>
+					What we provide
+				</p>
+				<h2 class="section-title">Complete Lighting Design & Installation</h2>
+				<p class="section-subtitle">
+					From energy-efficient LED upgrades to full lighting control systems and emergency provisions, we handle
+					every aspect of your lighting installation in-house, with no subcontractor gaps.
+				</p>
+
+				<div class="highlight-grid" data-animate-stagger="0.07">
+					{
+						lightingHighlights.map((item) => (
+							<article class="highlight-card brand-line-box" data-animate="fade-up">
+								<div class="icon-wrap" aria-hidden="true">
+									{
+										item.icon === 'bulb' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="M9.5 18h5"></path>
+												<path d="M10 22h4"></path>
+												<path d="M12 2a7 7 0 0 0-4.4 12.5c.8.6 1.4 1.4 1.8 2.3h5.2c.4-.9 1-1.7 1.8-2.3A7 7 0 0 0 12 2Z"></path>
+											</svg>
+										)
+									}
+									{
+										item.icon === 'shield' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="M12 3 5 6v6c0 4.97 3.1 8.03 7 9 3.9-.97 7-4.03 7-9V6l-7-3Z"></path>
+												<path d="m9.3 11.9 1.9 1.9 3.5-3.5"></path>
+											</svg>
+										)
+									}
+									{
+										item.icon === 'sliders' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="M4 6h8"></path>
+												<path d="M14 6h6"></path>
+												<path d="M10 6a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path>
+												<path d="M4 12h3"></path>
+												<path d="M9 12h11"></path>
+												<path d="M7 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path>
+												<path d="M4 18h10"></path>
+												<path d="M16 18h4"></path>
+												<path d="M14 18a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z"></path>
+											</svg>
+										)
+									}
+									{
+										item.icon === 'sun' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<circle cx="12" cy="12" r="3.2"></circle>
+												<path d="M12 3v2.2"></path>
+												<path d="M12 18.8V21"></path>
+												<path d="m5.6 5.6 1.6 1.6"></path>
+												<path d="m16.8 16.8 1.6 1.6"></path>
+												<path d="M3 12h2.2"></path>
+												<path d="M18.8 12H21"></path>
+												<path d="m5.6 18.4 1.6-1.6"></path>
+												<path d="m16.8 7.2 1.6-1.6"></path>
+											</svg>
+										)
+									}
+								</div>
+								<h3>{item.title}</h3>
+								<p>{item.description}</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer links={homeAnchors} />
+</Layout>
+
+<style>
+	.service-hero {
+		position: relative;
+		min-height: clamp(290px, 42vw, 380px);
+		display: grid;
+		align-items: end;
+		overflow: clip;
+	}
+
+	.service-hero-bg,
+	.service-hero-overlay {
+		position: absolute;
+		inset: 0;
+	}
+
+	.service-hero-bg {
+		background: center / cover no-repeat url('/images/service-lighting-hero.png');
+	}
+
+	.service-hero-overlay {
+		background: linear-gradient(115deg, rgba(10, 18, 42, 0.62), rgba(10, 18, 42, 0.35));
+	}
+
+	.service-hero-content {
+		position: relative;
+		z-index: 1;
+		color: var(--white);
+		padding-bottom: clamp(1.4rem, 3vw, 2.5rem);
+	}
+
+	.crumbs {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.42rem;
+		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
+	}
+
+	.crumbs a {
+		color: rgba(255, 255, 255, 0.86);
+		transition: color 0.2s var(--motion-ease);
+	}
+
+	.crumbs a:hover {
+		color: var(--white);
+	}
+
+	h1 {
+		margin-top: 0.85rem;
+		font-size: clamp(2.1rem, 6.8vw, 4.2rem);
+		letter-spacing: -0.03em;
+		line-height: 0.98;
+		max-width: 9ch;
+		color: var(--white);
+	}
+
+	.service-intro {
+		background: var(--ghost-white);
+	}
+
+	.section-kicker {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font: 600 0.86rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
+		color: var(--blue);
+	}
+
+	.highlight-grid {
+		margin-top: 2.5rem;
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.95rem;
+	}
+
+	.highlight-card {
+		position: relative;
+		background: #ffffff;
+		clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+		padding: 1.35rem 1.35rem 1.4rem;
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.06);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.highlight-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 18px 34px rgba(21, 27, 44, 0.14);
+	}
+
+	.icon-wrap {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 3.35rem;
+		height: 3.35rem;
+		border-radius: 50%;
+		color: var(--white);
+		background: linear-gradient(145deg, #2a34ff, #0000fe);
+		transition: transform 0.25s ease;
+	}
+
+	.highlight-card:hover .icon-wrap {
+		transform: translateY(-2px) scale(1.04);
+	}
+
+	.icon-wrap svg {
+		width: 1.45rem;
+		height: 1.45rem;
+	}
+
+	h3 {
+		margin-top: 1.1rem;
+		padding-top: 0.9rem;
+		border-top: 1px solid rgba(0, 0, 254, 0.2);
+		font-size: clamp(1.45rem, 2vw, 2rem);
+		line-height: 1;
+		letter-spacing: -0.02em;
+	}
+
+	.highlight-card p {
+		margin-top: 0.85rem;
+		font-size: 0.98rem;
+		line-height: 1.72;
+		color: var(--charcoal-400);
+	}
+
+	@media (max-width: 1060px) {
+		.highlight-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 640px) {
+		.highlight-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
