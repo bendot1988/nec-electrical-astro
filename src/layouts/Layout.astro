@@ -310,6 +310,9 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		transform: scaleX(0);
 		transform-origin: left;
 		transition: transform 0.28s ease;
+		/* Above Leaflet panes (≤700) and control bars (1000); pointer-events off so the map stays usable. */
+		z-index: 1001;
+		pointer-events: none;
 	}
 
 	.brand-line-box:hover::after {

@@ -29,6 +29,9 @@ const { service } = Astro.props;
 <style>
 	.service-card {
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
 		background: var(--white);
 		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
 		box-shadow: 0 10px 30px rgba(20, 24, 38, 0.08);
@@ -41,6 +44,7 @@ const { service } = Astro.props;
 	}
 
 	.service-card img {
+		flex-shrink: 0;
 		width: 100%;
 		height: clamp(170px, 18vw, 235px);
 		object-fit: cover;
@@ -48,6 +52,10 @@ const { service } = Astro.props;
 	}
 
 	.service-body {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		min-height: 0;
 		padding: 1.05rem;
 	}
 
@@ -62,7 +70,7 @@ const { service } = Astro.props;
 	}
 
 	ul {
-		margin: 0.8rem 0 0;
+		margin: 0.8rem 0 1.25rem;
 		padding: 0;
 		list-style: none;
 		display: grid;
@@ -88,7 +96,8 @@ const { service } = Astro.props;
 	}
 
 	.service-inline-link {
-		margin-top: 1.25rem;
+		margin-top: auto;
+		align-self: flex-start;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.35rem;
@@ -102,7 +111,8 @@ const { service } = Astro.props;
 			var(--motion-ease);
 	}
 
-	.service-inline-link:hover {
+	.service-inline-link:hover,
+	.service-card:hover .service-inline-link {
 		color: var(--white);
 		background: var(--blue);
 		transform: translateX(2px);

@@ -22,9 +22,15 @@ const pageDescription =
 			integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
 			crossorigin=""
 		/>
+		<script
+			src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+			integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+			crossorigin=""
+			defer
+		></script>
 	</Fragment>
 
-	<Header links={navLinks} ctaHref="#contact" />
+	<Header links={navLinks} ctaHref="/#contact" />
 
 	<main id="main-content">
 		<section class="locations-hero">
@@ -52,6 +58,9 @@ const pageDescription =
 						<li>Coverage extending north of the M25 for major project delivery</li>
 						<li>Commercial, industrial, and specialist electrical scopes</li>
 					</ul>
+					<div class="locations-cta">
+						<a href="/#contact" class="btn btn-primary">Ready to start your project?</a>
+					</div>
 				</div>
 
 				<div class="locations-map-wrap brand-line-box">
@@ -68,11 +77,9 @@ const pageDescription =
 	const initLocationsMap = async () => {
 		const mapNode = document.getElementById('uk-service-map');
 		if (!mapNode || mapNode.dataset.initialized === 'true') return;
+		const L = window.L;
+		if (!L) return;
 		mapNode.dataset.initialized = 'true';
-
-		const leafletUrl = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-		const leaflet = await import(leafletUrl);
-		const L = leaflet.default ?? leaflet;
 
 		const map = L.map(mapNode, { scrollWheelZoom: false, zoomControl: true }).setView([53.1, -1.35], 7);
 
@@ -102,12 +109,19 @@ const pageDescription =
 		});
 	};
 
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initLocationsMap, { once: true });
-	} else {
+	const bootMap = () => {
 		initLocationsMap();
+		// Retry shortly in case external script hasn't finished loading yet.
+		setTimeout(initLocationsMap, 120);
+		setTimeout(initLocationsMap, 300);
+	};
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', bootMap, { once: true });
+	} else {
+		bootMap();
 	}
-	document.addEventListener('astro:page-load', initLocationsMap);
+	document.addEventListener('astro:page-load', bootMap);
 </script>
 
 <style>
@@ -123,6 +137,9 @@ const pageDescription =
 	.locations-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 1.35rem; align-items: stretch; }
 	.locations-copy ul { margin: 1rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
 	.locations-copy li { position: relative; padding-left: 1.65rem; color: var(--charcoal-300); line-height: 1.5; }
+	.locations-cta {
+		margin: 1.35rem 0 0;
+	}
 	.locations-copy li::before {
 		content: '';
 		position: absolute;
