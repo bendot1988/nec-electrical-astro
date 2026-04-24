@@ -33,7 +33,7 @@ export const navLinks: NavLink[] = [
 	{ href: '#about', label: 'About Us' },
 	{ href: '#services', label: 'Services' },
 	{ href: '/health-safety/', label: 'Health & Safety' },
-	{ href: '#locations', label: 'Locations' },
+	{ href: '/locations/', label: 'Locations' },
 	{ href: '#contact', label: 'Contact' },
 ];
 
