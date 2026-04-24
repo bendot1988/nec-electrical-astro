@@ -384,9 +384,13 @@ serviceMenuItems.push({
 		opacity: 1;
 	}
 
+	/* Start below the header so the dim layer does not wash over the menu / close control */
 	.mobile-drawer-backdrop {
 		position: absolute;
-		inset: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: var(--drawer-panel-top, 100vh);
 		z-index: 0;
 		background: rgba(17, 22, 35, 0.45);
 		border: 0;
