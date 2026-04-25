@@ -182,6 +182,7 @@ serviceMenuItems.push({
 	});
 
 	let mobileNavAbort;
+	let mobileScrollY = 0;
 	const initMobileNav = () => {
 		const header = document.querySelector('.site-header');
 		const toggle = document.querySelector('[data-menu-toggle]');
@@ -208,11 +209,17 @@ serviceMenuItems.push({
 			if (open) {
 				drawer.removeAttribute('inert');
 				setDrawerOffset();
-				document.body.style.overflow = 'hidden';
+				mobileScrollY = window.scrollY;
+				document.documentElement.classList.add('mobile-nav-open');
+				document.body.classList.add('mobile-nav-open');
+				document.body.style.top = `-${mobileScrollY}px`;
 				if (label) label.textContent = 'Close menu';
 			} else {
 				drawer.setAttribute('inert', '');
-				document.body.style.overflow = '';
+				document.documentElement.classList.remove('mobile-nav-open');
+				document.body.classList.remove('mobile-nav-open');
+				document.body.style.top = '';
+				window.scrollTo(0, mobileScrollY);
 				if (label) label.textContent = 'Open menu';
 			}
 		};
@@ -578,6 +585,7 @@ serviceMenuItems.push({
 		align-items: center;
 		gap: 2rem;
 		position: relative;
+		z-index: 90;
 		min-width: 0;
 		max-width: 100%;
 		box-sizing: border-box;
@@ -858,5 +866,18 @@ serviceMenuItems.push({
 			font-size: 0.9rem;
 			padding-inline: 1rem;
 		}
+	}
+
+	:global(html.mobile-nav-open),
+	:global(body.mobile-nav-open) {
+		overflow: hidden;
+		height: 100%;
+	}
+
+	:global(body.mobile-nav-open) {
+		position: fixed;
+		left: 0;
+		right: 0;
+		width: 100%;
 	}
 </style>
