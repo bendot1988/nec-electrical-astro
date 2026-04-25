@@ -405,10 +405,13 @@ serviceMenuItems.push({
 
 	.mobile-drawer-panel {
 		position: absolute;
-		left: 50%;
+		left: max(0.625rem, env(safe-area-inset-left, 0px));
+		right: max(0.625rem, env(safe-area-inset-right, 0px));
 		top: var(--drawer-panel-top, 120px);
 		z-index: 1;
-		width: min(520px, calc(100% - 1.25rem));
+		width: auto;
+		max-width: 520px;
+		margin-inline: auto;
 		box-sizing: border-box;
 		max-height: min(78vh, calc(100dvh - var(--drawer-panel-top, 120px) - 12px), 560px);
 		overflow-y: auto;
@@ -420,7 +423,7 @@ serviceMenuItems.push({
 		border: 1px solid rgba(18, 22, 38, 0.08);
 		box-shadow: 0 24px 48px rgba(18, 22, 38, 0.22);
 		clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
-		transform: translateX(-50%) translateY(-8px);
+		transform: translateY(-8px);
 		opacity: 0;
 		transition: opacity 0.22s var(--motion-ease), transform 0.22s var(--motion-ease);
 	}
@@ -448,7 +451,7 @@ serviceMenuItems.push({
 
 	.mobile-drawer.is-open .mobile-drawer-panel {
 		opacity: 1;
-		transform: translateX(-50%) translateY(0);
+		transform: translateY(0);
 	}
 
 	.mobile-drawer-nav {
