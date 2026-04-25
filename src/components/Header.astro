@@ -270,7 +270,6 @@ serviceMenuItems.push({
 		position: sticky;
 		top: 0;
 		z-index: 5;
-		overflow-x: clip;
 	}
 
 	.site-header.is-mobile-nav-open {
@@ -593,8 +592,8 @@ serviceMenuItems.push({
 		background: rgba(255, 255, 255, 0.95);
 		padding: 0.9rem 1rem;
 		border: 1px solid rgba(255, 255, 255, 0.65);
-		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
-		overflow-x: clip;
+		/* Keep shell unclipped so the absolute mega menu can render outside the bar. */
+		clip-path: none;
 	}
 
 	.brand {
@@ -813,6 +812,14 @@ serviceMenuItems.push({
 	}
 
 	@media (max-width: 1120px) {
+		.site-header {
+			overflow-x: clip;
+		}
+
+		.top-nav {
+			overflow-x: clip;
+		}
+
 		.nav-list {
 			display: none;
 		}
