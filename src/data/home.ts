@@ -32,9 +32,10 @@ export const pageDescription =
 export const navLinks: NavLink[] = [
 	{ href: '#about', label: 'About Us' },
 	{ href: '#services', label: 'Services' },
+	{ href: '/projects/', label: 'Projects' },
 	{ href: '/health-safety/', label: 'Health & Safety' },
 	{ href: '/locations/', label: 'Locations' },
-	{ href: '#contact', label: 'Contact' },
+	{ href: '/contact/', label: 'Contact' },
 ];
 
 export const serviceCards: ServiceCardItem[] = [

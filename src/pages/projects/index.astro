@@ -1,0 +1,380 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { navLinks } from '../../data/home';
+import { projects } from '../../data/projects';
+
+const pageTitle = 'Projects | NEC Ltd Electrical';
+const pageDescription =
+	"Browse NEC Ltd Electrical's project portfolio — industrial, commercial, and educational electrical installations delivered across the UK.";
+
+const homeAnchors = navLinks.map((link) => ({
+	...link,
+	href: link.href.startsWith('/') ? link.href : `/${link.href}`,
+}));
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonical="https://dotwall.dev/nec/projects/"
+	ogImage="/images/projects/navara-mill/exterior-site-1.png"
+>
+	<Header links={homeAnchors} ctaHref="/#contact" />
+
+	<main id="main-content">
+		<section class="projects-hero">
+			<div class="projects-hero-bg" aria-hidden="true"></div>
+			<div class="projects-hero-overlay" aria-hidden="true"></div>
+			<div class="container projects-hero-content">
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">Projects</span>
+				</nav>
+				<h1>Our Projects</h1>
+				<p class="hero-sub">
+					Real installations. Real results. Explore the work we've delivered for clients across industry,
+					commerce, and education.
+				</p>
+			</div>
+		</section>
+
+		<section class="section projects-list">
+			<div class="container">
+				<p class="section-kicker">
+					<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+						<path
+							fill="currentColor"
+							d="M13.2 2.8c.2-.5-.5-.9-.8-.4L6.7 12.1a.5.5 0 0 0 .4.8h3.1L9.5 21c-.1.6.6.9.9.4l6.8-10.7a.5.5 0 0 0-.4-.8h-3.4l-.2-7.1Z"
+						></path>
+					</svg>
+					Case Studies
+				</p>
+				<h2 class="section-title">Featured Work</h2>
+				<p class="section-subtitle">
+					From multi-million-pound industrial facilities to commercial fit-outs, every project reflects our
+					commitment to quality, safety, and programme delivery.
+				</p>
+
+				<div class="project-grid" data-animate-stagger="0.07">
+					{
+						projects.map((project) => (
+							<article class="project-card brand-line-box" data-animate="fade-up">
+								<a href={project.href} class="card-image-link" tabindex="-1" aria-hidden="true">
+									<div class="card-image">
+										<img
+											src={project.heroImage}
+											alt={project.title}
+											loading="lazy"
+											width="800"
+											height="480"
+										/>
+									</div>
+								</a>
+								<div class="card-body">
+									<div class="card-meta">
+										{project.tags.slice(0, 2).map((tag) => (
+											<span class="tag">{tag}</span>
+										))}
+									</div>
+									<h3>
+										<a href={project.href}>{project.title}</a>
+									</h3>
+									<p class="card-excerpt">{project.excerpt}</p>
+									<dl class="card-stats">
+										<div class="stat">
+											<dt>Sector</dt>
+											<dd>{project.sector}</dd>
+										</div>
+										<div class="stat">
+											<dt>Value</dt>
+											<dd>{project.value}</dd>
+										</div>
+										<div class="stat">
+											<dt>Duration</dt>
+											<dd>{project.duration}</dd>
+										</div>
+										<div class="stat">
+											<dt>Location</dt>
+											<dd>{project.location}</dd>
+										</div>
+									</dl>
+									<a href={project.href} class="card-cta">
+										View project
+										<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5">
+											<path d="M5 12h14M13 6l6 6-6 6" />
+										</svg>
+									</a>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="section cta-band">
+			<div class="container cta-inner" data-animate="fade-up">
+				<div class="cta-copy">
+					<h2>Have a project in mind?</h2>
+					<p>Get in touch and we'll talk through the scope, timeline, and how we can help.</p>
+				</div>
+				<a href="/#contact" class="btn btn-primary">Start a conversation</a>
+			</div>
+		</section>
+	</main>
+
+	<Footer links={homeAnchors} />
+</Layout>
+
+<style>
+	.projects-hero {
+		position: relative;
+		min-height: clamp(290px, 42vw, 380px);
+		display: grid;
+		align-items: end;
+		overflow: clip;
+	}
+
+	.projects-hero-bg,
+	.projects-hero-overlay {
+		position: absolute;
+		inset: 0;
+	}
+
+	.projects-hero-bg {
+		background: center 40% / cover no-repeat
+			url('/images/projects/navara-mill/exterior-site-1.png');
+	}
+
+	.projects-hero-overlay {
+		background: linear-gradient(115deg, rgba(10, 18, 42, 0.72), rgba(10, 18, 42, 0.4));
+	}
+
+	.projects-hero-content {
+		position: relative;
+		z-index: 1;
+		color: var(--white);
+		padding-bottom: clamp(1.4rem, 3vw, 2.5rem);
+	}
+
+	.crumbs {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.42rem;
+		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
+	}
+
+	.crumbs a {
+		color: rgba(255, 255, 255, 0.86);
+		transition: color 0.2s var(--motion-ease);
+	}
+
+	.crumbs a:hover {
+		color: var(--white);
+	}
+
+	h1 {
+		margin-top: 0.85rem;
+		font-size: clamp(2.1rem, 6.8vw, 4.2rem);
+		letter-spacing: -0.03em;
+		line-height: 0.98;
+		color: var(--white);
+	}
+
+	.hero-sub {
+		margin-top: 1rem;
+		font-size: clamp(1rem, 1.5vw, 1.15rem);
+		line-height: 1.6;
+		color: rgba(255, 255, 255, 0.82);
+		max-width: 54ch;
+	}
+
+	.projects-list {
+		background: var(--ghost-white);
+	}
+
+	.section-kicker {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font: 600 0.86rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
+		color: var(--blue);
+	}
+
+	.project-grid {
+		margin-top: 2.5rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 540px), 1fr));
+		gap: 1.6rem;
+	}
+
+	.project-card {
+		background: #ffffff;
+		clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.06);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.project-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 20px 38px rgba(21, 27, 44, 0.13);
+	}
+
+	.card-image-link {
+		display: block;
+		overflow: clip;
+	}
+
+	.card-image {
+		overflow: clip;
+	}
+
+	.card-image img {
+		width: 100%;
+		height: 260px;
+		object-fit: cover;
+		object-position: center 30%;
+		display: block;
+		transition: transform 0.4s ease;
+	}
+
+	.project-card:hover .card-image img {
+		transform: scale(1.04);
+	}
+
+	.card-body {
+		padding: 1.6rem 1.6rem 1.8rem;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+
+	.card-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin-bottom: 1rem;
+	}
+
+	.tag {
+		display: inline-block;
+		font: 600 0.75rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--blue);
+		background: rgba(0, 0, 254, 0.07);
+		padding: 0.3rem 0.65rem;
+		border-radius: 2px;
+	}
+
+	.card-body h3 {
+		font-size: clamp(1.5rem, 2.2vw, 2rem);
+		letter-spacing: -0.025em;
+		line-height: 1.05;
+		margin: 0;
+		padding: 0;
+		border: none;
+	}
+
+	.card-body h3 a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.card-body h3 a:hover {
+		color: var(--blue);
+	}
+
+	.card-excerpt {
+		margin-top: 0.85rem;
+		font-size: 0.97rem;
+		line-height: 1.72;
+		color: var(--charcoal-400);
+		flex: 1;
+	}
+
+	.card-stats {
+		margin-top: 1.4rem;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.75rem 1.2rem;
+		border-top: 1px solid rgba(0, 0, 254, 0.12);
+		padding-top: 1.2rem;
+	}
+
+	.stat dt {
+		font: 600 0.76rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--charcoal-400);
+	}
+
+	.stat dd {
+		margin: 0.28rem 0 0;
+		font: 700 0.95rem/1.2 'League Spartan', Arial, sans-serif;
+		color: var(--charcoal-900, #0f1525);
+	}
+
+	.card-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		margin-top: 1.4rem;
+		font: 700 0.9rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--blue);
+		text-decoration: none;
+		transition: gap 0.2s ease;
+	}
+
+	.card-cta:hover {
+		gap: 0.7rem;
+	}
+
+	.cta-band {
+		background: linear-gradient(135deg, #0a122a 0%, #0d1b40 100%);
+	}
+
+	.cta-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.cta-copy h2 {
+		font-size: clamp(1.6rem, 3vw, 2.4rem);
+		letter-spacing: -0.025em;
+		line-height: 1.1;
+		color: var(--white);
+		margin: 0;
+	}
+
+	.cta-copy p {
+		margin-top: 0.6rem;
+		font-size: 1rem;
+		color: rgba(255, 255, 255, 0.72);
+		line-height: 1.6;
+	}
+
+	@media (max-width: 640px) {
+		.cta-inner {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.card-stats {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
