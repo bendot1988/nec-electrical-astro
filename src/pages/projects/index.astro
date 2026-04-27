@@ -13,6 +13,99 @@ const homeAnchors = navLinks.map((link) => ({
 	...link,
 	href: link.href.startsWith('/') ? link.href : `/${link.href}`,
 }));
+
+const previousNecWork = [
+	{
+		title: 'ACS&T, Wolverhampton',
+		description: 'Full design and build of electrical services to a three storey office block.',
+		image: '/images/projects/previous-nec/acs-wolverhampton.png',
+		tags: ['Commercial offices'],
+	},
+	{
+		title: 'Summerleys Business Centre, Princes Risborough',
+		description: 'Full design and build of electrical services to eight distribution warehouses with office blocks.',
+		image: '/images/projects/previous-nec/summerleys-princes-risborough.png',
+		tags: ['Distribution warehouse', 'Commercial offices'],
+	},
+	{
+		title: 'Business Park Caxton, Watford',
+		description: 'Full design and build of electrical services to four distribution warehouses with office blocks.',
+		image: '/images/projects/previous-nec/business-park-caxton-watford.png',
+		tags: ['Distribution warehouse', 'Commercial offices'],
+	},
+	{
+		title: 'Snap on Tools Offices, Kettering',
+		description: 'Full design and build of electrical services to a two storey office block.',
+		image: '/images/projects/previous-nec/snap-on-tools-kettering.png',
+		tags: ['Commercial offices'],
+	},
+	{
+		title: 'Site V, Milton Keynes',
+		description: 'Full design and build of electrical services to two distribution warehouses with office blocks.',
+		image: '/images/projects/previous-nec/site-v-milton-keynes.png',
+		tags: ['Distribution warehouse', 'Commercial offices'],
+	},
+	{
+		title: 'Reiser, Milton Keynes',
+		description: 'Full design and build of electrical services to single storey office block and warehouse.',
+		image: '/images/projects/previous-nec/reiser-milton-keynes.png',
+		tags: ['Commercial offices', 'Warehouse'],
+	},
+	{
+		title: 'Benteller Automotive, Corby',
+		description: 'Full design and build of electrical services to a car production warehouse/workshops.',
+		image: '/images/projects/previous-nec/benteller-automotive-corby.png',
+		tags: ['Car production & workshops'],
+	},
+	{
+		title: 'Bells Kia Car Showroom, Northampton',
+		description: 'Full design and build of electrical services to a car show room.',
+		image: '/images/projects/previous-nec/bells-kia-car-showroom-northampton.png',
+		tags: ['Car show room'],
+	},
+	{
+		title: 'Travis Perkins New Depot, Cambridge',
+		description: 'Full design and build of electrical services to a office and warehouse depot.',
+		image: '/images/projects/previous-nec/travis-perkins-new-depot-cambridge.png',
+		tags: ['Commercial offices', 'Warehouse'],
+	},
+	{
+		title: 'Cold Harbour Office Block, Harpenden',
+		description: 'Full design and build of electrical services to a three storey office block.',
+		image: '/images/projects/previous-nec/cold-harbour-office-block-harpenden.png',
+		tags: ['Commercial offices'],
+	},
+	{
+		title: 'Carings Kindergartens, Brooklands, Milton Keynes',
+		description: 'Full design and build of electrical services to a two storey nursery.',
+		image: '/images/projects/previous-nec/carings-kindergartens-brooklands-milton-keynes.png',
+		tags: ['Nursery'],
+	},
+	{
+		title: 'Torquemeters Office, Northampton',
+		description: 'Full design and build of electrical services to a two storey office block and workshop.',
+		image: '/images/projects/previous-nec/torquemeters-office-northampton.png',
+		tags: ['Commercial offices', 'Workshop'],
+	},
+	{
+		title: 'Oadby Plastics, Leicester',
+		description: 'Full design and build of electrical services to a three storey office block and new warehouse and trade counters.',
+		image: '/images/projects/previous-nec/oadby-plastics-leicester.png',
+		tags: ['Commercial offices', 'Warehouse'],
+	},
+	{
+		title: 'Magnetic Park Dunkleman',
+		description: 'Full design and build of electrical services to a two distribution warehouses with office blocks.',
+		image: '/images/projects/previous-nec/magnetic-park-dunkleman.png',
+		tags: ['Distribution warehouse', 'Commercial offices'],
+	},
+	{
+		title: 'Partridge Print, Rothwell',
+		description: 'Full design and build of electrical services to a two distribution warehouses with office blocks.',
+		image: '/images/projects/previous-nec/partridge-print-rothwell.png',
+		tags: ['Distribution warehouse', 'Commercial offices'],
+	},
+];
 ---
 
 <Layout
@@ -107,6 +200,45 @@ const homeAnchors = navLinks.map((link) => ({
 											<path d="M5 12h14M13 6l6 6-6 6" />
 										</svg>
 									</a>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="section previous-work">
+			<div class="container">
+				<p class="section-kicker">
+					<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+						<path
+							fill="currentColor"
+							d="M13.2 2.8c.2-.5-.5-.9-.8-.4L6.7 12.1a.5.5 0 0 0 .4.8h3.1L9.5 21c-.1.6.6.9.9.4l6.8-10.7a.5.5 0 0 0-.4-.8h-3.4l-.2-7.1Z"
+						></path>
+					</svg>
+					Legacy Portfolio
+				</p>
+				<h2 class="section-title">Previous NEC Work</h2>
+				<p class="section-subtitle">
+					A selection of earlier NEC projects with concise project details.
+				</p>
+
+				<div class="previous-grid" data-animate-stagger="0.06">
+					{
+						previousNecWork.map((project) => (
+							<article class="project-card previous-project-card brand-line-box" data-animate="fade-up">
+								<div class="card-image">
+									<img src={project.image} alt={project.title} loading="lazy" width="720" height="460" />
+								</div>
+								<div class="card-body previous-card-body">
+									<div class="card-meta previous-card-meta">
+										{project.tags.map((tag) => (
+											<span class="tag previous-tag">{tag}</span>
+										))}
+									</div>
+									<h3>{project.title}</h3>
+									<p>{project.description}</p>
 								</div>
 							</article>
 						))
@@ -210,8 +342,20 @@ const homeAnchors = navLinks.map((link) => ({
 	.project-grid {
 		margin-top: 2.5rem;
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(min(100%, 540px), 1fr));
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 1.6rem;
+	}
+
+	@media (max-width: 1024px) {
+		.project-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 640px) {
+		.project-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.project-card {
@@ -340,6 +484,66 @@ const homeAnchors = navLinks.map((link) => ({
 		gap: 0.7rem;
 	}
 
+	.previous-work {
+		background: #fff;
+		border-top: 1px solid rgba(0, 0, 254, 0.08);
+	}
+
+	.previous-grid {
+		margin-top: 2.2rem;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.6rem;
+	}
+
+	.previous-project-card .card-image img {
+		height: 220px;
+		object-position: center;
+	}
+
+	.previous-project-card {
+		background: #f0f2f5;
+		border: 1px solid rgba(15, 21, 37, 0.1);
+	}
+
+	.previous-card-body {
+		padding: 1.2rem 1.2rem 1.3rem;
+	}
+
+	.previous-card-body h3 {
+		font-size: clamp(1.5rem, 2.2vw, 2rem);
+		line-height: 1.05;
+		letter-spacing: -0.025em;
+		margin: 0;
+		padding: 0;
+		border: none;
+	}
+
+	.previous-card-body p {
+		margin-top: 0.85rem;
+		font-size: 0.97rem;
+		line-height: 1.72;
+		color: var(--charcoal-400);
+	}
+
+	.previous-card-meta {
+		margin-bottom: 0.9rem;
+	}
+
+	.previous-tag {
+		color: var(--blue);
+		background: rgba(0, 0, 254, 0.07);
+		font: 600 0.75rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+
+	@media (max-width: 1024px) {
+		.previous-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
 	.cta-band {
 		background: linear-gradient(135deg, #0a122a 0%, #0d1b40 100%);
 	}
@@ -368,6 +572,10 @@ const homeAnchors = navLinks.map((link) => ({
 	}
 
 	@media (max-width: 640px) {
+		.previous-grid {
+			grid-template-columns: 1fr;
+		}
+
 		.cta-inner {
 			flex-direction: column;
 			align-items: flex-start;
