@@ -30,8 +30,8 @@ export const pageDescription =
 	'NICEIC Approved Contractor delivering complete design and build electrical services across industrial, commercial, and educational sectors.';
 
 export const navLinks: NavLink[] = [
-	{ href: '#about', label: 'About Us' },
-	{ href: '#services', label: 'Services' },
+	{ href: '/#about', label: 'About Us' },
+	{ href: '/#services', label: 'Services' },
 	{ href: '/projects/', label: 'Projects' },
 	{ href: '/health-safety/', label: 'Health & Safety' },
 	{ href: '/locations/', label: 'Locations' },

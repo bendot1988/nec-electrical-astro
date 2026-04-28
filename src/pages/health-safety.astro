@@ -7,6 +7,7 @@ import { navLinks } from '../data/home';
 const pageTitle = 'Health & Safety | NEC Ltd Electrical';
 const pageDescription =
 	'Health and safety standards, site supervision, audits, and training commitments from NEC Ltd Electrical.';
+const homeAnchors = navLinks.map((link) => ({ ...link, href: link.href.startsWith('/') ? link.href : `/${link.href}` }));
 
 const safetyAssurances = [
 	{
@@ -40,19 +41,19 @@ const trainingLogos = [
 	canonical="https://dotwall.dev/nec/health-safety/"
 	ogImage="/images/service-security-hero.png"
 >
-	<Header links={navLinks} ctaHref="#contact" />
+	<Header links={homeAnchors} ctaHref="/#contact" />
 
 	<main id="main-content">
 		<section class="safety-hero">
 			<div class="safety-hero-bg" aria-hidden="true"></div>
 			<div class="safety-hero-overlay" aria-hidden="true"></div>
 			<div class="container safety-hero-content">
-				<p class="hero-kicker">Safety first, always</p>
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">Health & Safety</span>
+				</nav>
 				<h1>Health & Safety</h1>
-				<p>
-					Our industry carries significant hazards, so we work to strict standards and regulations to maintain a safe
-					working environment for our teams, clients, and all site users.
-				</p>
 			</div>
 		</section>
 
@@ -127,18 +128,19 @@ const trainingLogos = [
 		</section>
 	</main>
 
-	<Footer links={navLinks} />
+	<Footer links={homeAnchors} />
 </Layout>
 
 <style>
-	.safety-hero { position: relative; min-height: 62vh; overflow: clip; display: grid; align-items: end; }
+	.safety-hero { position: relative; min-height: clamp(290px, 42vw, 380px); overflow: clip; display: grid; align-items: end; }
 	.safety-hero-bg, .safety-hero-overlay { position: absolute; inset: 0; }
-	.safety-hero-bg { background: center / cover no-repeat url('/images/service-security-hero.png'); }
-	.safety-hero-overlay { background: linear-gradient(130deg, rgba(17, 22, 35, 0.85), rgba(17, 22, 35, 0.48)); }
-	.safety-hero-content { position: relative; z-index: 1; color: var(--white); padding-bottom: 3.2rem; }
-	.hero-kicker { margin: 0; text-transform: uppercase; font: 600 0.78rem/1 'Open Sans', Arial, sans-serif; letter-spacing: 0.09em; color: rgba(255, 255, 255, 0.9); }
-	h1 { margin-top: 0.85rem; font-size: clamp(2.25rem, 7vw, 4.5rem); line-height: 0.98; letter-spacing: -0.03em; color: var(--white); }
-	.safety-hero-content p:last-child { margin-top: 1rem; max-width: 66ch; color: #e1e5f2; }
+	.safety-hero-bg { background: center 30% / cover no-repeat url('/images/service-security-hero.png'); }
+	.safety-hero-overlay { background: linear-gradient(115deg, rgba(10, 18, 42, 0.62), rgba(10, 18, 42, 0.35)); }
+	.safety-hero-content { position: relative; z-index: 1; color: var(--white); padding-bottom: clamp(1.4rem, 3vw, 2.5rem); }
+	.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.42rem; font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif; }
+	.crumbs a { color: rgba(255, 255, 255, 0.86); transition: color 0.2s var(--motion-ease); }
+	.crumbs a:hover { color: var(--white); }
+	h1 { margin-top: 0.85rem; font-size: clamp(2.1rem, 6.8vw, 4.2rem); line-height: 0.98; letter-spacing: -0.03em; color: var(--white); max-width: 9ch; }
 	.section-kicker { display: inline-flex; align-items: center; gap: 0.5rem; font: 600 0.86rem/1 'League Spartan', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.07em; color: var(--blue); }
 	.safety-overview { background: var(--ghost-white); }
 	.assurance-grid { margin-top: 1.8rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
