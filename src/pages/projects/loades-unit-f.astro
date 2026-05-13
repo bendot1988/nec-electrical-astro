@@ -230,7 +230,14 @@ const heroBgStyle = `background-image: url('${posterUrl}'); background-position:
 							{videoEntries.map((v) => (
 								<figure class="video-card brand-line-box" data-animate="fade-up">
 									<div class="video-frame">
-										<video controls playsinline preload="metadata" poster={posterUrl}>
+										<video
+											class="loades-video"
+											controls
+											playsinline
+											preload="metadata"
+											poster={posterUrl}
+											muted
+										>
 											<source src={v.resolvedSrc} type={v.mimeType} />
 										</video>
 									</div>
@@ -298,6 +305,23 @@ const heroBgStyle = `background-image: url('${posterUrl}'); background-position:
 			</div>
 		</section>
 	</main>
+
+	<script is:inline>
+		(() => {
+			document.querySelectorAll('video.loades-video').forEach((el) => {
+				const v = el;
+				const enforceSilent = () => {
+					if (!v.muted || v.volume > 0) {
+						v.muted = true;
+						v.volume = 0;
+					}
+				};
+				enforceSilent();
+				v.addEventListener('volumechange', enforceSilent);
+				v.addEventListener('loadedmetadata', enforceSilent);
+			});
+		})();
+	</script>
 
 	<Footer links={homeAnchors} />
 </Layout>
