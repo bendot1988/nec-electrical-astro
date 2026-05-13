@@ -230,11 +230,9 @@ const heroBgStyle = `background-image: url('${posterUrl}'); background-position:
 							{videoEntries.map((v) => (
 								<figure class="video-card brand-line-box" data-animate="fade-up">
 									<div class="video-frame">
-										<div class="video-story">
-											<video controls playsinline preload="metadata" poster={posterUrl}>
-												<source src={v.resolvedSrc} type={v.mimeType} />
-											</video>
-										</div>
+										<video controls playsinline preload="metadata" poster={posterUrl}>
+											<source src={v.resolvedSrc} type={v.mimeType} />
+										</video>
 									</div>
 									<figcaption>
 										<strong>{v.title}</strong>
@@ -529,29 +527,14 @@ const heroBgStyle = `background-image: url('${posterUrl}'); background-position:
 		background: #0a122a;
 	}
 	.video-frame {
-		position: relative;
 		aspect-ratio: 16 / 9;
-		min-height: clamp(200px, 36vw, 420px);
-		background: linear-gradient(180deg, #0a122a 0%, #050a18 100%);
-		overflow: hidden;
+		background: #0a122a;
 	}
-	/* Instagram story ratio (9×16 portrait), centred inside the 16×9 player chrome */
-	.video-story {
-		position: absolute;
-		inset: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-	.video-story video {
+	.video-frame video {
+		width: 100%;
 		height: 100%;
-		width: auto;
-		max-width: 100%;
-		max-height: 100%;
-		aspect-ratio: 9 / 16;
 		display: block;
 		object-fit: contain;
-		background: #000;
 	}
 	.video-card figcaption {
 		padding: 1rem 1.15rem 1.2rem;
