@@ -116,13 +116,15 @@ export const projects: ProjectItem[] = [
 		videos: [
 			{
 				src: '/videos/projects/loades-unit-f/01-site-tour.mp4',
-				title: 'Site walkthrough',
-				caption: 'A moving tour of the unit: scale, routes, and fix-out quality before handover.',
+				title: 'Warehouse — trunking and containment',
+				caption:
+					'Walkthrough in the main unit: high-level trunking, cable routes, and containment through the warehouse space.',
 			},
 			{
 				src: '/videos/projects/loades-unit-f/02-lv-distribution.mp4',
-				title: 'LV assembly in detail',
-				caption: 'Closer look at distribution equipment, trunking entries, and commissioning-ready presentation.',
+				title: 'Office — LV distribution',
+				caption:
+					'Closer look at the LV assembly, trunking entries, and presentation in the office area ahead of handover.',
 			},
 		],
 	},
