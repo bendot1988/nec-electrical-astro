@@ -12,7 +12,7 @@ export interface ProjectItem {
 	scope: { title: string; description: string; icon: string }[];
 	href: string;
 	tags: string[];
-	/** Optional MP4s under `public/` — e.g. `/videos/projects/slug/file.mp4` */
+	/** Optional clips: same basename in `public/…` or in `src/assets/projects/{slug}/` (bundled). */
 	videos?: { src: string; title: string; caption?: string }[];
 }
 

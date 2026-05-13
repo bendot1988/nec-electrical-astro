@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { navLinks } from '../../data/home';
 import { projects } from '../../data/projects';
+import { withBaseUrl } from '../../utils/withBaseUrl';
 
 const project = projects.find((p) => p.slug === 'loades-unit-f')!;
 
@@ -12,6 +13,38 @@ const homeAnchors = navLinks.map((link) => ({
 	href: link.href.startsWith('/') ? link.href : `/${link.href}`,
 }));
 
+/** Vite emits hashed URLs — drop files here with the same basename as in `projects.ts` (e.g. `01-site-tour.mp4`). */
+const loadesAssetUrls: Record<string, string> = {};
+const loadesAssetGlob = import.meta.glob<{ default: string }>(
+	'../../assets/projects/loades-unit-f/*.{mp4,mov,webm}',
+	{ eager: true, import: 'url' }
+);
+for (const [key, mod] of Object.entries(loadesAssetGlob)) {
+	const name = key.split('/').pop();
+	if (name) loadesAssetUrls[name.toLowerCase()] = mod.default;
+}
+
+function resolveLoadesVideoSrc(storedPath: string): string {
+	const filename = storedPath.split('/').pop()?.toLowerCase();
+	if (filename && loadesAssetUrls[filename]) return loadesAssetUrls[filename];
+	return withBaseUrl(storedPath);
+}
+
+function videoMimeTypeForPath(path: string): string {
+	const tail = path.split('?')[0].toLowerCase();
+	if (tail.endsWith('.webm')) return 'video/webm';
+	if (tail.endsWith('.mov')) return 'video/quicktime';
+	return 'video/mp4';
+}
+
+const posterUrl = withBaseUrl(project.heroImage);
+const videoEntries =
+	project.videos?.map((v) => ({
+		...v,
+		resolvedSrc: resolveLoadesVideoSrc(v.src),
+		mimeType: videoMimeTypeForPath(v.src),
+	})) ?? [];
+
 const iconMap: Record<string, string> = {
 	light: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 1 7 7c0 2.6-1.4 4.9-3.5 6.2V17H8.5v-1.8A7 7 0 0 1 5 9a7 7 0 0 1 7-7Z"/></svg>`,
 	fire: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c2 3 4 4.8 4 8.2a4 4 0 1 1-8 0c0-1.9.6-3.4 2.2-5.1"/><path d="M12 10c1.2 1.5 2 2.3 2 3.8a2 2 0 1 1-4 0c0-.9.3-1.6 1.1-2.4"/></svg>`,
@@ -19,7 +52,7 @@ const iconMap: Record<string, string> = {
 	cable: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="2" rx="1"/><circle cx="7" cy="12" r="2"/><circle cx="17" cy="12" r="2"/><path d="M7 10V7a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v3"/><path d="M7 14v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-3"/></svg>`,
 };
 
-const heroBgStyle = `background-image: url('${project.heroImage}'); background-position: center 42%; background-size: cover; background-repeat: no-repeat;`;
+const heroBgStyle = `background-image: url('${posterUrl}'); background-position: center 42%; background-size: cover; background-repeat: no-repeat;`;
 ---
 
 <Layout
@@ -175,7 +208,7 @@ const heroBgStyle = `background-image: url('${project.heroImage}'); background-p
 		</section>
 
 		{
-			project.videos && project.videos.length > 0 && (
+			videoEntries.length > 0 && (
 				<section class="section video-section">
 					<div class="container">
 						<p class="section-kicker">
@@ -194,16 +227,17 @@ const heroBgStyle = `background-image: url('${project.heroImage}'); background-p
 						</p>
 
 						<div class="video-grid" data-animate-stagger="0.08">
-							{project.videos.map((v) => (
+							{videoEntries.map((v) => (
 								<figure class="video-card brand-line-box" data-animate="fade-up">
 									<div class="video-frame">
-										<video controls playsinline preload="metadata" poster={project.heroImage}>
-											<source src={v.src} type="video/mp4" />
+										<video controls playsinline preload="metadata" poster={posterUrl}>
+											<source src={v.resolvedSrc} type={v.mimeType} />
 										</video>
 									</div>
 									<figcaption>
 										<strong>{v.title}</strong>
 										{v.caption && <span class="video-caption">{v.caption}</span>}
+										<a href={v.resolvedSrc} class="video-download">Download clip</a>
 									</figcaption>
 								</figure>
 							))}
@@ -518,6 +552,17 @@ const heroBgStyle = `background-image: url('${project.heroImage}'); background-p
 	}
 	.video-caption {
 		display: block;
+	}
+	.video-download {
+		display: inline-block;
+		margin-top: 0.35rem;
+		font: 600 0.82rem/1.2 'League Spartan', Arial, sans-serif;
+		color: var(--blue);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+	.video-download:hover {
+		text-decoration: none;
 	}
 	.narrative-section {
 		background: var(--white);
