@@ -29,6 +29,10 @@ const { links } = Astro.props;
 				<a href="/#contact" class="btn btn-primary">Start Your Project Enquiry</a>
 				<a href="/#services" class="btn btn-outline">Our Expertise</a>
 			</div>
+			<div class="hero-accreditations" data-animate="fade-up" data-animate-delay="0.3">
+				<img src="/images/logo-chas-accredited.png" alt="CHAS Accredited Contractor" loading="lazy" width="310" height="172" />
+				<img src="/images/logo-niceic-approved.png" alt="NICEIC Approved Contractor" loading="lazy" width="300" height="170" />
+			</div>
 		</div>
 	</div>
 </header>
@@ -114,6 +118,32 @@ const { links } = Astro.props;
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.8rem;
+	}
+
+	.hero-accreditations {
+		margin-top: 1.55rem;
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 0.7rem;
+		align-items: center;
+	}
+
+	.hero-accreditations img {
+		display: block;
+		height: 48px;
+		width: auto;
+		background: rgba(255, 255, 255, 0.92);
+		padding: 0.32rem 0.5rem;
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+		box-shadow: 0 8px 18px rgba(14, 19, 35, 0.22);
+		transition: transform 0.2s var(--motion-ease), box-shadow 0.2s var(--motion-ease), background-color 0.2s
+			var(--motion-ease);
+	}
+
+	.hero-accreditations img:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 14px 24px rgba(14, 19, 35, 0.32);
+		background: #ffffff;
 	}
 
 	@keyframes heroFade {

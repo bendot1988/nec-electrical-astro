@@ -12,6 +12,8 @@ export interface ProjectItem {
 	scope: { title: string; description: string; icon: string }[];
 	href: string;
 	tags: string[];
+	/** Optional MP4s under `public/` — e.g. `/videos/projects/slug/file.mp4` */
+	videos?: { src: string; title: string; caption?: string }[];
 }
 
 export const projects: ProjectItem[] = [
@@ -60,6 +62,69 @@ export const projects: ProjectItem[] = [
 		],
 		tags: ['Lighting', 'Emergency Lighting', 'Fire Alarms', 'Mechanical Power'],
 		href: '/projects/dc9/',
+	},
+	{
+		slug: 'loades-unit-f',
+		title: 'Loades Unit F',
+		subtitle:
+			'Design and build electrical delivery for a high-bay industrial unit — from containment highways through to LV distribution and commissioning readiness.',
+		sector: 'Commercial & Industrial',
+		value: 'Design & build package',
+		duration: 'Full programme',
+		location: 'United Kingdom',
+		heroImage: '/images/projects/loades-unit-f/warehouse-interior.png',
+		excerpt:
+			'Loades Unit F shows a clean-sheet industrial shell transformed into a disciplined electrical installation: long runs of containment, coordinated overhead routes, and a Schneider Electric LV assembly ready for energisation and handover.',
+		scope: [
+			{
+				title: 'Cable Containment & Distribution Routes',
+				description:
+					'High-level containment installed to create predictable service highways across the unit, keeping circuits ordered, accessible, and ready for future tenant fit-out changes.',
+				icon: 'cable',
+			},
+			{
+				title: 'LV Distribution & Panel Assembly',
+				description:
+					'Main and sub-distribution equipment supplied and installed to form a coherent LV backbone, including Schneider Electric assemblies aligned to commissioning and O&M documentation.',
+				icon: 'power',
+			},
+			{
+				title: 'Lighting & Small Power',
+				description:
+					'General and task lighting circuits with small power provisions laid out to support safe circulation, inspection, and operational use across the full floor plate.',
+				icon: 'light',
+			},
+			{
+				title: 'Testing & Commissioning Readiness',
+				description:
+					'Installation completed to a stage where circuits are proven, labelled, and prepared for formal commissioning — reducing surprises at energisation and speeding client sign-off.',
+				icon: 'fire',
+			},
+		],
+		galleryImages: [
+			{
+				src: '/images/projects/loades-unit-f/warehouse-interior.png',
+				alt: 'Loades Unit F — wide industrial unit interior with cable tray and containment along white walls',
+			},
+			{
+				src: '/images/projects/loades-unit-f/lv-distribution.png',
+				alt: 'Loades Unit F — Schneider Electric LV distribution boards and trunking installation',
+			},
+		],
+		tags: ['Industrial', 'LV Distribution', 'Cable Containment', 'Commissioning'],
+		href: '/projects/loades-unit-f/',
+		videos: [
+			{
+				src: '/videos/projects/loades-unit-f/01-site-tour.mp4',
+				title: 'Site walkthrough',
+				caption: 'A moving tour of the unit: scale, routes, and fix-out quality before handover.',
+			},
+			{
+				src: '/videos/projects/loades-unit-f/02-lv-distribution.mp4',
+				title: 'LV assembly in detail',
+				caption: 'Closer look at distribution equipment, trunking entries, and commissioning-ready presentation.',
+			},
+		],
 	},
 	{
 		slug: 'steris',

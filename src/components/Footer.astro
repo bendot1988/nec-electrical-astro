@@ -12,11 +12,15 @@ const currentYear = new Date().getFullYear();
 <footer id="locations" class="site-footer">
 	<div class="container footer-grid">
 		<div class="footer-col">
-			<img src="/images/logo-white.svg" alt="NEC Ltd Electrical" width="170" height="42" />
+			<img class="footer-brand-logo" src="/images/logo-white.svg" alt="NEC Ltd Electrical" width="170" height="42" />
 			<p>
 				NICEIC Approved Contractor delivering high-quality design and build electrical services for the
 				industrial, commercial, and educational sectors.
 			</p>
+			<div class="footer-accreditations">
+				<img src="/images/logo-chas-accredited.png" alt="CHAS Accredited Contractor" loading="lazy" width="310" height="172" />
+				<img src="/images/logo-niceic-approved.png" alt="NICEIC Approved Contractor" loading="lazy" width="300" height="170" />
+			</div>
 		</div>
 		<div class="footer-col">
 			<h3>Useful Links</h3>
@@ -128,6 +132,32 @@ const currentYear = new Date().getFullYear();
 		max-width: 44ch;
 	}
 
+	.footer-accreditations {
+		margin-top: 1.05rem;
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 0.7rem;
+		align-items: center;
+	}
+
+	.footer-accreditations img {
+		display: block;
+		height: 68px;
+		width: auto;
+		background: rgba(255, 255, 255, 0.95);
+		padding: 0.34rem 0.5rem;
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+		box-shadow: 0 8px 18px rgba(14, 19, 35, 0.22);
+		transition: transform 0.2s var(--motion-ease), box-shadow 0.2s var(--motion-ease), background-color 0.2s
+			var(--motion-ease);
+	}
+
+	.footer-accreditations img:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 14px 24px rgba(14, 19, 35, 0.32);
+		background: #ffffff;
+	}
+
 	ul {
 		margin: 0.9rem 0 0;
 		padding: 0;
@@ -162,6 +192,12 @@ const currentYear = new Date().getFullYear();
 
 	.footer-col {
 		padding: 2.5rem 0;
+	}
+
+	.footer-brand-logo {
+		display: block;
+		height: 42px;
+		width: auto;
 	}
 
 	.contact-icon {
