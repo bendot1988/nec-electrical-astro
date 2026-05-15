@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { navLinks } from '../data/home';
+import { serviceMapPoints } from '../data/locations';
 
 const pageTitle = 'Locations | NEC Ltd Electrical';
 const pageDescription =
@@ -73,7 +74,7 @@ const pageDescription =
 	<Footer links={navLinks} />
 </Layout>
 
-<script is:inline>
+<script is:inline define:vars={{ serviceMapPoints }}>
 	const initLocationsMap = async () => {
 		const mapNode = document.getElementById('uk-service-map');
 		if (!mapNode || mapNode.dataset.initialized === 'true') return;
@@ -88,15 +89,6 @@ const pageDescription =
 			maxZoom: 18,
 		}).addTo(map);
 
-		const points = [
-			[53.3811, -1.4701], [53.8008, -1.5491], [53.959, -1.0815], [53.7457, -0.3367], [53.7676, -0.3274],
-			[53.5228, -1.1335], [53.7936, -1.7521], [53.6458, -1.785], [53.7078, -1.633], [53.6456, -1.778],
-			[53.228, -0.5461], [52.9548, -1.1581], [52.4862, -1.8904], [52.6369, -1.1398], [52.9225, -1.4746],
-			[52.4068, -1.5197], [52.5688, -0.2405], [52.5726, -0.2417], [52.2405, -0.9027], [52.0406, -0.7594],
-			[52.2053, 0.1218], [52.6309, 1.2974], [52.5717, 0.2426], [52.6769, -2.4493], [51.752, -1.2577],
-			[51.4545, -0.9781], [51.6553, -0.396], [51.5842, -0.254], [51.9023, -0.2011], [51.5072, -0.1276],
-		];
-
 		const markerIcon = L.divIcon({
 			className: 'service-marker-wrap',
 			html: '<span class="service-marker"></span>',
@@ -104,7 +96,7 @@ const pageDescription =
 			iconAnchor: [8, 8],
 		});
 
-		points.forEach((coords) => {
+		serviceMapPoints.forEach((coords) => {
 			L.marker(coords, { icon: markerIcon }).addTo(map);
 		});
 	};
