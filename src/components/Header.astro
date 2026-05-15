@@ -4,7 +4,7 @@ import { serviceCards } from '../data/home';
 
 interface Props {
 	links: NavLink[];
-	/** Homepage hero: fixed header, transparent nav until scroll. */
+	/** Homepage hero: fixed header so scroll styling applies over the hero. */
 	overlay?: boolean;
 	topBarLabel?: string;
 	topBarAddress?: string;
@@ -646,29 +646,14 @@ serviceMenuItems.push({
 			background-color 0.35s var(--motion-ease);
 	}
 
-	/* Homepage hero: transparent nav over imagery until scroll */
-	.site-header.is-overlay:not(.is-scrolled):not(.is-mobile-nav-open) .top-nav {
-		background: transparent;
-		border-color: transparent;
-		box-shadow: none;
-	}
-
-	.site-header.is-overlay:not(.is-scrolled):not(.is-mobile-nav-open) .nav-list > li > a,
-	.site-header.is-overlay:not(.is-scrolled):not(.is-mobile-nav-open) .services-trigger {
-		color: var(--white);
-	}
-
-	.site-header.is-overlay:not(.is-scrolled):not(.is-mobile-nav-open) .menu-toggle-bars,
-	.site-header.is-overlay:not(.is-scrolled):not(.is-mobile-nav-open) .menu-toggle-bars::before,
-	.site-header.is-overlay:not(.is-scrolled):not(.is-mobile-nav-open) .menu-toggle-bars::after {
-		background: var(--white);
-	}
-
-	.site-header.is-overlay.is-mobile-nav-open .top-nav {
+	/* Homepage: rounded nav bar at top of page as well as on scroll */
+	.site-header.is-overlay .top-nav {
 		border-radius: 14px;
-		border-color: rgba(18, 22, 38, 0.08);
-		background: rgba(255, 255, 255, 0.98);
-		box-shadow: 0 10px 28px rgba(18, 22, 38, 0.12);
+	}
+
+	.site-header.is-overlay .menu-toggle {
+		border-radius: 10px;
+		clip-path: none;
 	}
 
 	/* Rounded “pill” bar on scroll — echoes the curved brackets in the NEC logo */
