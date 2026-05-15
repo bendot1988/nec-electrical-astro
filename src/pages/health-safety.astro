@@ -23,7 +23,7 @@ const safetyAssurances = [
 	{
 		title: 'Qualified Site Leadership',
 		description:
-			'Site Supervisors hold relevant credentials, including SSSTS, to manage on-site health and safety matters effectively.',
+			'Site Supervisors hold relevant credentials, including SSSTS and SMSTS, to manage on-site health and safety matters effectively.',
 	},
 ];
 
@@ -32,6 +32,7 @@ const trainingLogos = [
 	{ name: 'ECS / CSCS', group: 'Operative Carding', image: '/images/logo-ecs-cscs.png' },
 	{ name: 'IPAF', group: 'Plant Access', image: '/images/logo-ipaf.png' },
 	{ name: 'PASMA', group: 'Mobile Towers', image: '/images/logo-pasma.png' },
+	{ name: 'CITB SMSTS', group: 'Site Management', image: '/images/logo-citb-smsts.png' },
 ];
 ---
 
@@ -91,15 +92,14 @@ const trainingLogos = [
 				<p class="section-kicker">Accreditation & training</p>
 				<h2 class="section-title">Credentials and Training Standards</h2>
 				<p class="section-subtitle">
-					We are a CHAS accredited company and our operatives are trained across key competency areas. Replace these
-					placeholder tiles with final client-approved logos when available.
+					We are a CHAS accredited company and our operatives are trained across key competency areas.
 				</p>
 				<div class="logo-grid" data-animate-stagger="0.06">
 					{
 						trainingLogos.map((item) => (
 							<article class="logo-tile" data-animate="fade-up">
 								<div class="logo-mark">
-									<img src={item.image} alt={`${item.name} logo`} loading="lazy" width="232" height="130" />
+									<img src={item.image} alt={`${item.name} logo`} loading="lazy" width="160" height="90" />
 								</div>
 								<h3>{item.name}</h3>
 								<p>{item.group}</p>
@@ -148,44 +148,56 @@ const trainingLogos = [
 	.assurance-card:hover { transform: translateY(-6px); box-shadow: 0 18px 34px rgba(21, 27, 44, 0.14); }
 	.assurance-card h3 { font-size: 1.45rem; }
 	.assurance-card p { margin-top: 0.7rem; color: var(--charcoal-400); line-height: 1.72; }
-	.logo-grid { margin-top: 1.8rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.9rem; }
+	.logo-grid {
+		margin-top: 1.8rem;
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 0.75rem;
+		align-items: stretch;
+	}
 	.logo-tile {
 		background: #f6f8fc;
 		clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
-		padding: 1rem;
+		padding: 0.75rem 0.55rem 0.85rem;
 		border: 1px solid rgba(30, 36, 56, 0.08);
 		transition: background-color 0.2s var(--motion-ease), transform 0.2s var(--motion-ease);
+		min-width: 0;
 	}
 	.logo-tile:hover { background: var(--white); transform: translateY(-2px); }
 	.logo-mark {
-		width: 232px;
-		height: 130px;
+		width: 100%;
+		height: clamp(4.25rem, 7.5vw, 5.25rem);
 		margin-inline: auto;
-		padding: 0;
+		padding: 0.5rem 0.4rem;
 		background: var(--white);
-		display: grid;
-		place-items: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		border: 2px solid rgba(0, 0, 254, 0.2);
 		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
 		overflow: hidden;
+		box-sizing: border-box;
 	}
 	.logo-mark img {
-		width: 232px;
-		height: 130px;
+		width: auto;
+		height: auto;
+		max-width: 100%;
+		max-height: 100%;
 		object-fit: contain;
 		object-position: center;
 		display: block;
 	}
 	.logo-tile h3 {
-		margin-top: 0.95rem;
-		font-size: 1.15rem;
-		line-height: 1.1;
+		margin-top: 0.7rem;
+		font-size: clamp(0.88rem, 1vw, 1.02rem);
+		line-height: 1.15;
 		text-align: center;
 	}
 	.logo-tile p {
-		margin-top: 0.38rem;
+		margin-top: 0.28rem;
 		color: var(--charcoal-400);
-		font-size: 0.9rem;
+		font-size: clamp(0.78rem, 0.9vw, 0.86rem);
+		line-height: 1.35;
 		text-align: center;
 	}
 	.training-note-wrap {
@@ -224,7 +236,7 @@ const trainingLogos = [
 	.safety-summary { background: #eaf1ff; color: var(--charcoal-100); }
 	.summary-wrap h2 { color: var(--blue); font-size: clamp(2rem, 4vw, 3rem); }
 	.summary-wrap p { margin-top: 1rem; max-width: 68ch; color: var(--charcoal-100); }
-	@media (max-width: 1060px) { .logo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+	@media (max-width: 1200px) { .logo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 	@media (max-width: 900px) { .assurance-grid { grid-template-columns: 1fr; } .logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 	@media (max-width: 560px) {
 		.logo-grid {
@@ -235,23 +247,7 @@ const trainingLogos = [
 			padding: 0.7rem 0.55rem;
 		}
 		.logo-mark {
-			width: 100%;
-			max-width: none;
-			height: auto;
-			aspect-ratio: 232 / 130;
-		}
-		.logo-mark img {
-			width: 100%;
-			height: 100%;
-			max-width: none;
-			object-fit: contain;
-		}
-		.logo-tile h3 {
-			font-size: 1rem;
-			margin-top: 0.65rem;
-		}
-		.logo-tile p {
-			font-size: 0.82rem;
+			height: clamp(4rem, 22vw, 4.75rem);
 		}
 	}
 </style>

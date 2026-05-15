@@ -227,7 +227,7 @@ export const projects: ProjectItem[] = [
 		sector: 'Food Processing & Industrial',
 		value: '£2 million',
 		duration: '2 years',
-		location: 'Crich, Derbyshire',
+		location: 'Kettering, Northamptonshire',
 		heroImage: '/images/projects/navara-mill/exterior-site-1.png',
 		excerpt:
 			"A £2 million, two-year electrical installation on one of the UK's leading gluten-free mills — delivering full LV distribution, emergency lighting, fire alarms, and small power across a massive purpose-built facility.",
