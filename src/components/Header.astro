@@ -470,8 +470,9 @@ serviceMenuItems.push({
 		scrollbar-color: var(--blue) rgba(0, 0, 254, 0.08);
 		background: var(--white);
 		border: 1px solid rgba(18, 22, 38, 0.08);
+		border-radius: 14px;
 		box-shadow: 0 24px 48px rgba(18, 22, 38, 0.22);
-		clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+		clip-path: none;
 		transform: translateY(-8px);
 		opacity: 0;
 		transition: opacity 0.22s var(--motion-ease), transform 0.22s var(--motion-ease);
@@ -550,7 +551,8 @@ serviceMenuItems.push({
 		background: #f5f7fb;
 		color: var(--charcoal-100);
 		text-decoration: none;
-		clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+		border-radius: 10px;
+		clip-path: none;
 		transition: background-color 0.2s var(--motion-ease), color 0.2s var(--motion-ease), transform 0.2s
 			var(--motion-ease);
 	}
@@ -609,6 +611,8 @@ serviceMenuItems.push({
 		width: 100%;
 		justify-content: center;
 		text-align: center;
+		border-radius: 10px;
+		clip-path: none;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
