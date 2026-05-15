@@ -15,7 +15,7 @@ const { links } = Astro.props;
 	<div class="hero-bg hero-bg-3" aria-hidden="true"></div>
 	<div class="hero-overlay" aria-hidden="true"></div>
 
-	<Header links={links} />
+	<Header links={links} overlay />
 
 	<div class="container hero-content">
 		<div class="hero-text" data-animate="fade-left">
@@ -41,6 +41,8 @@ const { links } = Astro.props;
 	.hero {
 		position: relative;
 		min-height: 85vh;
+		padding-top: 6.5rem;
+		box-sizing: border-box;
 		isolation: isolate;
 		overflow: clip;
 		background: #000;
