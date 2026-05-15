@@ -176,48 +176,49 @@ export const projects: ProjectItem[] = [
 	},
 	{
 		slug: 'metalcraft',
-		title: 'Metalcraft Medical Lab',
-		subtitle: 'Electrical and life-safety infrastructure for an NHS-critical medical laboratory',
-		sector: 'Medical Laboratory & Healthcare',
+		title: 'Metalcraft',
+		subtitle:
+			'Electrical and life-safety infrastructure for workshop, offices, and a training centre in Chatteris',
+		sector: 'Commercial & Industrial',
 		value: 'Multi-phase programme',
 		duration: 'Ongoing (third project)',
-		location: 'United Kingdom',
+		location: 'Chatteris, Cambridgeshire',
 		heroImage: '/images/projects/metalcraft/exterior-lab-building.png',
 		excerpt:
-			'A staged electrical package for Metalcraft’s medical laboratory operations, delivering LV distribution, emergency lighting data, CCTV, fire alarms, mechanical power, and external lighting for NHS equipment sterilization services.',
+			'A staged electrical package across Metalcraft’s Chatteris site — workshop, offices, and training centre — delivering LV distribution, emergency lighting, CCTV, fire alarms, mechanical power, and external lighting.',
 		scope: [
 			{
-				title: 'Emergency Lighting Data',
+				title: 'Emergency Lighting',
 				description:
-					'Emergency lighting and supporting data infrastructure installed to maintain compliance, visibility, and control throughout laboratory and warehouse zones.',
+					'Emergency lighting installed across workshop, office, and training areas to maintain compliant escape routes, visibility, and safe circulation for staff and visitors.',
 				icon: 'light',
 			},
 			{
 				title: 'CCTV & Security',
 				description:
-					'Integrated CCTV coverage to protect critical medical equipment flows and provide secure monitoring for inbound and outbound hospital service operations.',
+					'Integrated CCTV coverage across the site to support secure monitoring of workshop operations, office accommodation, and the training centre.',
 				icon: 'camera',
 			},
 			{
 				title: 'Fire Alarms & LV Distribution',
 				description:
-					'Life-safety fire alarm systems and low-voltage distribution designed to support resilient operation of a high-dependency medical processing environment.',
+					'Fire alarm systems and low-voltage distribution designed to support safe, reliable operation across the full commercial facility.',
 				icon: 'fire',
 			},
 			{
 				title: 'Mechanical Power & External Lighting',
 				description:
-					'Mechanical power supplies and external lighting installations supporting operational reliability, safe circulation, and high-ceiling controlled-temperature storage spaces.',
+					'Mechanical power supplies and external lighting to support workshop plant, office use, training spaces, and safe movement around the building envelope.',
 				icon: 'power',
 			},
 		],
 		galleryImages: [
 			{
 				src: '/images/projects/metalcraft/exterior-lab-building.png',
-				alt: 'Metalcraft medical laboratory and warehouse facility exterior',
+				alt: 'Metalcraft workshop, offices, and training centre exterior at Chatteris',
 			},
 		],
-		tags: ['Medical Lab', 'NHS Support', 'LV Distribution', 'Fire Alarms'],
+		tags: ['Workshop', 'Offices', 'Training Centre', 'Fire Alarms'],
 		href: '/projects/metalcraft/',
 	},
 	{
