@@ -35,7 +35,6 @@ export const navLinks: NavLink[] = [
 	{ href: '/projects/', label: 'Projects' },
 	{ href: '/health-safety/', label: 'Health & Safety' },
 	{ href: '/locations/', label: 'Locations' },
-	{ href: '/contact/', label: 'Contact' },
 ];
 
 export const serviceCards: ServiceCardItem[] = [
