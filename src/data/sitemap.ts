@@ -16,7 +16,7 @@ export interface SitemapColumn {
 const servicePages: SitemapPage[] = [
 	...serviceCards.map((s) => ({
 		label: s.title,
-		href: s.href ?? '/#services',
+		href: s.href ?? '/services/',
 		description: s.description,
 	})),
 	{
@@ -34,7 +34,7 @@ export const sitemapColumns: SitemapColumn[] = [
 		pages: [
 			{ label: 'Homepage', href: '/', description: 'Hero, services overview, accreditations, and news.' },
 			{ label: 'About us', href: '/#about', description: 'Who we are and how we work with clients.' },
-			{ label: 'Services overview', href: '/#services', description: 'Filterable cards for every capability.' },
+			{ label: 'Services overview', href: '/services/', description: 'Filterable cards for every capability.' },
 			{ label: 'Projects', href: '/projects/', description: 'Featured case studies and previous NEC work.' },
 			{ label: 'Contact', href: '/contact/', description: 'Project enquiry form and direct contact routes.' },
 		],

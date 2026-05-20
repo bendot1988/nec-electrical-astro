@@ -1,0 +1,145 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServicesSection from '../../components/ServicesSection.astro';
+import { navLinks, serviceCards } from '../../data/home';
+
+const pageTitle = 'Services | NEC Ltd Electrical';
+const pageDescription =
+	'Explore NEC Ltd Electrical’s complete design and build capabilities — design and technical, power infrastructure, lighting, security, and data communications.';
+const homeAnchors = navLinks.map((link) => ({
+	...link,
+	href: link.href.startsWith('/') ? link.href : `/${link.href}`,
+}));
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonical="https://dotwall.dev/nec/services/"
+	ogImage="/images/service-power-hero.png"
+>
+	<Header links={homeAnchors} ctaHref="/#contact" />
+
+	<main id="main-content">
+		<section class="services-hero">
+			<div class="services-hero-bg" aria-hidden="true"></div>
+			<div class="services-hero-overlay" aria-hidden="true"></div>
+			<div class="container services-hero-content">
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">Services</span>
+				</nav>
+				<h1>Our Services</h1>
+				<p class="hero-sub">
+					Complete design and build electrical services — from initial surveys and technical design through to
+					installation, testing, and handover.
+				</p>
+			</div>
+		</section>
+
+		<ServicesSection services={serviceCards} />
+
+		<section class="section cta-band">
+			<div class="container cta-inner" data-animate="fade-up">
+				<div class="cta-copy">
+					<h2>Need something outside our standard services?</h2>
+					<p>Tell us about bespoke scopes and we will scope a tailored electrical solution.</p>
+				</div>
+				<a href="/custom-electrical-work/" class="btn btn-primary">Custom electrical work</a>
+			</div>
+		</section>
+	</main>
+
+	<Footer links={homeAnchors} />
+</Layout>
+
+<style>
+	.services-hero {
+		position: relative;
+		min-height: clamp(290px, 42vw, 380px);
+		display: grid;
+		align-items: end;
+		overflow: clip;
+	}
+
+	.services-hero-bg,
+	.services-hero-overlay {
+		position: absolute;
+		inset: 0;
+	}
+
+	.services-hero-bg {
+		background: center 35% / cover no-repeat url('/images/service-power-hero.png');
+	}
+
+	.services-hero-overlay {
+		background: linear-gradient(115deg, rgba(10, 18, 42, 0.72), rgba(10, 18, 42, 0.4));
+	}
+
+	.services-hero-content {
+		position: relative;
+		z-index: 1;
+		color: var(--white);
+		padding-bottom: clamp(1.4rem, 3vw, 2.5rem);
+	}
+
+	.crumbs {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.42rem;
+		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
+	}
+
+	.crumbs a {
+		color: rgba(255, 255, 255, 0.86);
+		transition: color 0.2s var(--motion-ease);
+	}
+
+	.crumbs a:hover {
+		color: var(--white);
+	}
+
+	h1 {
+		margin-top: 0.85rem;
+		font-size: clamp(2.1rem, 6.8vw, 4.2rem);
+		letter-spacing: -0.03em;
+		line-height: 0.98;
+		color: var(--white);
+	}
+
+	.hero-sub {
+		margin-top: 1rem;
+		font-size: clamp(1rem, 1.5vw, 1.15rem);
+		line-height: 1.6;
+		color: rgba(255, 255, 255, 0.82);
+		max-width: 54ch;
+	}
+
+	.cta-band {
+		background: linear-gradient(135deg, #0a122a 0%, #0d1b40 100%);
+	}
+
+	.cta-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.cta-copy h2 {
+		font-size: clamp(1.6rem, 3vw, 2.2rem);
+		color: var(--white);
+		letter-spacing: -0.02em;
+	}
+
+	.cta-copy p {
+		margin-top: 0.55rem;
+		color: rgba(255, 255, 255, 0.78);
+		max-width: 48ch;
+	}
+</style>

@@ -5,9 +5,10 @@ import type { ServiceCardItem } from '../data/home';
 
 interface Props {
 	services: ServiceCardItem[];
+	showFilter?: boolean;
 }
 
-const { services } = Astro.props;
+const { services, showFilter = true } = Astro.props;
 ---
 
 <section id="services" class="section services">
@@ -18,12 +19,12 @@ const { services } = Astro.props;
 			to final commissioning.
 		</p>
 
-		<ServiceFilter />
+		{showFilter && <ServiceFilter />}
 
 		<div class="service-grid" data-service-grid data-animate-stagger="0.07">
 			{services.map((service) => <ServiceCard service={service} />)}
 		</div>
-		<p class="empty-state" data-service-empty hidden>No services match this filter.</p>
+		{showFilter && <p class="empty-state" data-service-empty hidden>No services match this filter.</p>}
 	</div>
 </section>
 
