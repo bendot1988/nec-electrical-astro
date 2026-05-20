@@ -1,0 +1,261 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceWhyChooseSection from '../../components/ServiceWhyChooseSection.astro';
+import ServiceFaqSection from '../../components/ServiceFaqSection.astro';
+import { navLinks } from '../../data/home';
+
+const pageTitle = 'Design & Technical Services | NEC Ltd Electrical';
+const pageDescription =
+	'In-house design and technical services from NEC Ltd Electrical, including surveys, AutoCAD drawings, testing, commissioning, and O&M documentation.';
+const homeAnchors = navLinks.map((link) => ({ ...link, href: link.href.startsWith('/') ? link.href : `/${link.href}` }));
+
+const highlights = [
+	{
+		title: 'Full In-House Design Services',
+		description:
+			'We develop project-ready electrical designs tailored to your building, programme, and compliance requirements, with early-stage coordination to reduce downstream risk.',
+		icon: 'idea',
+	},
+	{
+		title: 'AutoCAD Drawings',
+		description:
+			'Detailed AutoCAD layouts and schematics that provide clear installation guidance and technical clarity for consultants, project managers, and site teams.',
+		icon: 'draw',
+	},
+	{
+		title: 'Testing & Commissioning',
+		description:
+			'Structured test and commissioning procedures to verify performance, confirm compliance, and ensure every system is fully operational before handover.',
+		icon: 'check',
+	},
+	{
+		title: 'O&M Documentation',
+		description:
+			'Complete operation and maintenance packs, including system records, test certificates, and user-ready documentation to support long-term asset management.',
+		icon: 'docs',
+	},
+];
+
+const whyChooseItems = [
+	{
+		number: '01',
+		title: 'Design-Led Delivery',
+		description:
+			'By starting with coordinated technical design, we reduce rework, avoid service clashes, and create smoother project delivery from tender to completion.',
+	},
+	{
+		number: '02',
+		title: 'Clear Documentation',
+		description:
+			'Our drawings, schedules, and technical outputs are structured for practical use on site, helping teams move faster with fewer ambiguities.',
+	},
+	{
+		number: '03',
+		title: 'Compliance Confidence',
+		description:
+			'We build every design around current standards and best practice, making testing, certification, and handover more straightforward for all stakeholders.',
+	},
+	{
+		number: '04',
+		title: 'One Accountable Team',
+		description:
+			'Design and installation under one roof means one point of ownership for programme, quality, and technical outcomes.',
+	},
+];
+
+const faqItems = [
+	{
+		question: 'Can you support projects from concept through to commissioning?',
+		answer:
+			'Yes. We can support early feasibility through detailed design, technical coordination, installation support, testing, and final handover documentation.',
+	},
+	{
+		question: 'Do you produce drawing packages suitable for consultant review?',
+		answer:
+			'Absolutely. We provide clear, structured drawing sets and supporting information designed to simplify consultant checks and approval workflows.',
+	},
+	{
+		question: 'What documentation is included at handover?',
+		answer:
+			'Typical handover includes O&M manuals, relevant certificates, test records, as-installed information, and key system details for facilities teams.',
+	},
+	{
+		question: 'Can your technical team work alongside other contractors?',
+		answer:
+			'Yes. We regularly coordinate with principal contractors and specialist trades to align design intent with build reality and keep delivery on programme.',
+	},
+];
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonical="https://dotwall.dev/nec/services/design-technical/"
+	ogImage="/images/service-design-technical.jpg"
+>
+	<Header links={homeAnchors} ctaHref="/#contact" />
+
+	<main id="main-content">
+		<section class="service-hero">
+			<div class="service-hero-bg" aria-hidden="true"></div>
+			<div class="service-hero-overlay" aria-hidden="true"></div>
+			<div class="container service-hero-content">
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<a href="/#services">Service</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">Design & Technical</span>
+				</nav>
+				<h1>Design & Technical</h1>
+			</div>
+		</section>
+
+		<section class="section service-intro">
+			<div class="container">
+				<p class="section-kicker">
+					<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+						<path
+							fill="currentColor"
+							d="M13.2 2.8c.2-.5-.5-.9-.8-.4L6.7 12.1a.5.5 0 0 0 .4.8h3.1L9.5 21c-.1.6.6.9.9.4l6.8-10.7a.5.5 0 0 0-.4-.8h-3.4l-.2-7.1Z"
+						></path>
+					</svg>
+					What we provide
+				</p>
+				<h2 class="section-title">Comprehensive Design & Technical Services</h2>
+				<p class="section-subtitle">
+					From early-stage technical planning to final documentation, our in-house team delivers practical, buildable
+					electrical design services that support quality outcomes on site.
+				</p>
+
+				<div class="highlight-grid" data-animate-stagger="0.07">
+					{
+						highlights.map((item) => (
+							<article class="highlight-card brand-line-box" data-animate="fade-up">
+								<div class="icon-wrap" aria-hidden="true">
+									{
+										item.icon === 'idea' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="M9.5 18h5"></path>
+												<path d="M10 22h4"></path>
+												<path d="M12 2a7 7 0 0 0-4.4 12.5c.8.6 1.4 1.4 1.8 2.3h5.2c.4-.9 1-1.7 1.8-2.3A7 7 0 0 0 12 2Z"></path>
+											</svg>
+										)
+									}
+									{
+										item.icon === 'draw' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="m3 21 3.8-1 11-11a2.1 2.1 0 1 0-3-3l-11 11L3 21Z"></path>
+												<path d="m13.5 6.5 3 3"></path>
+											</svg>
+										)
+									}
+									{
+										item.icon === 'check' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="m5 13 4 4L19 7"></path>
+											</svg>
+										)
+									}
+									{
+										item.icon === 'docs' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+												<rect x="6" y="3" width="12" height="18" rx="2"></rect>
+												<path d="M9 8h6"></path>
+												<path d="M9 12h6"></path>
+												<path d="M9 16h4"></path>
+											</svg>
+										)
+									}
+								</div>
+								<h3>{item.title}</h3>
+								<p>{item.description}</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="section design-narrative">
+			<div class="container">
+				<div class="narrative-top">
+					<figure class="media-tile brand-line-box" data-animate="fade-up">
+						<img src="/images/service-design-partnership-top-left.png" alt="Electrical design and build project installation" loading="lazy" width="900" height="900" />
+					</figure>
+					<figure class="media-tile brand-line-box" data-animate="fade-up">
+						<img src="/images/service-design-partnership-top-right.png" alt="Engineer reviewing technical design packages" loading="lazy" width="900" height="900" />
+					</figure>
+				</div>
+				<div class="narrative-main">
+					<figure class="media-tile brand-line-box" data-animate="fade-left">
+						<img src="/images/service-design-partnership-bottom-left.png" alt="Detailed AutoCAD plans ready for project delivery" loading="lazy" width="900" height="900" />
+					</figure>
+					<div class="narrative-copy" data-animate="fade-right">
+						<h2 class="section-title">Technical Detail that Works on Site</h2>
+						<p>
+							Strong project outcomes start with practical design. Our team develops clear technical packages that
+							align with installation realities, helping projects move confidently from concept to completion.
+						</p>
+						<ul>
+							<li>Early coordination to reduce rework and delays</li>
+							<li>Buildable AutoCAD layouts and schematics</li>
+							<li>Commissioning-focused technical planning</li>
+							<li>Clear records for facilities handover and maintenance</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<ServiceWhyChooseSection
+			title="Why Choose NEC Electrical for Your Design & Build?"
+			description="Choosing a partner who manages both technical design and physical installation gives your project a clear commercial advantage at every stage."
+			items={whyChooseItems}
+		/>
+
+		<ServiceFaqSection items={faqItems} />
+	</main>
+
+	<Footer links={homeAnchors} />
+</Layout>
+
+<style>
+	.service-hero { position: relative; min-height: clamp(290px, 42vw, 380px); display: grid; align-items: end; overflow: clip; }
+	.service-hero-bg, .service-hero-overlay { position: absolute; inset: 0; }
+	.service-hero-bg { background: center / cover no-repeat url('/images/service-design-technical.jpg'); }
+	.service-hero-overlay { background: linear-gradient(115deg, rgba(10, 18, 42, 0.62), rgba(10, 18, 42, 0.35)); }
+	.service-hero-content { position: relative; z-index: 1; color: var(--white); padding-bottom: clamp(1.4rem, 3vw, 2.5rem); }
+	.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.42rem; font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif; }
+	.crumbs a { color: rgba(255, 255, 255, 0.86); transition: color 0.2s var(--motion-ease); }
+	.crumbs a:hover { color: var(--white); }
+	h1 { margin-top: 0.85rem; font-size: clamp(2.1rem, 6.8vw, 4.2rem); letter-spacing: -0.03em; line-height: 0.98; max-width: 9ch; color: var(--white); }
+	.service-intro { background: var(--ghost-white); }
+	.section-kicker { display: inline-flex; align-items: center; gap: 0.5rem; font: 600 0.86rem/1 'League Spartan', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.07em; color: var(--blue); }
+	.highlight-grid { margin-top: 2.5rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.95rem; }
+	.highlight-card { position: relative; background: #ffffff; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); padding: 1.35rem 1.35rem 1.4rem; box-shadow: 0 10px 26px rgba(21, 27, 44, 0.06); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+	.highlight-card:hover { transform: translateY(-6px); box-shadow: 0 18px 34px rgba(21, 27, 44, 0.14); }
+	.icon-wrap { display: inline-flex; align-items: center; justify-content: center; width: 3.35rem; height: 3.35rem; border-radius: 50%; color: var(--white); background: linear-gradient(145deg, #2a34ff, #0000fe); transition: transform 0.25s ease; }
+	.highlight-card:hover .icon-wrap { transform: translateY(-2px) scale(1.04); }
+	.icon-wrap svg { width: 1.45rem; height: 1.45rem; }
+	h3 { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px solid rgba(0, 0, 254, 0.2); font-size: clamp(1.45rem, 2vw, 2rem); line-height: 1; letter-spacing: -0.02em; }
+	.highlight-card p { margin-top: 0.85rem; font-size: 0.98rem; line-height: 1.72; color: var(--charcoal-400); }
+	.design-narrative { background: var(--white); }
+	.narrative-top { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+	.media-tile { margin: 0; clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%); overflow: clip; background: #e8edf8; }
+	.media-tile img { width: 100%; height: 100%; display: block; object-fit: cover; aspect-ratio: 1.25 / 1; }
+	.narrative-main { margin-top: 1.2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: stretch; }
+	.narrative-copy { background: var(--white); padding: 1.2rem 0.2rem 0.8rem; }
+	.narrative-copy .section-title { font-size: clamp(2rem, 3.8vw, 3.35rem); line-height: 1.02; max-width: 12ch; }
+	.narrative-copy p { margin-top: 1rem; max-width: 50ch; font-size: 1.02rem; line-height: 1.75; color: var(--charcoal-400); }
+	.narrative-copy ul { margin: 1.1rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.52rem; }
+	.narrative-copy li { position: relative; padding-left: 1.72rem; font-size: 0.97rem; line-height: 1.42; color: var(--charcoal-300); }
+	.narrative-copy li::before { content: ''; position: absolute; left: 0; top: 0.25rem; width: 1rem; height: 1rem; border-radius: 50%; background: var(--blue); }
+	.narrative-copy li::after { content: ''; position: absolute; left: 0.33rem; top: 0.53rem; width: 0.35rem; height: 0.2rem; border-left: 2px solid var(--white); border-bottom: 2px solid var(--white); transform: rotate(-45deg); }
+	@media (max-width: 1060px) { .highlight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+	@media (max-width: 980px) { .narrative-main { grid-template-columns: 1fr; gap: 1.25rem; } }
+	@media (max-width: 700px) { .narrative-top { grid-template-columns: 1fr; } }
+	@media (max-width: 640px) { .highlight-grid { grid-template-columns: 1fr; } }
+</style>

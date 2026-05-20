@@ -15,19 +15,23 @@ const { links } = Astro.props;
 	<div class="hero-bg hero-bg-3" aria-hidden="true"></div>
 	<div class="hero-overlay" aria-hidden="true"></div>
 
-	<Header links={links} />
+	<Header links={links} overlay />
 
 	<div class="container hero-content">
-		<div class="hero-text">
-			<p class="eyebrow">Northamptonshire Electrical Contractors</p>
-			<h1>Professional Design & Build Electrical Services</h1>
-			<p>
+		<div class="hero-text" data-animate="fade-left">
+			<p class="eyebrow" data-animate="fade-up" data-animate-delay="0.08">Northamptonshire Electrical Contractors</p>
+			<h1 data-animate="fade-up" data-animate-delay="0.14">Professional Design & Build Electrical Services</h1>
+			<p data-animate="fade-up" data-animate-delay="0.2">
 				Delivering fully supported electrical installations from design to completion for industrial, commercial,
 				and educational sectors.
 			</p>
-			<div class="hero-actions">
-				<a href="#contact" class="btn btn-primary">Start Your Project Enquiry</a>
-				<a href="#services" class="btn btn-outline">Our Expertise</a>
+			<div class="hero-actions" data-animate="fade-up" data-animate-delay="0.26">
+				<a href="/#contact" class="btn btn-primary">Start Your Project Enquiry</a>
+				<a href="/#services" class="btn btn-outline">Our Expertise</a>
+			</div>
+			<div class="hero-accreditations" data-animate="fade-up" data-animate-delay="0.3">
+				<img src="/images/logo-chas-accredited.png" alt="CHAS Accredited Contractor" loading="lazy" width="310" height="172" />
+				<img src="/images/logo-niceic-approved.png" alt="NICEIC Approved Contractor" loading="lazy" width="300" height="170" />
 			</div>
 		</div>
 	</div>
@@ -37,8 +41,11 @@ const { links } = Astro.props;
 	.hero {
 		position: relative;
 		min-height: 85vh;
-		background: #000;
+		padding-top: 6.5rem;
+		box-sizing: border-box;
+		isolation: isolate;
 		overflow: clip;
+		background: #000;
 	}
 
 	.hero-bg,
@@ -48,6 +55,7 @@ const { links } = Astro.props;
 	}
 
 	.hero-bg {
+		background-color: #000;
 		background-size: cover;
 		background-position: center;
 		opacity: 0;
@@ -114,15 +122,41 @@ const { links } = Astro.props;
 		gap: 0.8rem;
 	}
 
+	.hero-accreditations {
+		margin-top: 1.55rem;
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 0.7rem;
+		align-items: center;
+	}
+
+	.hero-accreditations img {
+		display: block;
+		height: 48px;
+		width: auto;
+		background: rgba(255, 255, 255, 0.92);
+		padding: 0.32rem 0.5rem;
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+		box-shadow: 0 8px 18px rgba(14, 19, 35, 0.22);
+		transition: transform 0.2s var(--motion-ease), box-shadow 0.2s var(--motion-ease), background-color 0.2s
+			var(--motion-ease);
+	}
+
+	.hero-accreditations img:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 14px 24px rgba(14, 19, 35, 0.32);
+		background: #ffffff;
+	}
+
 	@keyframes heroFade {
 		0% {
 			opacity: 0;
 		}
-		5%,
-		33.333% {
+		8%,
+		30% {
 			opacity: 1;
 		}
-		38.333%,
+		41.333%,
 		100% {
 			opacity: 0;
 		}

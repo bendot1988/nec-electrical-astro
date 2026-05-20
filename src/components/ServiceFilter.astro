@@ -47,24 +47,27 @@ const filters = [
 	}
 
 	.filter-btn {
-		border: 1px solid #ced4e2;
-		background: var(--white);
+		background: #edf1f8;
 		color: var(--charcoal-300);
 		font: 600 0.9rem/1 'League Spartan', Arial, sans-serif;
 		padding: 0.6rem 0.8rem;
+		border: none;
+		appearance: none;
 		border-radius: 0;
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: transform 0.2s var(--motion-ease), background-color 0.2s var(--motion-ease), color 0.2s
+			var(--motion-ease);
 	}
 
 	.filter-btn:hover {
-		border-color: var(--blue);
-		color: var(--blue);
+		background: var(--blue);
+		color: var(--white);
+		transform: translateY(-1px);
 	}
 
 	.filter-btn.is-active {
 		background: var(--blue);
 		color: var(--white);
-		border-color: var(--blue);
 	}
 </style>

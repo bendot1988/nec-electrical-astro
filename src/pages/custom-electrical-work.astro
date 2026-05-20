@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { navLinks } from '../data/home';
+
+const pageTitle = 'Custom Electrical Work Request | NEC Ltd Electrical';
+const pageDescription =
+	'Submit a custom electrical work request for specialist projects, bespoke scopes, and tailored technical support from NEC Ltd Electrical.';
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonical="https://dotwall.dev/nec/custom-electrical-work/"
+	ogImage="/images/service-design-technical.jpg"
+>
+	<Header links={navLinks} ctaHref="#request-form" />
+
+	<main id="main-content">
+		<section class="custom-hero">
+			<div class="custom-hero-bg" aria-hidden="true"></div>
+			<div class="custom-hero-overlay" aria-hidden="true"></div>
+			<div class="container custom-hero-content">
+				<p class="hero-kicker">Bespoke project support</p>
+				<h1>Custom Electrical Work</h1>
+				<p>
+					If your project needs something outside our standard service categories, send us the details and our team
+					will scope a tailored solution.
+				</p>
+			</div>
+		</section>
+
+		<section id="request-form" class="section custom-request">
+			<div class="container request-grid">
+				<div>
+					<p class="section-kicker">Request form</p>
+					<h2 class="section-title">Tell us what you need</h2>
+					<p class="section-subtitle">
+						Share your project goals, location, timeline, and any technical constraints. We will review your request
+						and come back with a clear next step.
+					</p>
+					<div class="request-guidance brand-line-box">
+						<p class="guidance-kicker">Suitable project types</p>
+						<h3>Commercial & Industrial Projects We Support</h3>
+						<ul>
+							<li>Design-and-build electrical packages for commercial and industrial facilities</li>
+							<li>Power, lighting, data, security, and specialist system integration works</li>
+							<li>Refurbishments, upgrades, expansions, and technically complex project scopes</li>
+							<li>Coordination with consultants, principal contractors, and multi-trade teams</li>
+						</ul>
+						<p class="request-note">
+							We focus on commercial and industrial installations, so we do not provide small domestic call-outs or
+							single-room residential rewires.
+						</p>
+					</div>
+				</div>
+				<ContactForm />
+			</div>
+		</section>
+	</main>
+
+	<Footer links={navLinks} />
+</Layout>
+
+<style>
+	.custom-hero { position: relative; min-height: 56vh; overflow: clip; display: grid; align-items: end; }
+	.custom-hero-bg, .custom-hero-overlay { position: absolute; inset: 0; }
+	.custom-hero-bg { background: center / cover no-repeat url('/images/service-design-technical.jpg'); }
+	.custom-hero-overlay { background: linear-gradient(130deg, rgba(17, 22, 35, 0.84), rgba(17, 22, 35, 0.42)); }
+	.custom-hero-content { position: relative; z-index: 1; color: var(--white); padding-bottom: 2.7rem; }
+	.hero-kicker { margin: 0; text-transform: uppercase; font: 600 0.78rem/1 'Open Sans', Arial, sans-serif; letter-spacing: 0.09em; color: rgba(255, 255, 255, 0.9); }
+	h1 { margin-top: 0.85rem; font-size: clamp(2.2rem, 7vw, 4.3rem); line-height: 0.98; letter-spacing: -0.03em; color: var(--white); }
+	.custom-hero-content p:last-child { margin-top: 1rem; max-width: 65ch; color: #dde1ee; }
+	.custom-request { background: var(--ghost-white); }
+	.request-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 1.4rem; }
+	.section-kicker { font: 600 0.78rem/1 'Open Sans', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); }
+	.custom-request .section-kicker { margin-bottom: 0.55rem; }
+	.request-guidance {
+		margin-top: 1.25rem;
+		background: var(--white);
+		clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+		padding: 1.05rem 1.1rem;
+		box-shadow: 0 10px 24px rgba(20, 24, 38, 0.06);
+		border-left: 3px solid var(--blue);
+	}
+	.guidance-kicker {
+		margin: 0;
+		font: 600 0.76rem/1 'Open Sans', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--blue);
+	}
+	.request-guidance h3 { margin-top: 0.55rem; font-size: 1.45rem; line-height: 1.1; }
+	.request-guidance ul { margin: 0.9rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
+	.request-guidance li { position: relative; padding-left: 1.65rem; color: var(--charcoal-300); line-height: 1.5; }
+	.request-guidance li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.24rem;
+		width: 0.95rem;
+		height: 0.95rem;
+		background: center / contain no-repeat
+			url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Ccircle cx='10' cy='10' r='9' fill='%230000fe'/%3E%3Cpath d='M5.6 10.2 8.5 13l5.9-6' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	}
+	.request-note {
+		margin-top: 1rem;
+		padding: 0.7rem 0.75rem;
+		background: rgba(0, 0, 254, 0.05);
+		color: var(--charcoal-300);
+		font-size: 0.95rem;
+		line-height: 1.65;
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+	}
+	@media (max-width: 960px) { .request-grid { grid-template-columns: 1fr; } }
+</style>

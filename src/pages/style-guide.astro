@@ -1,0 +1,469 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle = 'NEC Visual Style Guide (Internal)';
+const pageDescription =
+	'Internal reference for the NEC homepage visual language: typography, spacing, buttons, cards, angles, hover treatment, and section patterns.';
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonical="https://dotwall.dev/nec/style-guide/"
+	ogImage="/images/hero-1.jpg"
+	noindex={true}
+>
+	<main id="main-content" class="style-guide">
+		<section class="guide-hero">
+			<div class="container">
+				<p class="eyebrow">Internal reference only</p>
+				<h1>NEC Homepage Style Guide</h1>
+				<p class="intro">
+					Use this page as the baseline for all new pages. It documents the visual system already implemented on the
+					homepage and shows live examples for consistency.
+				</p>
+				<a class="btn btn-primary" href="/">Back to homepage</a>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container">
+				<h2 class="section-title">Core Tokens</h2>
+				<p class="section-subtitle">Color, max width, and motion settings from global layout styles.</p>
+				<div class="token-grid">
+					<div class="token-card">
+						<h3>Color palette</h3>
+						<div class="swatch-grid">
+							<div class="swatch">
+								<span class="chip c-blue"></span>
+								<code>--blue #0000fe</code>
+							</div>
+							<div class="swatch">
+								<span class="chip c-charcoal-100"></span>
+								<code>--charcoal-100 #212128</code>
+							</div>
+							<div class="swatch">
+								<span class="chip c-charcoal-400"></span>
+								<code>--charcoal-400 #6e7a84</code>
+							</div>
+							<div class="swatch">
+								<span class="chip c-ghost"></span>
+								<code>--ghost-white #f8f9fc</code>
+							</div>
+							<div class="swatch">
+								<span class="chip c-white"></span>
+								<code>--white #ffffff</code>
+							</div>
+						</div>
+					</div>
+					<div class="token-card">
+						<h3>Layout + motion</h3>
+						<ul>
+							<li><code>--page-max: 1200px</code></li>
+							<li><code>.container: width min(100% - 10%, var(--page-max))</code></li>
+							<li><code>--motion-duration: 0.72s</code></li>
+							<li><code>--motion-distance: 26px</code></li>
+							<li><code>--motion-ease: cubic-bezier(0.22, 1, 0.36, 1)</code></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section-alt">
+			<div class="container">
+				<h2 class="section-title">Typography Scale</h2>
+				<p class="section-subtitle">
+					League Spartan for headings and Open Sans for body text. Keep headings compact with negative letter
+					spacing.
+				</p>
+				<div class="type-grid">
+					<article class="type-card">
+						<p class="label">Hero H1</p>
+						<p class="sample hero-h1">Professional Design & Build Electrical Services</p>
+						<p class="meta"><code>clamp(2.3rem, 7vw, 4.5rem)</code>, line-height <code>1</code></p>
+					</article>
+					<article class="type-card">
+						<p class="label">Section title</p>
+						<p class="sample section-h2">Comprehensive Electrical Services</p>
+						<p class="meta"><code>clamp(2rem, 3vw, 2.5rem)</code>, line-height <code>1.15</code></p>
+					</article>
+					<article class="type-card">
+						<p class="label">Card heading</p>
+						<p class="sample card-h3">Data & Communications</p>
+						<p class="meta"><code>1.2rem-1.45rem</code> depending on card type</p>
+					</article>
+					<article class="type-card">
+						<p class="label">Body text</p>
+						<p class="sample body-copy">
+							Delivering fully supported electrical installations from design to completion for industrial,
+							commercial, and educational sectors.
+						</p>
+						<p class="meta"><code>0.95rem-1rem</code>, line-height <code>1.65-1.9</code></p>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container">
+				<h2 class="section-title">Spacing Rhythm</h2>
+				<p class="section-subtitle">Spacing values currently used across homepage components.</p>
+				<div class="token-grid">
+					<div class="token-card">
+						<h3>Section + grid spacing</h3>
+						<ul>
+							<li><code>.section</code> vertical padding: <code>5rem</code> (mobile sections often <code>4rem</code>)</li>
+							<li>Content grid gaps: <code>1.2rem</code> to <code>1.6rem</code></li>
+							<li>Card top spacing: typically <code>2rem</code> from heading block</li>
+							<li>Text stacks: <code>0.4rem</code>, <code>0.8rem</code>, <code>1rem</code>, <code>1.25rem</code></li>
+						</ul>
+					</div>
+					<div class="token-card">
+						<h3>Element spacing conventions</h3>
+						<ul>
+							<li>Card internal padding: <code>1rem-1.35rem</code></li>
+							<li>Button padding: <code>0.9rem 1.35rem</code></li>
+							<li>Filter button padding: <code>0.6rem 0.8rem</code></li>
+							<li>Contact icon boxes: <code>78px</code> desktop, <code>64px</code> mobile</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section-alt">
+			<div class="container">
+				<h2 class="section-title">Angles + Interactive Language</h2>
+				<p class="section-subtitle">
+					The visual signature is angled corners, blue accents, and subtle lift on hover.
+				</p>
+				<div class="pattern-grid">
+					<article class="pattern-card">
+						<h3>Angled buttons</h3>
+						<div class="demo-row">
+							<a href="#" class="btn btn-primary">Primary action</a>
+							<a href="#" class="btn demo-outline">Secondary action</a>
+						</div>
+						<p>Use clipped corner via <code>clip-path</code>. Hover should feel responsive, not aggressive.</p>
+					</article>
+					<article class="pattern-card">
+						<h3>Angled filter chips</h3>
+						<div class="demo-row">
+							<button class="filter-demo is-active" type="button">All Services</button>
+							<button class="filter-demo" type="button">Data & Communications</button>
+						</div>
+						<p>Small clipped corner and compact vertical rhythm; active state in solid blue.</p>
+					</article>
+					<article class="pattern-card">
+						<h3>Blue line reveal</h3>
+						<div class="line-demo brand-line-box">
+							<p>Hover to see the signature blue line at the bottom edge.</p>
+						</div>
+						<p>Use on cards and media blocks where hover feedback is needed.</p>
+					</article>
+					<article class="pattern-card">
+						<h3>Lift on hover</h3>
+						<div class="lift-demo">
+							<h4>Service card motion</h4>
+							<p>Default: soft shadow. Hover: translate Y by <code>-6px</code> with deeper shadow.</p>
+						</div>
+						<p>This is your “make bigger on hover” behavior pattern across cards.</p>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="container">
+				<h2 class="section-title">Section Treatments</h2>
+				<p class="section-subtitle">Reference backgrounds used through the homepage.</p>
+				<div class="treatment-grid">
+					<article class="treatment-card t-white">
+						<h3>Default content section</h3>
+						<p>White background, clean typography and card grids.</p>
+					</article>
+					<article class="treatment-card t-ghost">
+						<h3>Ghost-white section</h3>
+						<p>Used for services and news panels to break up long pages.</p>
+					</article>
+					<article class="treatment-card t-dark">
+						<h3>Dark utility section</h3>
+						<p>Used in contact/footer with map texture and high-contrast text.</p>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section class="section section-alt">
+			<div class="container">
+				<h2 class="section-title">Implementation Notes</h2>
+				<p class="section-subtitle">Use these rules when building any new service or content page.</p>
+				<ul class="note-list">
+					<li>Keep clipping angles consistent: buttons around <code>10-12px</code>, cards around <code>20-22px</code>.</li>
+					<li>Use blue accents intentionally: active controls, icon highlights, line reveals, and primary CTAs.</li>
+					<li>Preserve card hover rhythm: lift and shadow only; avoid dramatic scaling.</li>
+					<li>Stick to the existing spacing increments before introducing new one-off values.</li>
+					<li>Reuse section title + subtitle patterns to maintain hierarchy and scanability.</li>
+					<li>Maintain consistent motion timing using global motion variables.</li>
+				</ul>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.style-guide {
+		background: var(--white);
+	}
+
+	.guide-hero {
+		padding: 4.5rem 0 3.2rem;
+		background: linear-gradient(130deg, #14151e, #1b1d2f);
+		color: var(--white);
+	}
+
+	.eyebrow {
+		margin: 0;
+		text-transform: uppercase;
+		font: 600 0.78rem/1 'Open Sans', Arial, sans-serif;
+		letter-spacing: 0.09em;
+		color: #bfc3da;
+	}
+
+	h1 {
+		margin-top: 0.9rem;
+		font-size: clamp(2rem, 6vw, 3.6rem);
+		letter-spacing: -0.03em;
+		line-height: 1;
+		color: var(--white);
+	}
+
+	.intro {
+		margin-top: 1rem;
+		max-width: 68ch;
+		color: #d4d8eb;
+	}
+
+	.guide-hero .btn {
+		margin-top: 1.35rem;
+	}
+
+	.section-alt {
+		background: var(--ghost-white);
+	}
+
+	.token-grid,
+	.pattern-grid,
+	.treatment-grid {
+		margin-top: 2rem;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.type-grid {
+		margin-top: 2rem;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.token-card,
+	.type-card,
+	.pattern-card,
+	.treatment-card {
+		background: var(--white);
+		padding: 1.2rem;
+		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.07);
+	}
+
+	.token-card h3,
+	.type-card h3,
+	.pattern-card h3,
+	.treatment-card h3 {
+		font-size: 1.25rem;
+	}
+
+	.token-card ul,
+	.note-list {
+		margin: 0.8rem 0 0;
+		padding-left: 1rem;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.type-card .label {
+		font: 600 0.8rem/1 'Open Sans', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--charcoal-400);
+	}
+
+	.type-card .sample {
+		margin-top: 0.7rem;
+		color: var(--charcoal-100);
+	}
+
+	.hero-h1 {
+		font: 400 clamp(2.3rem, 7vw, 4.5rem) / 1 'League Spartan', Arial, sans-serif;
+		letter-spacing: -0.03em;
+	}
+
+	.section-h2 {
+		font: 400 clamp(2rem, 3vw, 2.5rem) / 1.15 'League Spartan', Arial, sans-serif;
+		letter-spacing: -0.04em;
+	}
+
+	.card-h3 {
+		font: 400 1.35rem/1.1 'League Spartan', Arial, sans-serif;
+	}
+
+	.body-copy {
+		font: 400 1rem/1.8 'Open Sans', Arial, sans-serif;
+		color: var(--charcoal-400);
+	}
+
+	.type-card .meta {
+		margin-top: 0.8rem;
+		font-size: 0.9rem;
+		color: var(--charcoal-400);
+	}
+
+	.swatch-grid {
+		margin-top: 0.8rem;
+		display: grid;
+		gap: 0.55rem;
+	}
+
+	.swatch {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	.chip {
+		width: 1.1rem;
+		height: 1.1rem;
+		display: inline-block;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.c-blue {
+		background: var(--blue);
+	}
+
+	.c-charcoal-100 {
+		background: var(--charcoal-100);
+	}
+
+	.c-charcoal-400 {
+		background: var(--charcoal-400);
+	}
+
+	.c-ghost {
+		background: var(--ghost-white);
+	}
+
+	.c-white {
+		background: var(--white);
+	}
+
+	.demo-row {
+		margin-top: 0.9rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+	}
+
+	.demo-outline {
+		background: #e8ebf5;
+		color: var(--charcoal-100);
+	}
+
+	.filter-demo {
+		background: #edf1f8;
+		color: var(--charcoal-300);
+		font: 600 0.9rem/1 'League Spartan', Arial, sans-serif;
+		padding: 0.6rem 0.8rem;
+		border: none;
+		appearance: none;
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+	}
+
+	.filter-demo.is-active {
+		background: var(--blue);
+		color: var(--white);
+	}
+
+	.line-demo {
+		margin-top: 0.9rem;
+		background: #eef2f8;
+		padding: 1rem;
+		clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+	}
+
+	.lift-demo {
+		margin-top: 0.9rem;
+		background: #f3f5fa;
+		padding: 1rem;
+		clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.07);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.lift-demo:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 18px 34px rgba(21, 27, 44, 0.14);
+	}
+
+	.lift-demo h4 {
+		font: 400 1.2rem/1 'League Spartan', Arial, sans-serif;
+		color: var(--charcoal-100);
+	}
+
+	.lift-demo p,
+	.pattern-card p,
+	.treatment-card p {
+		margin-top: 0.6rem;
+		color: var(--charcoal-400);
+	}
+
+	.t-white {
+		background: var(--white);
+	}
+
+	.t-ghost {
+		background: var(--ghost-white);
+	}
+
+	.t-dark {
+		background: linear-gradient(140deg, rgba(18, 20, 34, 0.96), rgba(27, 27, 44, 0.95));
+		color: var(--white);
+	}
+
+	.t-dark h3,
+	.t-dark p {
+		color: var(--white);
+	}
+
+	.note-list {
+		margin-top: 1.2rem;
+	}
+
+	.note-list code,
+	.token-card code,
+	.type-card code {
+		font-size: 0.9em;
+	}
+
+	@media (max-width: 900px) {
+		.token-grid,
+		.type-grid,
+		.pattern-grid,
+		.treatment-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

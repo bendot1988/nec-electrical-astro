@@ -1,0 +1,253 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { navLinks } from '../data/home';
+
+const pageTitle = 'Health & Safety | NEC Ltd Electrical';
+const pageDescription =
+	'Health and safety standards, site supervision, audits, and training commitments from NEC Ltd Electrical.';
+const homeAnchors = navLinks.map((link) => ({ ...link, href: link.href.startsWith('/') ? link.href : `/${link.href}` }));
+
+const safetyAssurances = [
+	{
+		title: 'Regular Site Audits',
+		description:
+			'Our sites are inspected by our Health & Safety Consultant with a dedicated audit schedule produced for each project.',
+	},
+	{
+		title: 'Daily Practical Safety',
+		description:
+			'Regular toolbox talks are carried out by site teams so operatives are consistently reminded of their duties and standards.',
+	},
+	{
+		title: 'Qualified Site Leadership',
+		description:
+			'Site Supervisors hold relevant credentials, including SSSTS and SMSTS, to manage on-site health and safety matters effectively.',
+	},
+];
+
+const trainingLogos = [
+	{ name: 'CHAS Accredited', group: 'Accreditation', image: '/images/logo-chas.png' },
+	{ name: 'ECS / CSCS', group: 'Operative Carding', image: '/images/logo-ecs-cscs.png' },
+	{ name: 'IPAF', group: 'Plant Access', image: '/images/logo-ipaf.png' },
+	{ name: 'PASMA', group: 'Mobile Towers', image: '/images/logo-pasma.png' },
+	{ name: 'CITB SMSTS', group: 'Site Management', image: '/images/logo-citb-smsts.png' },
+];
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	canonical="https://dotwall.dev/nec/health-safety/"
+	ogImage="/images/service-security-hero.png"
+>
+	<Header links={homeAnchors} ctaHref="/#contact" />
+
+	<main id="main-content">
+		<section class="safety-hero">
+			<div class="safety-hero-bg" aria-hidden="true"></div>
+			<div class="safety-hero-overlay" aria-hidden="true"></div>
+			<div class="container safety-hero-content">
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">Health & Safety</span>
+				</nav>
+				<h1>Health & Safety</h1>
+			</div>
+		</section>
+
+		<section class="section safety-overview">
+			<div class="container">
+				<p class="section-kicker">
+					<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+						<path
+							fill="currentColor"
+							d="M13.2 2.8c.2-.5-.5-.9-.8-.4L6.7 12.1a.5.5 0 0 0 .4.8h3.1L9.5 21c-.1.6.6.9.9.4l6.8-10.7a.5.5 0 0 0-.4-.8h-3.4l-.2-7.1Z"
+						></path>
+					</svg>
+					Our approach
+				</p>
+				<h2 class="section-title">Safety is Embedded in Every Stage of Delivery</h2>
+				<p class="section-subtitle">
+					From pre-start planning to final handover, we maintain clear health and safety processes designed to keep
+					projects compliant, controlled, and safe for everyone on site.
+				</p>
+				<div class="assurance-grid" data-animate-stagger="0.07">
+					{
+						safetyAssurances.map((item) => (
+							<article class="assurance-card brand-line-box" data-animate="fade-up">
+								<h3>{item.title}</h3>
+								<p>{item.description}</p>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="section accreditation">
+			<div class="container">
+				<p class="section-kicker">Accreditation & training</p>
+				<h2 class="section-title">Credentials and Training Standards</h2>
+				<p class="section-subtitle">
+					We are a CHAS accredited company and our operatives are trained across key competency areas.
+				</p>
+				<div class="logo-grid" data-animate-stagger="0.06">
+					{
+						trainingLogos.map((item) => (
+							<article class="logo-tile" data-animate="fade-up">
+								<div class="logo-mark">
+									<img src={item.image} alt={`${item.name} logo`} loading="lazy" width="160" height="90" />
+								</div>
+								<h3>{item.name}</h3>
+								<p>{item.group}</p>
+							</article>
+						))
+					}
+				</div>
+				<div class="training-note-wrap">
+					<h3 class="training-note-title">Additional Competencies</h3>
+					<p class="training-note">
+						Our operatives are also fully trained and qualified in manual handling, asbestos awareness, and safe
+						working at height.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="contact" class="section safety-summary">
+			<div class="container summary-wrap">
+				<h2>Committed to Safe, Compliant Project Delivery</h2>
+				<p>
+					Our systems are built to protect people first, support compliant delivery, and give clients confidence that
+					health and safety is actively managed on every NEC project.
+				</p>
+			</div>
+		</section>
+	</main>
+
+	<Footer links={homeAnchors} />
+</Layout>
+
+<style>
+	.safety-hero { position: relative; min-height: clamp(290px, 42vw, 380px); overflow: clip; display: grid; align-items: end; }
+	.safety-hero-bg, .safety-hero-overlay { position: absolute; inset: 0; }
+	.safety-hero-bg { background: center 30% / cover no-repeat url('/images/service-security-hero.png'); }
+	.safety-hero-overlay { background: linear-gradient(115deg, rgba(10, 18, 42, 0.62), rgba(10, 18, 42, 0.35)); }
+	.safety-hero-content { position: relative; z-index: 1; color: var(--white); padding-bottom: clamp(1.4rem, 3vw, 2.5rem); }
+	.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.42rem; font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif; }
+	.crumbs a { color: rgba(255, 255, 255, 0.86); transition: color 0.2s var(--motion-ease); }
+	.crumbs a:hover { color: var(--white); }
+	h1 { margin-top: 0.85rem; font-size: clamp(2.1rem, 6.8vw, 4.2rem); line-height: 0.98; letter-spacing: -0.03em; color: var(--white); max-width: 9ch; }
+	.section-kicker { display: inline-flex; align-items: center; gap: 0.5rem; font: 600 0.86rem/1 'League Spartan', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.07em; color: var(--blue); }
+	.safety-overview { background: var(--ghost-white); }
+	.assurance-grid { margin-top: 1.8rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+	.assurance-card { background: var(--white); clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); padding: 1.25rem; box-shadow: 0 10px 26px rgba(21, 27, 44, 0.06); transition: transform 0.25s ease, box-shadow 0.25s ease; }
+	.assurance-card:hover { transform: translateY(-6px); box-shadow: 0 18px 34px rgba(21, 27, 44, 0.14); }
+	.assurance-card h3 { font-size: 1.45rem; }
+	.assurance-card p { margin-top: 0.7rem; color: var(--charcoal-400); line-height: 1.72; }
+	.logo-grid {
+		margin-top: 1.8rem;
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 0.75rem;
+		align-items: stretch;
+	}
+	.logo-tile {
+		background: #f6f8fc;
+		clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+		padding: 0.75rem 0.55rem 0.85rem;
+		border: 1px solid rgba(30, 36, 56, 0.08);
+		transition: background-color 0.2s var(--motion-ease), transform 0.2s var(--motion-ease);
+		min-width: 0;
+	}
+	.logo-tile:hover { background: var(--white); transform: translateY(-2px); }
+	.logo-mark {
+		width: 100%;
+		height: clamp(4.25rem, 7.5vw, 5.25rem);
+		margin-inline: auto;
+		padding: 0.5rem 0.4rem;
+		background: var(--white);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 2px solid rgba(0, 0, 254, 0.2);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+		overflow: hidden;
+		box-sizing: border-box;
+	}
+	.logo-mark img {
+		width: auto;
+		height: auto;
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+		object-position: center;
+		display: block;
+	}
+	.logo-tile h3 {
+		margin-top: 0.7rem;
+		font-size: clamp(0.88rem, 1vw, 1.02rem);
+		line-height: 1.15;
+		text-align: center;
+	}
+	.logo-tile p {
+		margin-top: 0.28rem;
+		color: var(--charcoal-400);
+		font-size: clamp(0.78rem, 0.9vw, 0.86rem);
+		line-height: 1.35;
+		text-align: center;
+	}
+	.training-note-wrap {
+		margin-top: 1.8rem;
+		padding: 1.35rem 1.2rem 0;
+		text-align: center;
+		position: relative;
+	}
+
+	.training-note-wrap::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 110px;
+		height: 3px;
+		color: var(--blue);
+		background: var(--blue);
+	}
+
+	.training-note-title {
+		margin: 0;
+		font-size: clamp(1.45rem, 2.1vw, 1.9rem);
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+	}
+
+	.training-note {
+		margin: 0.85rem auto 0;
+		color: var(--charcoal-300);
+		font-size: 1.03rem;
+		line-height: 1.8;
+		max-width: 64ch;
+	}
+	.safety-summary { background: #eaf1ff; color: var(--charcoal-100); }
+	.summary-wrap h2 { color: var(--blue); font-size: clamp(2rem, 4vw, 3rem); }
+	.summary-wrap p { margin-top: 1rem; max-width: 68ch; color: var(--charcoal-100); }
+	@media (max-width: 1200px) { .logo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+	@media (max-width: 900px) { .assurance-grid { grid-template-columns: 1fr; } .logo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+	@media (max-width: 560px) {
+		.logo-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0.65rem;
+		}
+		.logo-tile {
+			padding: 0.7rem 0.55rem;
+		}
+		.logo-mark {
+			height: clamp(4rem, 22vw, 4.75rem);
+		}
+	}
+</style>

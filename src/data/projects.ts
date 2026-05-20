@@ -1,0 +1,306 @@
+export interface ProjectItem {
+	slug: string;
+	title: string;
+	subtitle: string;
+	sector: string;
+	value: string;
+	duration: string;
+	location: string;
+	heroImage: string;
+	galleryImages: { src: string; alt: string }[];
+	excerpt: string;
+	scope: { title: string; description: string; icon: string }[];
+	href: string;
+	tags: string[];
+	/** Optional clips: same basename in `public/…` or in `src/assets/projects/{slug}/` (bundled). */
+	videos?: { src: string; title: string; caption?: string }[];
+}
+
+export const projects: ProjectItem[] = [
+	{
+		slug: 'dc9',
+		title: 'DC9',
+		subtitle: 'Technical electrical and mechanical services delivery for a large warehouse facility',
+		sector: 'Logistics & Industrial',
+		value: 'Major distribution facility project',
+		duration: 'Phased delivery',
+		location: 'United Kingdom',
+		heroImage: '/images/projects/dc9/featured-interior.png',
+		excerpt:
+			'DC9 included the installation of lighting, emergency lighting, fire alarm systems, and mechanical power infrastructure across a large-scale warehouse environment.',
+		scope: [
+			{
+				title: 'Lighting',
+				description:
+					'Main lighting installation designed for clear visibility, operational safety, and efficient coverage throughout warehouse zones.',
+				icon: 'light',
+			},
+			{
+				title: 'Emergency Lighting',
+				description:
+					'Emergency lighting systems installed to support compliant evacuation routes and continuity during power disruption scenarios.',
+				icon: 'light',
+			},
+			{
+				title: 'Fire Alarm Systems',
+				description:
+					'Fire detection and alarm infrastructure installed to provide life-safety protection across operational areas.',
+				icon: 'fire',
+			},
+			{
+				title: 'Mechanical Power',
+				description:
+					'Mechanical power supplies delivered to support warehouse plant and associated building services infrastructure.',
+				icon: 'power',
+			},
+		],
+		galleryImages: [
+			{
+				src: '/images/projects/dc9/featured-interior.png',
+				alt: 'DC9 warehouse interior with high-level service installation',
+			},
+		],
+		tags: ['Lighting', 'Emergency Lighting', 'Fire Alarms', 'Mechanical Power'],
+		href: '/projects/dc9/',
+	},
+	{
+		slug: 'loades-unit-f',
+		title: 'Loades Unit F',
+		subtitle:
+			'Design and build electrical delivery for a high-bay industrial unit — from containment highways through to LV distribution and commissioning readiness.',
+		sector: 'Commercial & Industrial',
+		value: 'Design & build package',
+		duration: 'Full programme',
+		location: 'United Kingdom',
+		heroImage: '/images/projects/loades-unit-f/warehouse-interior.png',
+		excerpt:
+			'Loades Unit F shows a clean-sheet industrial shell transformed into a disciplined electrical installation: long runs of containment, coordinated overhead routes, and a Schneider Electric LV assembly ready for energisation and handover.',
+		scope: [
+			{
+				title: 'Cable Containment & Distribution Routes',
+				description:
+					'High-level containment installed to create predictable service highways across the unit, keeping circuits ordered, accessible, and ready for future tenant fit-out changes.',
+				icon: 'cable',
+			},
+			{
+				title: 'LV Distribution & Panel Assembly',
+				description:
+					'Main and sub-distribution equipment supplied and installed to form a coherent LV backbone, including Schneider Electric assemblies aligned to commissioning and O&M documentation.',
+				icon: 'power',
+			},
+			{
+				title: 'Lighting & Small Power',
+				description:
+					'General and task lighting circuits with small power provisions laid out to support safe circulation, inspection, and operational use across the full floor plate.',
+				icon: 'light',
+			},
+			{
+				title: 'Testing & Commissioning Readiness',
+				description:
+					'Installation completed to a stage where circuits are proven, labelled, and prepared for formal commissioning — reducing surprises at energisation and speeding client sign-off.',
+				icon: 'fire',
+			},
+		],
+		galleryImages: [
+			{
+				src: '/images/projects/loades-unit-f/warehouse-interior.png',
+				alt: 'Loades Unit F — wide industrial unit interior with cable tray and containment along white walls',
+			},
+			{
+				src: '/images/projects/loades-unit-f/lv-distribution.png',
+				alt: 'Loades Unit F — Schneider Electric LV distribution boards and trunking installation',
+			},
+		],
+		tags: ['Industrial', 'LV Distribution', 'Cable Containment', 'Commissioning'],
+		href: '/projects/loades-unit-f/',
+		videos: [
+			{
+				src: '/videos/projects/loades-unit-f/01-site-tour.mp4',
+				title: 'Warehouse — trunking and containment',
+				caption:
+					'Walkthrough in the main unit: high-level trunking, cable routes, and containment through the warehouse space.',
+			},
+			{
+				src: '/videos/projects/loades-unit-f/02-lv-distribution.mp4',
+				title: 'Office — LV distribution',
+				caption:
+					'Closer look at the LV assembly, trunking entries, and presentation in the office area ahead of handover.',
+			},
+		],
+	},
+	{
+		slug: 'steris',
+		title: 'Steris',
+		subtitle: 'NHS-focused sterilization facility electrical infrastructure',
+		sector: 'Healthcare Infrastructure & Medical Processing',
+		value: 'Multi-project partnership',
+		duration: 'Third project phase',
+		location: 'United Kingdom',
+		heroImage: '/images/projects/steris/facility-interior-1.png',
+		excerpt:
+			'Steris is a global healthcare partner delivering sterilization services for NHS hospital equipment. NEC is currently delivering the third project phase, supporting large-scale warehouse operations with controlled temperature requirements.',
+		scope: [
+			{
+				title: 'Sterilization Facility Support',
+				description:
+					'Electrical infrastructure supporting incoming and outgoing NHS equipment workflows, including processing spaces where endoscopies and related devices are prepared for return to hospitals.',
+				icon: 'power',
+			},
+			{
+				title: 'High-Ceiling Environment Services',
+				description:
+					'Power and building services coordinated within high-ceiling warehouse areas to maintain reliable operation in controlled-temperature storage and processing zones.',
+				icon: 'light',
+			},
+			{
+				title: 'Operational Continuity Infrastructure',
+				description:
+					'Robust distribution and services planning designed for continuous throughput in a mission-critical healthcare operation with national NHS dependencies.',
+				icon: 'cable',
+			},
+			{
+				title: 'Scalable Multi-Phase Delivery',
+				description:
+					'Delivery model aligned to an ongoing programme of works, enabling repeatable standards and phased expansion across multiple Steris projects.',
+				icon: 'fire',
+			},
+		],
+		galleryImages: [
+			{
+				src: '/images/projects/steris/facility-interior-1.png',
+				alt: 'Steris facility interior showing high-ceiling technical workspace and equipment lines',
+			},
+		],
+		tags: ['Sterilization', 'NHS Support', 'Healthcare', 'Warehouse'],
+		href: '/projects/steris/',
+	},
+	{
+		slug: 'metalcraft',
+		title: 'Metalcraft',
+		subtitle:
+			'Electrical and life-safety infrastructure for workshop, offices, and a training centre in Chatteris',
+		sector: 'Commercial & Industrial',
+		value: 'Multi-phase programme',
+		duration: 'Ongoing (third project)',
+		location: 'Chatteris, Cambridgeshire',
+		heroImage: '/images/projects/metalcraft/exterior-lab-building.png',
+		excerpt:
+			'A staged electrical package across Metalcraft’s Chatteris site — workshop, offices, and training centre — delivering LV distribution, emergency lighting, CCTV, fire alarms, mechanical power, and external lighting.',
+		scope: [
+			{
+				title: 'Emergency Lighting',
+				description:
+					'Emergency lighting installed across workshop, office, and training areas to maintain compliant escape routes, visibility, and safe circulation for staff and visitors.',
+				icon: 'light',
+			},
+			{
+				title: 'CCTV & Security',
+				description:
+					'Integrated CCTV coverage across the site to support secure monitoring of workshop operations, office accommodation, and the training centre.',
+				icon: 'camera',
+			},
+			{
+				title: 'Fire Alarms & LV Distribution',
+				description:
+					'Fire alarm systems and low-voltage distribution designed to support safe, reliable operation across the full commercial facility.',
+				icon: 'fire',
+			},
+			{
+				title: 'Mechanical Power & External Lighting',
+				description:
+					'Mechanical power supplies and external lighting to support workshop plant, office use, training spaces, and safe movement around the building envelope.',
+				icon: 'power',
+			},
+		],
+		galleryImages: [
+			{
+				src: '/images/projects/metalcraft/exterior-lab-building.png',
+				alt: 'Metalcraft workshop, offices, and training centre exterior at Chatteris',
+			},
+		],
+		tags: ['Workshop', 'Offices', 'Training Centre', 'Fire Alarms'],
+		href: '/projects/metalcraft/',
+	},
+	{
+		slug: 'navara-mill',
+		title: 'Navara Mill',
+		subtitle: 'Full LV electrical installation for a large-scale gluten-free mill',
+		sector: 'Food Processing & Industrial',
+		value: 'Major industrial installation',
+		duration: '2 years',
+		location: 'Kettering, Northamptonshire',
+		heroImage: '/images/projects/navara-mill/exterior-site-1.png',
+		excerpt:
+			"A full electrical installation on one of the UK's leading gluten-free mills — delivering LV distribution, emergency lighting, fire alarms, and small power across a massive purpose-built facility.",
+		scope: [
+			{
+				title: 'Emergency Lighting & Data',
+				description:
+					'Full emergency lighting installation across all zones of the facility, designed and installed to BS 5266 compliance, with supporting data infrastructure for control and monitoring.',
+				icon: 'light',
+			},
+			{
+				title: 'Fire Alarm Systems',
+				description:
+					'Addressable fire detection and alarm systems installed throughout the building to BS 5839, ensuring life-safety compliance across the entire production and administration areas.',
+				icon: 'fire',
+			},
+			{
+				title: 'Small Power',
+				description:
+					'Comprehensive small power distribution throughout the facility, serving production machinery, office areas, plant rooms, and specialist equipment supplied by the German machinery contractor.',
+				icon: 'power',
+			},
+			{
+				title: 'LV Distribution',
+				description:
+					'Design and installation of the complete low voltage distribution network, including switchgear, distribution boards, and cable management systems serving a building of significant scale.',
+				icon: 'cable',
+			},
+		],
+		galleryImages: [
+			{
+				src: '/images/projects/navara-mill/exterior-site-1.png',
+				alt: 'Navara Mill exterior — green cladded building during construction phase',
+			},
+			{
+				src: '/images/projects/navara-mill/exterior-workers.png',
+				alt: 'NEC engineers on site outside the Navara Mill building',
+			},
+			{
+				src: '/images/projects/navara-mill/switchgear-team.png',
+				alt: 'NEC Ltd engineers commissioning switchgear panels inside the mill',
+			},
+			{
+				src: '/images/projects/navara-mill/switchgear-engineer.png',
+				alt: 'Engineer carrying out switchgear commissioning works',
+			},
+			{
+				src: '/images/projects/navara-mill/cable-tray-curved.png',
+				alt: 'Neat cable tray installation with curved bend inside the mill',
+			},
+			{
+				src: '/images/projects/navara-mill/interior-machinery.png',
+				alt: 'Interior of the Navara Mill showing Schulze milling machinery and cable containment',
+			},
+			{
+				src: '/images/projects/navara-mill/interior-services.png',
+				alt: 'Galvanised steelwork and pipework inside the completed mill building',
+			},
+			{
+				src: '/images/projects/navara-mill/3d-model.png',
+				alt: 'Autodesk Navisworks 3D coordination model used during design phase',
+			},
+			{
+				src: '/images/projects/navara-mill/interior-monitor.png',
+				alt: 'Site monitor showing progress of interior fit-out at Navara Mill',
+			},
+			{
+				src: '/images/projects/navara-mill/exterior-site-2.png',
+				alt: 'Navara Mill exterior showing building scale during construction',
+			},
+		],
+		tags: ['LV Distribution', 'Fire Alarms', 'Emergency Lighting', 'Industrial'],
+		href: '/projects/navara-mill/',
+	},
+];
