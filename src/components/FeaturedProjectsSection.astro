@@ -1,0 +1,237 @@
+---
+import type { ProjectItem } from '../data/projects';
+
+interface Props {
+	projects: ProjectItem[];
+	limit?: number;
+}
+
+const { projects, limit = 3 } = Astro.props;
+const featured = projects.slice(0, limit);
+---
+
+<section class="section featured-projects">
+	<div class="container">
+		<p class="section-kicker">
+			<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+				<path
+					fill="currentColor"
+					d="M13.2 2.8c.2-.5-.5-.9-.8-.4L6.7 12.1a.5.5 0 0 0 .4.8h3.1L9.5 21c-.1.6.6.9.9.4l6.8-10.7a.5.5 0 0 0-.4-.8h-3.4l-.2-7.1Z"></path>
+			</svg>
+			Recent work
+		</p>
+		<div class="section-heading-row">
+			<div>
+				<h2 class="section-title">Latest Projects</h2>
+				<p class="section-subtitle">
+					A snapshot of recent design and build electrical delivery across industrial, commercial, and healthcare
+					environments.
+				</p>
+			</div>
+			<a href="/projects/" class="view-all-link">View all projects</a>
+		</div>
+
+		<div class="project-grid" data-animate-stagger="0.07">
+			{
+				featured.map((project) => (
+					<article class="project-card brand-line-box" data-animate="fade-up">
+						<a href={project.href} class="card-image-link" tabindex="-1" aria-hidden="true">
+							<div class="card-image">
+								<img src={project.heroImage} alt={project.title} loading="lazy" width="800" height="480" />
+							</div>
+						</a>
+						<div class="card-body">
+							<div class="card-meta">
+								{project.tags.slice(0, 2).map((tag) => (
+									<span class="tag">{tag}</span>
+								))}
+							</div>
+							<h3>
+								<a href={project.href}>{project.title}</a>
+							</h3>
+							<p class="card-excerpt">{project.excerpt}</p>
+							<a href={project.href} class="card-cta">
+								View project
+								<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5">
+									<path d="M5 12h14M13 6l6 6-6 6" />
+								</svg>
+							</a>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.featured-projects {
+		background: var(--ghost-white);
+	}
+
+	.section-kicker {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font: 600 0.86rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
+		color: var(--blue);
+	}
+
+	.section-heading-row {
+		margin-top: 0.35rem;
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 1.5rem;
+	}
+
+	.section-subtitle {
+		margin-top: 0.75rem;
+		max-width: 58ch;
+		color: var(--charcoal-400);
+		line-height: 1.7;
+	}
+
+	.view-all-link {
+		flex-shrink: 0;
+		font: 600 0.95rem/1 'League Spartan', Arial, sans-serif;
+		color: var(--blue);
+		text-decoration: none;
+		padding: 0.55rem 0.85rem;
+		background: rgba(0, 0, 254, 0.07);
+		clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+		transition: background-color 0.2s var(--motion-ease), color 0.2s var(--motion-ease), transform 0.2s
+			var(--motion-ease);
+	}
+
+	.view-all-link:hover {
+		background: var(--blue);
+		color: var(--white);
+		transform: translateY(-1px);
+	}
+
+	.project-grid {
+		margin-top: 2rem;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.6rem;
+	}
+
+	.project-card {
+		background: #ffffff;
+		clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.06);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.project-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 20px 38px rgba(21, 27, 44, 0.13);
+	}
+
+	.card-image-link {
+		display: block;
+		overflow: clip;
+	}
+
+	.card-image img {
+		width: 100%;
+		height: 220px;
+		object-fit: cover;
+		object-position: center 30%;
+		display: block;
+		transition: transform 0.4s ease;
+	}
+
+	.project-card:hover .card-image img {
+		transform: scale(1.04);
+	}
+
+	.card-body {
+		padding: 1.4rem 1.4rem 1.6rem;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+
+	.card-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin-bottom: 0.85rem;
+	}
+
+	.tag {
+		display: inline-block;
+		font: 600 0.75rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--blue);
+		background: rgba(0, 0, 254, 0.07);
+		padding: 0.3rem 0.65rem;
+		border-radius: 2px;
+	}
+
+	.card-body h3 {
+		font-size: clamp(1.35rem, 2vw, 1.75rem);
+		letter-spacing: -0.025em;
+		line-height: 1.08;
+		margin: 0;
+	}
+
+	.card-body h3 a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.card-body h3 a:hover {
+		color: var(--blue);
+	}
+
+	.card-excerpt {
+		margin-top: 0.75rem;
+		font-size: 0.95rem;
+		line-height: 1.68;
+		color: var(--charcoal-400);
+		flex: 1;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.card-cta {
+		margin-top: 1.1rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font: 600 0.92rem/1 'League Spartan', Arial, sans-serif;
+		color: var(--blue);
+		text-decoration: none;
+	}
+
+	.card-cta:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 1024px) {
+		.project-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 768px) {
+		.section-heading-row {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+
+		.project-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

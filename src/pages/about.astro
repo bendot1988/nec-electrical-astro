@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import WhyChooseSection from '../components/WhyChooseSection.astro';
+import AccreditationsSection from '../components/AccreditationsSection.astro';
+import FeaturedProjectsSection from '../components/FeaturedProjectsSection.astro';
+import Footer from '../components/Footer.astro';
+import { navLinks, differentiators, accreditations } from '../data/home';
+import { projects } from '../data/projects';
+
+const pageTitle = 'About Us | NEC Ltd Electrical';
+const pageDescription =
+	'Learn about NEC Ltd Electrical, including our ethos, mission, accreditations, and design and build electrical expertise for industrial, commercial, and educational projects.';
+
+const pageLinks = navLinks.map((link) => ({
+	...link,
+	href: link.href.startsWith('/') ? link.href : `/${link.href}`,
+}));
+
+const heroImage = projects.find((project) => project.slug === 'navara-mill')?.heroImage ?? projects[0].heroImage;
+---
+
+<Layout title={pageTitle} description={pageDescription} ogImage={heroImage}>
+	<Header links={pageLinks} />
+
+	<main id="main-content">
+		<section class="about-hero">
+			<div class="about-hero-bg" style={`background-image: url('${heroImage}');`} aria-hidden="true"></div>
+			<div class="about-hero-overlay" aria-hidden="true"></div>
+			<div class="container about-hero-content">
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">About Us</span>
+				</nav>
+				<h1>About NEC Ltd Electrical</h1>
+				<p>
+					A Northamptonshire-based NICEIC Approved Contractor delivering dependable design and build electrical
+					services for clients who need quality, clarity, and safe delivery from tender to handover.
+				</p>
+			</div>
+		</section>
+
+		<section class="section about-intro">
+			<div class="container about-intro-grid">
+				<div class="about-block" data-animate="fade-up">
+					<p class="section-kicker">Our ethos</p>
+					<h2 class="section-title">Built on trust, delivered with discipline</h2>
+					<p>
+						We believe electrical work should never feel like a black box. Clients deserve a contractor who
+						communicates clearly, plans thoroughly, and treats every installation, from a single unit
+						refurbishment to a multi-million-pound industrial facility, with the same professional standards.
+					</p>
+					<p>
+						Our teams take pride in tidy, well-coordinated installations. We work closely with main contractors,
+						consultants, and end users so programmes stay realistic, interfaces are understood early, and the
+						finished result is compliant, maintainable, and ready for the long term.
+					</p>
+				</div>
+
+				<div class="about-block about-mission brand-line-box" data-animate="fade-up" data-animate-delay="0.08">
+					<p class="section-kicker">Our mission</p>
+					<h2 class="section-title">Electrical delivery you can rely on</h2>
+					<p>
+						To provide complete design and build electrical solutions that protect people, support operations, and
+						give our clients confidence at every stage of a project.
+					</p>
+					<ul class="mission-points">
+						<li>Design and install to recognised standards, with documentation that supports commissioning and handover.</li>
+						<li>Maintain safe, well-supervised sites through qualified leadership and robust health and safety processes.</li>
+						<li>Build lasting relationships by being commercially fair, technically capable, and straightforward to work with.</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<WhyChooseSection items={differentiators} />
+		<AccreditationsSection items={accreditations} />
+		<FeaturedProjectsSection projects={projects} limit={3} />
+	</main>
+
+	<Footer links={pageLinks} />
+</Layout>
+
+<style>
+	.about-hero {
+		position: relative;
+		min-height: clamp(320px, 48vh, 420px);
+		overflow: clip;
+		display: grid;
+		align-items: end;
+	}
+
+	.about-hero-bg,
+	.about-hero-overlay {
+		position: absolute;
+		inset: 0;
+	}
+
+	.about-hero-bg {
+		background-position: center 40%;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.about-hero-overlay {
+		background: linear-gradient(130deg, rgba(17, 22, 35, 0.88), rgba(17, 22, 35, 0.52));
+	}
+
+	.about-hero-content {
+		position: relative;
+		z-index: 1;
+		color: var(--white);
+		padding-bottom: clamp(2rem, 4vw, 2.8rem);
+	}
+
+	.crumbs {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.42rem;
+		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.crumbs a {
+		color: rgba(255, 255, 255, 0.86);
+	}
+
+	.crumbs a:hover {
+		color: var(--white);
+	}
+
+	.about-hero-content h1 {
+		margin-top: 0.85rem;
+		font-size: clamp(2.1rem, 6vw, 3.8rem);
+		line-height: 0.98;
+		letter-spacing: -0.03em;
+		color: var(--white);
+		max-width: 14ch;
+	}
+
+	.about-hero-content p:last-child {
+		margin-top: 1rem;
+		max-width: 58ch;
+		color: #dde1ee;
+		line-height: 1.65;
+	}
+
+	.about-intro {
+		background: var(--white);
+	}
+
+	.about-intro-grid {
+		display: grid;
+		grid-template-columns: 1.15fr 0.85fr;
+		gap: 1.6rem;
+		align-items: start;
+	}
+
+	.section-kicker {
+		font: 600 0.73rem/1 'Open Sans', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--blue);
+	}
+
+	.about-block p {
+		margin-top: 0.9rem;
+		color: var(--charcoal-400);
+		line-height: 1.75;
+		max-width: 62ch;
+	}
+
+	.about-mission {
+		background: #f3f5fa;
+		padding: 1.5rem;
+		clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.05);
+	}
+
+	.mission-points {
+		margin: 1rem 0 0;
+		padding-left: 1.15rem;
+		display: grid;
+		gap: 0.65rem;
+		color: var(--charcoal-400);
+		line-height: 1.7;
+	}
+
+	.mission-points li::marker {
+		color: var(--blue);
+	}
+
+	@media (max-width: 900px) {
+		.about-intro-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

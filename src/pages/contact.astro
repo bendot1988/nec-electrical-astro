@@ -5,9 +5,9 @@ import ContactSection from '../components/ContactSection.astro';
 import Footer from '../components/Footer.astro';
 import { navLinks } from '../data/home';
 
-const pageTitle = 'Contact | NEC Ltd Electrical';
+const pageTitle = 'Contact Us | NEC Ltd Electrical';
 const pageDescription =
-	'Contact NEC Ltd Electrical to discuss design and build electrical services, project scope, programme, and budget.';
+	'Contact NEC Ltd Electrical to discuss design and build electrical services. Submit an enquiry, call, email, or visit us in Kettering.';
 
 const pageLinks = navLinks.map((link) => ({
 	...link,
@@ -15,22 +15,23 @@ const pageLinks = navLinks.map((link) => ({
 }));
 ---
 
-<Layout
-	title={pageTitle}
-	description={pageDescription}
->
-	<Header links={pageLinks} ctaHref="/contact/" />
+<Layout title={pageTitle} description={pageDescription}>
+	<Header links={pageLinks} />
 
 	<main id="main-content">
 		<section class="contact-hero">
 			<div class="contact-hero-bg" aria-hidden="true"></div>
 			<div class="contact-hero-overlay" aria-hidden="true"></div>
 			<div class="container contact-hero-content">
-				<p class="hero-kicker">Contact</p>
-				<h1>Let&apos;s discuss your next electrical project</h1>
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">Contact</span>
+				</nav>
+				<h1>Get in touch about your project today</h1>
 				<p>
-					Whether you need design support, site delivery, or a complete design and build package, our team can
-					help scope the right solution.
+					Whether you are planning a new build, refurbishment, or specialist electrical scope, our team is ready
+					to talk through requirements, programme, and budget.
 				</p>
 			</div>
 		</section>
@@ -44,7 +45,7 @@ const pageLinks = navLinks.map((link) => ({
 <style>
 	.contact-hero {
 		position: relative;
-		min-height: 46vh;
+		min-height: clamp(320px, 48vh, 420px);
 		overflow: clip;
 		display: grid;
 		align-items: end;
@@ -61,35 +62,46 @@ const pageLinks = navLinks.map((link) => ({
 	}
 
 	.contact-hero-overlay {
-		background: linear-gradient(130deg, rgba(17, 22, 35, 0.85), rgba(17, 22, 35, 0.48));
+		background: linear-gradient(130deg, rgba(17, 22, 35, 0.88), rgba(17, 22, 35, 0.52));
 	}
 
 	.contact-hero-content {
 		position: relative;
 		z-index: 1;
 		color: var(--white);
-		padding-bottom: 2.7rem;
+		padding-bottom: clamp(2rem, 4vw, 2.8rem);
 	}
 
-	.hero-kicker {
-		margin: 0;
-		text-transform: uppercase;
-		font: 600 0.78rem/1 'Open Sans', Arial, sans-serif;
-		letter-spacing: 0.09em;
-		color: rgba(255, 255, 255, 0.9);
+	.crumbs {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.42rem;
+		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.crumbs a {
+		color: rgba(255, 255, 255, 0.86);
+	}
+
+	.crumbs a:hover {
+		color: var(--white);
 	}
 
 	h1 {
 		margin-top: 0.85rem;
-		font-size: clamp(2.2rem, 6.2vw, 4.1rem);
+		font-size: clamp(2.1rem, 6vw, 3.8rem);
 		line-height: 0.98;
 		letter-spacing: -0.03em;
 		color: var(--white);
+		max-width: 16ch;
 	}
 
 	.contact-hero-content p:last-child {
 		margin-top: 1rem;
-		max-width: 64ch;
+		max-width: 58ch;
 		color: #dde1ee;
+		line-height: 1.65;
 	}
 </style>

@@ -33,10 +33,10 @@ export const sitemapColumns: SitemapColumn[] = [
 		intro: 'Jump into the main homepage story, services grid, and enquiry form.',
 		pages: [
 			{ label: 'Homepage', href: '/', description: 'Hero, services overview, accreditations, and news.' },
-			{ label: 'About us', href: '/#about', description: 'Who we are and how we work with clients.' },
+			{ label: 'About us', href: '/about/', description: 'Company ethos, mission, accreditations, and recent projects.' },
 			{ label: 'Services overview', href: '/services/', description: 'Filterable cards for every capability.' },
 			{ label: 'Projects', href: '/projects/', description: 'Featured case studies and previous NEC work.' },
-			{ label: 'Contact', href: '/contact/', description: 'Project enquiry form and direct contact routes.' },
+			{ label: 'Contact', href: '/contact/', description: 'Project enquiry form, phone, email, and address.' },
 		],
 	},
 	{
