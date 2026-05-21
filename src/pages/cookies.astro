@@ -1,0 +1,33 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+---
+
+<LegalLayout
+	title="Cookie Policy | NEC Ltd Electrical"
+	description="Details of cookies and similar technologies used on the NEC Ltd Electrical website, and how you can manage your preferences."
+	canonicalPath="/cookies/"
+	heading="Cookie Policy"
+	intro="This page explains how cookies are used on the NEC Ltd Electrical website and how you can control them."
+	sections={[
+		{
+			title: 'What are cookies?',
+			paragraphs: [
+				'Cookies are small text files stored on your device when you visit a website. They help the site function correctly and, where permitted, understand how visitors use it.',
+			],
+		},
+		{
+			title: 'Cookies we use',
+			paragraphs: [
+				'Essential cookies are required for core site functionality such as remembering cookie consent choices.',
+				'Analytics cookies, where enabled, help us understand traffic and improve the website. These are only loaded if you accept non-essential cookies.',
+			],
+		},
+		{
+			title: 'Managing cookies',
+			paragraphs: [
+				'You can accept or reject non-essential cookies using the banner shown on your first visit. You can also control cookies through your browser settings.',
+				'For more detail on how we handle personal data, see our privacy policy.',
+			],
+		},
+	]}
+/>

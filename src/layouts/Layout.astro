@@ -1,4 +1,6 @@
 ---
+import { DEFAULT_OG_IMAGE, resolveCanonicalUrl, resolveOgImageUrl, truncateSeo } from '../utils/seo';
+
 interface Props {
 	title: string;
 	description: string;
@@ -7,11 +9,12 @@ interface Props {
 	noindex?: boolean;
 }
 
-const { title, description, canonical, ogImage = '/images/hero-1.jpg', noindex = false } = Astro.props;
-const canonicalUrl =
-	canonical ??
-	new URL(Astro.url.pathname, Astro.site ?? `${Astro.url.protocol}//${Astro.url.host}`).toString();
-const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astro.url.host}`).toString();
+const { title, description, canonical, ogImage = DEFAULT_OG_IMAGE, noindex = false } = Astro.props;
+const seoTitle = truncateSeo(title, 60);
+const seoDescription = truncateSeo(description, 155);
+const canonicalUrl = resolveCanonicalUrl(Astro.url.pathname, Astro.site, canonical);
+const ogImageUrl = resolveOgImageUrl(ogImage, Astro.site);
+const usesStandardOgImage = ogImage === DEFAULT_OG_IMAGE || ogImage.endsWith('/og-default.jpg');
 ---
 
 <!doctype html>
@@ -20,27 +23,33 @@ const ogImageUrl = new URL(ogImage, Astro.site ?? `${Astro.url.protocol}//${Astr
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
+		<meta name="description" content={seoDescription} />
 		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
 		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap"
 		/>
-		<title>{title}</title>
+		<title>{seoTitle}</title>
 
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="NEC Ltd Electrical" />
+		<meta property="og:title" content={seoTitle} />
+		<meta property="og:description" content={seoDescription} />
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:image" content={ogImageUrl} />
+		{usesStandardOgImage && <meta property="og:image:width" content="1200" />}
+		{usesStandardOgImage && <meta property="og:image:height" content="630" />}
 		<meta property="og:locale" content="en_GB" />
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
+		<meta name="twitter:title" content={seoTitle} />
+		<meta name="twitter:description" content={seoDescription} />
 		<meta name="twitter:image" content={ogImageUrl} />
 		<slot name="head" />
 	</head>

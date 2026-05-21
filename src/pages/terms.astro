@@ -1,0 +1,34 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+---
+
+<LegalLayout
+	title="Terms of Use | NEC Ltd Electrical"
+	description="Terms governing use of the NEC Ltd Electrical website, including acceptable use, content accuracy, and liability limitations."
+	canonicalPath="/terms/"
+	heading="Terms of Use"
+	intro="By using this website you agree to the following terms. Please read them carefully."
+	sections={[
+		{
+			title: 'Website use',
+			paragraphs: [
+				'This website is provided for general information about NEC Ltd Electrical and our commercial electrical services.',
+				'You must not misuse the site, attempt unauthorised access, or use content in a way that infringes our rights or applicable law.',
+			],
+		},
+		{
+			title: 'Information accuracy',
+			paragraphs: [
+				'We aim to keep website content accurate and up to date, but information is provided for general guidance and may change without notice.',
+				'Project requirements, specifications, and quotations should always be confirmed directly with our team.',
+			],
+		},
+		{
+			title: 'Liability',
+			paragraphs: [
+				'To the fullest extent permitted by law, NEC Ltd Electrical is not liable for loss arising from reliance on website content or temporary unavailability of the site.',
+				'Nothing in these terms excludes liability where it cannot be excluded under applicable law.',
+			],
+		},
+	]}
+/>

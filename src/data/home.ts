@@ -22,12 +22,12 @@ export interface NewsPostItem {
 	title: string;
 	image: string;
 	readTime: string;
-	href: string;
+	href?: string;
 }
 
-export const pageTitle = 'NEC Ltd Electrical | Design and Build Electrical Services';
+export const pageTitle = 'NEC Electrical Services | NEC Ltd Electrical';
 export const pageDescription =
-	'NICEIC Approved Contractor delivering complete design and build electrical services across industrial, commercial, and educational sectors.';
+	'NICEIC Approved Contractor for design and build electrical services across industrial, commercial and educational projects in the UK.';
 
 export const navLinks: NavLink[] = [
 	{ href: '/#about', label: 'About Us' },
@@ -130,19 +130,16 @@ export const newsPosts: NewsPostItem[] = [
 		title: 'From Concept to Completion: The Advantage of Design and Build Electrical Services',
 		image: '/images/news-design-build.jpeg',
 		readTime: '1 min read',
-		href: '#',
 	},
 	{
 		title: 'Is Your Electrical System Compliant? Three Reasons to Choose a NICEIC Contractor',
 		image: '/images/news-compliance.jpg',
 		readTime: '1 min read',
-		href: '#',
 	},
 	{
 		title: 'Sparking Up Our Digital Presence: Welcome to the New NEC Ltd Website',
 		image: '/images/news-digital-presence.jpeg',
 		readTime: '1 min read',
-		href: '#',
 	},
 ];
 
@@ -152,6 +149,7 @@ export const localBusinessSchema = {
 	name: 'NEC Ltd Electrical',
 	url: 'https://dotwall.dev/nec/',
 	logo: 'https://dotwall.dev/nec/images/logo-blue.svg',
+	image: 'https://dotwall.dev/nec/images/og-default.jpg',
 	description: pageDescription,
 	telephone: '+44 1536 417807',
 	email: 'enquries@necltd.net',
@@ -164,7 +162,6 @@ export const localBusinessSchema = {
 		addressCountry: 'GB',
 	},
 	areaServed: 'United Kingdom',
-	sameAs: ['https://dotwall.dev/nec/'],
 };
 
 export const websiteSchema = {
