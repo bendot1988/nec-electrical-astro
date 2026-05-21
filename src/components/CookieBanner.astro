@@ -1,5 +1,5 @@
 ---
-import { ANALYTICS_DOMAIN, COOKIE_CONSENT_KEY, STAT_MONITOR_SCRIPT } from '../data/analytics';
+import { COOKIE_CONSENT_KEY, STAT_MONITOR_SCRIPT } from '../data/analytics';
 ---
 
 <div
@@ -32,7 +32,7 @@ import { ANALYTICS_DOMAIN, COOKIE_CONSENT_KEY, STAT_MONITOR_SCRIPT } from '../da
 
 <script
 	is:inline
-	define:vars={{ analyticsDomain: ANALYTICS_DOMAIN, consentKey: COOKIE_CONSENT_KEY, scriptUrl: STAT_MONITOR_SCRIPT }}
+	define:vars={{ consentKey: COOKIE_CONSENT_KEY, scriptUrl: STAT_MONITOR_SCRIPT }}
 >
 	(function () {
 		var ANALYTICS = 'analytics';
@@ -42,8 +42,7 @@ import { ANALYTICS_DOMAIN, COOKIE_CONSENT_KEY, STAT_MONITOR_SCRIPT } from '../da
 			if (window.__necStatMonitorLoaded) return;
 			window.__necStatMonitorLoaded = true;
 			var s = document.createElement('script');
-			s.defer = true;
-			s.setAttribute('data-domain', analyticsDomain);
+			s.async = true;
 			s.src = scriptUrl;
 			document.head.appendChild(s);
 		}
