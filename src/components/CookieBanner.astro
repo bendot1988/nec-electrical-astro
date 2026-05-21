@@ -1,0 +1,223 @@
+---
+import { ANALYTICS_DOMAIN, COOKIE_CONSENT_KEY, STAT_MONITOR_SCRIPT } from '../data/analytics';
+---
+
+<div
+	id="cookie-banner-root"
+	class="cookie-banner"
+	role="region"
+	aria-label="Cookie consent"
+	aria-hidden="true"
+	hidden
+>
+	<div class="cookie-banner-panel">
+		<div class="cookie-banner-copy">
+			<p class="cookie-banner-title">Cookies on this site</p>
+			<p class="cookie-banner-text">
+				We use privacy-focused analytics to understand how visitors use our website. You can accept analytics or
+				choose essential cookies only. See our <a href="/cookies/">cookie policy</a> and <a href="/privacy/">privacy
+				policy</a>.
+			</p>
+		</div>
+		<div class="cookie-banner-actions">
+			<button type="button" class="cookie-btn cookie-btn-ghost" id="cookie-banner-essential">
+				Essential only
+			</button>
+			<button type="button" class="cookie-btn cookie-btn-accent" id="cookie-banner-accept">
+				Accept analytics
+			</button>
+		</div>
+	</div>
+</div>
+
+<script
+	is:inline
+	define:vars={{ analyticsDomain: ANALYTICS_DOMAIN, consentKey: COOKIE_CONSENT_KEY, scriptUrl: STAT_MONITOR_SCRIPT }}
+>
+	(function () {
+		var ANALYTICS = 'analytics';
+		var ESSENTIAL = 'essential';
+
+		function loadStatMonitor() {
+			if (window.__necStatMonitorLoaded) return;
+			window.__necStatMonitorLoaded = true;
+			var s = document.createElement('script');
+			s.defer = true;
+			s.setAttribute('data-domain', analyticsDomain);
+			s.src = scriptUrl;
+			document.head.appendChild(s);
+		}
+
+		function hideBanner(el) {
+			if (!el) return;
+			el.classList.remove('is-visible');
+			el.setAttribute('aria-hidden', 'true');
+			setTimeout(function () {
+				el.hidden = true;
+			}, 280);
+		}
+
+		function showBanner(el) {
+			if (!el) return;
+			el.hidden = false;
+			el.offsetHeight;
+			el.classList.add('is-visible');
+			el.setAttribute('aria-hidden', 'false');
+		}
+
+		function setConsent(value) {
+			try {
+				localStorage.setItem(consentKey, value);
+			} catch (e) {}
+			if (value === ANALYTICS) loadStatMonitor();
+		}
+
+		var root = document.getElementById('cookie-banner-root');
+		var btnAccept = document.getElementById('cookie-banner-accept');
+		var btnEssential = document.getElementById('cookie-banner-essential');
+
+		var existing = null;
+		try {
+			existing = localStorage.getItem(consentKey);
+		} catch (e) {}
+
+		if (existing === ANALYTICS) {
+			loadStatMonitor();
+		}
+
+		if (!existing && root) {
+			showBanner(root);
+		}
+
+		if (btnAccept) {
+			btnAccept.addEventListener('click', function () {
+				setConsent(ANALYTICS);
+				hideBanner(root);
+			});
+		}
+
+		if (btnEssential) {
+			btnEssential.addEventListener('click', function () {
+				setConsent(ESSENTIAL);
+				hideBanner(root);
+			});
+		}
+
+		window.necOpenCookieSettings = function () {
+			if (root) showBanner(root);
+		};
+	})();
+</script>
+
+<style>
+	.cookie-banner {
+		position: fixed;
+		inset: auto 0 0;
+		z-index: 1200;
+		padding: 0.85rem clamp(0.85rem, 3vw, 1.25rem) max(0.85rem, env(safe-area-inset-bottom));
+		pointer-events: none;
+		opacity: 0;
+		transform: translateY(110%);
+		transition:
+			transform 0.32s var(--motion-ease, cubic-bezier(0.22, 1, 0.36, 1)),
+			opacity 0.32s var(--motion-ease, cubic-bezier(0.22, 1, 0.36, 1));
+	}
+
+	.cookie-banner.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+
+	.cookie-banner-panel {
+		width: min(100%, var(--page-max, 1200px));
+		margin-inline: auto;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem 1.4rem;
+		padding: 1rem 1.15rem;
+		background: rgba(255, 255, 255, 0.97);
+		border: 1px solid rgba(0, 0, 254, 0.12);
+		box-shadow: 0 16px 40px rgba(20, 24, 38, 0.12);
+		clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+	}
+
+	.cookie-banner-copy {
+		flex: 1 1 16rem;
+		min-width: 0;
+	}
+
+	.cookie-banner-title {
+		margin: 0;
+		font: 600 0.95rem/1.2 'League Spartan', Arial, sans-serif;
+		color: var(--charcoal-100, #212128);
+	}
+
+	.cookie-banner-text {
+		margin: 0.45rem 0 0;
+		font-size: 0.88rem;
+		line-height: 1.55;
+		color: var(--charcoal-400, #6e7a84);
+		max-width: 58ch;
+	}
+
+	.cookie-banner-text a {
+		color: var(--blue, #0000fe);
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+
+	.cookie-banner-text a:hover {
+		color: var(--charcoal-100, #212128);
+	}
+
+	.cookie-banner-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.55rem;
+		flex-shrink: 0;
+	}
+
+	.cookie-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 2.65rem;
+		padding: 0.55rem 1rem;
+		border: none;
+		border-radius: 0;
+		font: 600 0.88rem/1 'League Spartan', Arial, sans-serif;
+		letter-spacing: 0.01em;
+		cursor: pointer;
+		clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 0 100%);
+		transition:
+			background-color 0.2s var(--motion-ease, ease),
+			color 0.2s var(--motion-ease, ease),
+			border-color 0.2s var(--motion-ease, ease),
+			transform 0.2s var(--motion-ease, ease);
+	}
+
+	.cookie-btn-ghost {
+		background: transparent;
+		color: var(--charcoal-300, #444);
+		border: 1px solid rgba(33, 33, 40, 0.18);
+	}
+
+	.cookie-btn-ghost:hover {
+		border-color: rgba(0, 0, 254, 0.35);
+		color: var(--charcoal-100, #212128);
+	}
+
+	.cookie-btn-accent {
+		background: rgba(0, 0, 254, 0.08);
+		color: var(--blue, #0000fe);
+	}
+
+	.cookie-btn-accent:hover {
+		background: var(--blue, #0000fe);
+		color: var(--white, #fff);
+		transform: translateY(-1px);
+	}
+</style>

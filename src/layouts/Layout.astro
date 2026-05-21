@@ -1,5 +1,7 @@
 ---
 import { DEFAULT_OG_IMAGE, resolveCanonicalUrl, resolveOgImageUrl, truncateSeo } from '../utils/seo';
+import CookieBanner from '../components/CookieBanner.astro';
+import { ANALYTICS_DOMAIN, COOKIE_CONSENT_KEY, STAT_MONITOR_SCRIPT } from '../data/analytics';
 
 interface Props {
 	title: string;
@@ -51,11 +53,35 @@ const usesStandardOgImage = ogImage === DEFAULT_OG_IMAGE || ogImage.endsWith('/o
 		<meta name="twitter:title" content={seoTitle} />
 		<meta name="twitter:description" content={seoDescription} />
 		<meta name="twitter:image" content={ogImageUrl} />
+		<!-- Stat Monitor (Plausible): loaded only after cookie consent -->
+		<script
+			is:inline
+			define:vars={{
+				consentKey: COOKIE_CONSENT_KEY,
+				analyticsDomain: ANALYTICS_DOMAIN,
+				scriptUrl: STAT_MONITOR_SCRIPT,
+			}}
+		>
+			(function () {
+				try {
+					if (localStorage.getItem(consentKey) === 'analytics') {
+						if (window.__necStatMonitorLoaded) return;
+						window.__necStatMonitorLoaded = true;
+						var s = document.createElement('script');
+						s.defer = true;
+						s.setAttribute('data-domain', analyticsDomain);
+						s.src = scriptUrl;
+						document.head.appendChild(s);
+					}
+				} catch (e) {}
+			})();
+		</script>
 		<slot name="head" />
 	</head>
 	<body>
 		<a class="skip-link" href="#main-content">Skip to content</a>
 		<slot />
+		<CookieBanner />
 		<script is:inline>
 			const MOTION_SELECTORS = [
 				'.section .section-kicker',

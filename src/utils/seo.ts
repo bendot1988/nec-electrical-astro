@@ -1,3 +1,4 @@
+export const SITE_ORIGIN = 'https://www.necltd.net';
 const DEFAULT_OG_IMAGE = '/images/og-default.jpg';
 
 /** Trim copy to a safe SEO length without breaking mid-word when possible. */
@@ -15,7 +16,7 @@ export function resolveCanonicalUrl(pathname: string, site?: URL | string, expli
 		return explicit.endsWith('/') ? explicit : `${explicit}/`;
 	}
 
-	const siteUrl = typeof site === 'string' ? site : site?.href ?? 'https://dotwall.dev/nec';
+	const siteUrl = typeof site === 'string' ? site : site?.href ?? SITE_ORIGIN;
 	const base = siteUrl.replace(/\/$/, '');
 	let path = pathname || '/';
 
@@ -26,7 +27,7 @@ export function resolveCanonicalUrl(pathname: string, site?: URL | string, expli
 }
 
 export function resolveOgImageUrl(imagePath: string, site?: URL | string): string {
-	const siteUrl = typeof site === 'string' ? site : site?.href ?? 'https://dotwall.dev/nec';
+	const siteUrl = typeof site === 'string' ? site : site?.href ?? SITE_ORIGIN;
 	const base = siteUrl.replace(/\/$/, '');
 	if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) return imagePath;
 	return `${base}${imagePath.startsWith('/') ? imagePath : `/${imagePath}`}`;

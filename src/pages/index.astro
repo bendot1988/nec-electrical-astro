@@ -20,7 +20,7 @@ import {
 } from '../data/home';
 ---
 
-<Layout title={pageTitle} description={pageDescription} canonical="https://dotwall.dev/nec/">
+<Layout title={pageTitle} description={pageDescription}>
 	<Fragment slot="head">
 		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 		<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />

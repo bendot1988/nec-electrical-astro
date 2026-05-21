@@ -1,3 +1,5 @@
+import { SITE_ORIGIN } from '../utils/seo';
+
 export interface NavLink {
 	href: string;
 	label: string;
@@ -147,9 +149,9 @@ export const localBusinessSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'Electrician',
 	name: 'NEC Ltd Electrical',
-	url: 'https://dotwall.dev/nec/',
-	logo: 'https://dotwall.dev/nec/images/logo-blue.svg',
-	image: 'https://dotwall.dev/nec/images/og-default.jpg',
+	url: `${SITE_ORIGIN}/`,
+	logo: `${SITE_ORIGIN}/images/logo-blue.svg`,
+	image: `${SITE_ORIGIN}/images/og-default.jpg`,
 	description: pageDescription,
 	telephone: '+44 1536 417807',
 	email: 'enquries@necltd.net',
@@ -168,7 +170,7 @@ export const websiteSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'WebSite',
 	name: 'NEC Ltd Electrical',
-	url: 'https://dotwall.dev/nec/',
+	url: `${SITE_ORIGIN}/`,
 	publisher: {
 		'@type': 'Organization',
 		name: 'NEC Ltd Electrical',
