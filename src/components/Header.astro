@@ -890,7 +890,28 @@ serviceMenuItems.push({
 
 	@media (max-width: 1120px) {
 		.site-header {
+			position: static;
+			top: auto;
+			z-index: auto;
 			overflow-x: clip;
+			padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+			background: transparent;
+		}
+
+		.site-header.is-overlay {
+			position: static;
+		}
+
+		.site-header.is-mobile-nav-open {
+			z-index: 200;
+		}
+
+		.top-bar {
+			display: none;
+		}
+
+		.nav-wrap {
+			margin-top: 0;
 		}
 
 		.top-nav {
