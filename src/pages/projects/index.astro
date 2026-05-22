@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
+import PageHero from '../../components/PageHero.astro';
 import Footer from '../../components/Footer.astro';
 import { navLinks } from '../../data/home';
 import { projects } from '../../data/projects';
@@ -113,25 +113,23 @@ const previousNecWork = [
 	description={pageDescription}
 	ogImage="/images/projects/navara-mill/exterior-site-1.png"
 >
-	<Header links={homeAnchors} />
-
 	<main id="main-content">
-		<section class="projects-hero">
-			<div class="projects-hero-bg" aria-hidden="true"></div>
-			<div class="projects-hero-overlay" aria-hidden="true"></div>
-			<div class="container projects-hero-content">
-				<nav class="crumbs" aria-label="Breadcrumb">
-					<a href="/">Home</a>
-					<span aria-hidden="true">›</span>
-					<span aria-current="page">Projects</span>
-				</nav>
-				<h1>Our Projects</h1>
-				<p class="hero-sub">
-					Real installations. Real results. Explore the work we've delivered for clients across industry,
-					commerce, and education.
-				</p>
-			</div>
-		</section>
+		<PageHero
+			links={homeAnchors}
+			image="/images/projects/navara-mill/exterior-site-1.png"
+			imagePosition="center 40%"
+		>
+			<nav class="crumbs" aria-label="Breadcrumb">
+				<a href="/">Home</a>
+				<span aria-hidden="true">›</span>
+				<span aria-current="page">Projects</span>
+			</nav>
+			<h1>Our Projects</h1>
+			<p class="hero-sub">
+				Real installations. Real results. Explore the work we've delivered for clients across industry,
+				commerce, and education.
+			</p>
+		</PageHero>
 
 		<section class="section projects-list">
 			<div class="container">
@@ -253,69 +251,6 @@ const previousNecWork = [
 </Layout>
 
 <style>
-	.projects-hero {
-		position: relative;
-		min-height: clamp(290px, 42vw, 380px);
-		display: grid;
-		align-items: end;
-		overflow: clip;
-	}
-
-	.projects-hero-bg,
-	.projects-hero-overlay {
-		position: absolute;
-		inset: 0;
-	}
-
-	.projects-hero-bg {
-		background: center 40% / cover no-repeat
-			url('/images/projects/navara-mill/exterior-site-1.png');
-	}
-
-	.projects-hero-overlay {
-		background: linear-gradient(115deg, rgba(10, 18, 42, 0.72), rgba(10, 18, 42, 0.4));
-	}
-
-	.projects-hero-content {
-		position: relative;
-		z-index: 1;
-		color: var(--white);
-		padding-bottom: clamp(1.4rem, 3vw, 2.5rem);
-	}
-
-	.crumbs {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 0.42rem;
-		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
-	}
-
-	.crumbs a {
-		color: rgba(255, 255, 255, 0.86);
-		transition: color 0.2s var(--motion-ease);
-	}
-
-	.crumbs a:hover {
-		color: var(--white);
-	}
-
-	h1 {
-		margin-top: 0.85rem;
-		font-size: clamp(2.1rem, 6.8vw, 4.2rem);
-		letter-spacing: -0.03em;
-		line-height: 0.98;
-		color: var(--white);
-	}
-
-	.hero-sub {
-		margin-top: 1rem;
-		font-size: clamp(1rem, 1.5vw, 1.15rem);
-		line-height: 1.6;
-		color: rgba(255, 255, 255, 0.82);
-		max-width: 54ch;
-	}
-
 	.projects-list {
 		background: var(--ghost-white);
 	}

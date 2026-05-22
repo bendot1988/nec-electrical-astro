@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
 import Footer from '../components/Footer.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { navLinks } from '../data/home';
@@ -15,21 +15,15 @@ const pageDescription =
 	description={pageDescription}
 	ogImage="/images/service-design-technical.jpg"
 >
-	<Header links={navLinks} ctaHref="#request-form" />
-
 	<main id="main-content">
-		<section class="custom-hero">
-			<div class="custom-hero-bg" aria-hidden="true"></div>
-			<div class="custom-hero-overlay" aria-hidden="true"></div>
-			<div class="container custom-hero-content">
-				<p class="hero-kicker">Bespoke project support</p>
-				<h1>Custom Electrical Work</h1>
-				<p>
-					If your project needs something outside our standard service categories, send us the details and our team
-					will scope a tailored solution.
-				</p>
-			</div>
-		</section>
+		<PageHero links={navLinks} image="/images/service-design-technical.jpg" ctaHref="#request-form">
+			<p class="hero-kicker">Bespoke project support</p>
+			<h1>Custom Electrical Work</h1>
+			<p>
+				If your project needs something outside our standard service categories, send us the details and our team
+				will scope a tailored solution.
+			</p>
+		</PageHero>
 
 		<section id="request-form" class="section custom-request">
 			<div class="container request-grid">
@@ -64,14 +58,6 @@ const pageDescription =
 </Layout>
 
 <style>
-	.custom-hero { position: relative; min-height: 56vh; overflow: clip; display: grid; align-items: end; }
-	.custom-hero-bg, .custom-hero-overlay { position: absolute; inset: 0; }
-	.custom-hero-bg { background: center / cover no-repeat url('/images/service-design-technical.jpg'); }
-	.custom-hero-overlay { background: linear-gradient(130deg, rgba(17, 22, 35, 0.84), rgba(17, 22, 35, 0.42)); }
-	.custom-hero-content { position: relative; z-index: 1; color: var(--white); padding-bottom: 2.7rem; }
-	.hero-kicker { margin: 0; text-transform: uppercase; font: 600 0.78rem/1 'Open Sans', Arial, sans-serif; letter-spacing: 0.09em; color: rgba(255, 255, 255, 0.9); }
-	h1 { margin-top: 0.85rem; font-size: clamp(2.2rem, 7vw, 4.3rem); line-height: 0.98; letter-spacing: -0.03em; color: var(--white); }
-	.custom-hero-content p:last-child { margin-top: 1rem; max-width: 65ch; color: #dde1ee; }
 	.custom-request { background: var(--ghost-white); }
 	.request-grid { display: grid; grid-template-columns: 1fr 0.9fr; gap: 1.4rem; }
 	.section-kicker { font: 600 0.78rem/1 'Open Sans', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); }

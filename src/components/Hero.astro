@@ -149,7 +149,18 @@ const { links } = Astro.props;
 
 	@media (max-width: 1120px) {
 		.hero {
-			padding-top: 0;
+			padding-top: max(0.85rem, env(safe-area-inset-top, 0px));
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+		}
+
+		.hero-content {
+			margin-top: auto;
+			min-height: 0;
+			flex: 1;
+			display: flex;
+			align-items: center;
 		}
 	}
 

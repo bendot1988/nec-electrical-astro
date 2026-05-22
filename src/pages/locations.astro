@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
 import Footer from '../components/Footer.astro';
 import { navLinks } from '../data/home';
 import { serviceMapPoints } from '../data/locations';
@@ -30,18 +30,12 @@ const pageDescription =
 		></script>
 	</Fragment>
 
-	<Header links={navLinks} />
-
 	<main id="main-content">
-		<section class="locations-hero">
-			<div class="locations-hero-bg" aria-hidden="true"></div>
-			<div class="locations-hero-overlay" aria-hidden="true"></div>
-			<div class="container locations-hero-content">
-				<p class="hero-kicker">Regional coverage</p>
-				<h1>Project Locations</h1>
-				<p>Supporting commercial and industrial electrical projects across key UK regions.</p>
-			</div>
-		</section>
+		<PageHero links={navLinks} image="/images/hero-2.jpg">
+			<p class="hero-kicker">Regional coverage</p>
+			<h1>Project Locations</h1>
+			<p>Supporting commercial and industrial electrical projects across key UK regions.</p>
+		</PageHero>
 
 		<section class="section locations-map-section">
 			<div class="container locations-grid">
@@ -116,14 +110,6 @@ const pageDescription =
 </script>
 
 <style>
-	.locations-hero { position: relative; min-height: 48vh; overflow: clip; display: grid; align-items: end; }
-	.locations-hero-bg, .locations-hero-overlay { position: absolute; inset: 0; }
-	.locations-hero-bg { background: center / cover no-repeat url('/images/hero-2.jpg'); }
-	.locations-hero-overlay { background: linear-gradient(130deg, rgba(17, 22, 35, 0.82), rgba(17, 22, 35, 0.45)); }
-	.locations-hero-content { position: relative; z-index: 1; color: var(--white); padding-bottom: 2.6rem; }
-	.hero-kicker { margin: 0; text-transform: uppercase; font: 600 0.78rem/1 'Open Sans', Arial, sans-serif; letter-spacing: 0.09em; color: rgba(255, 255, 255, 0.9); }
-	h1 { margin-top: 0.85rem; font-size: clamp(2.2rem, 7vw, 4.2rem); line-height: 0.98; letter-spacing: -0.03em; color: var(--white); }
-	.locations-hero-content p:last-child { margin-top: 0.95rem; max-width: 60ch; color: #dde1ee; }
 	.locations-map-section { background: var(--ghost-white); }
 	.locations-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 1.35rem; align-items: stretch; }
 	.locations-copy ul { margin: 1rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }

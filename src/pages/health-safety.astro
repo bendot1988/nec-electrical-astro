@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
 import Footer from '../components/Footer.astro';
 import { navLinks } from '../data/home';
 
@@ -41,21 +41,15 @@ const trainingLogos = [
 	description={pageDescription}
 	ogImage="/images/service-security-hero.png"
 >
-	<Header links={homeAnchors} />
-
 	<main id="main-content">
-		<section class="safety-hero">
-			<div class="safety-hero-bg" aria-hidden="true"></div>
-			<div class="safety-hero-overlay" aria-hidden="true"></div>
-			<div class="container safety-hero-content">
-				<nav class="crumbs" aria-label="Breadcrumb">
-					<a href="/">Home</a>
-					<span aria-hidden="true">›</span>
-					<span aria-current="page">Health & Safety</span>
-				</nav>
-				<h1>Health & Safety</h1>
-			</div>
-		</section>
+		<PageHero links={homeAnchors} image="/images/service-security-hero.png" imagePosition="center 30%">
+			<nav class="crumbs" aria-label="Breadcrumb">
+				<a href="/">Home</a>
+				<span aria-hidden="true">›</span>
+				<span aria-current="page">Health & Safety</span>
+			</nav>
+			<h1>Health & Safety</h1>
+		</PageHero>
 
 		<section class="section safety-overview">
 			<div class="container">
@@ -131,15 +125,6 @@ const trainingLogos = [
 </Layout>
 
 <style>
-	.safety-hero { position: relative; min-height: clamp(290px, 42vw, 380px); overflow: clip; display: grid; align-items: end; }
-	.safety-hero-bg, .safety-hero-overlay { position: absolute; inset: 0; }
-	.safety-hero-bg { background: center 30% / cover no-repeat url('/images/service-security-hero.png'); }
-	.safety-hero-overlay { background: linear-gradient(115deg, rgba(10, 18, 42, 0.62), rgba(10, 18, 42, 0.35)); }
-	.safety-hero-content { position: relative; z-index: 1; color: var(--white); padding-bottom: clamp(1.4rem, 3vw, 2.5rem); }
-	.crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.42rem; font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif; }
-	.crumbs a { color: rgba(255, 255, 255, 0.86); transition: color 0.2s var(--motion-ease); }
-	.crumbs a:hover { color: var(--white); }
-	h1 { margin-top: 0.85rem; font-size: clamp(2.1rem, 6.8vw, 4.2rem); line-height: 0.98; letter-spacing: -0.03em; color: var(--white); max-width: 9ch; }
 	.section-kicker { display: inline-flex; align-items: center; gap: 0.5rem; font: 600 0.86rem/1 'League Spartan', Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.07em; color: var(--blue); }
 	.safety-overview { background: var(--ghost-white); }
 	.assurance-grid { margin-top: 1.8rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }

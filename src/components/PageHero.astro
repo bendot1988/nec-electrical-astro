@@ -1,0 +1,200 @@
+---
+import Header from './Header.astro';
+import type { NavLink } from '../data/home';
+
+interface Props {
+	links: NavLink[];
+	/** Background image URL. Omit for gradient-only heroes (e.g. legal). */
+	image?: string;
+	imagePosition?: string;
+	size?: 'standard' | 'compact' | 'project';
+	ctaHref?: string;
+}
+
+const {
+	links,
+	image,
+	imagePosition = 'center',
+	size = 'standard',
+	ctaHref,
+} = Astro.props;
+---
+
+<section
+	class:list={[
+		'page-hero',
+		size === 'compact' && 'page-hero--compact',
+		size === 'project' && 'page-hero--project',
+	]}
+>
+	{
+		image ? (
+			<div
+				class="page-hero-bg"
+				style={`background-image: url('${image}'); background-position: ${imagePosition};`}
+				aria-hidden="true"
+			/>
+		) : null
+	}
+	<div class="page-hero-overlay" aria-hidden="true"></div>
+	<Header links={links} overlay ctaHref={ctaHref} />
+	<div class="container page-hero-content">
+		<slot />
+	</div>
+</section>
+
+<style>
+	.page-hero {
+		position: relative;
+		min-height: clamp(300px, 44vw, 400px);
+		padding-top: 6.5rem;
+		box-sizing: border-box;
+		overflow: clip;
+		display: grid;
+		align-items: end;
+		background: #101528;
+	}
+
+	.page-hero--compact {
+		min-height: clamp(260px, 38vw, 320px);
+	}
+
+	.page-hero--project {
+		min-height: clamp(340px, 50vw, 460px);
+	}
+
+	.page-hero-bg,
+	.page-hero-overlay {
+		position: absolute;
+		inset: 0;
+	}
+
+	.page-hero-bg {
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.page-hero-overlay {
+		background: linear-gradient(130deg, rgba(17, 22, 35, 0.88), rgba(17, 22, 35, 0.5));
+	}
+
+	.page-hero-content {
+		position: relative;
+		z-index: 1;
+		color: var(--white);
+		padding-bottom: clamp(2rem, 4vw, 2.75rem);
+	}
+
+	.page-hero-content :global(.crumbs) {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.42rem;
+		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.page-hero-content :global(.crumbs a) {
+		color: rgba(255, 255, 255, 0.86);
+	}
+
+	.page-hero-content :global(.crumbs a:hover) {
+		color: var(--white);
+	}
+
+	.page-hero-content :global(.crumbs [aria-current='page']) {
+		max-width: 28ch;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.page-hero-content :global(.hero-kicker) {
+		margin: 0;
+		text-transform: uppercase;
+		font: 600 0.78rem/1 'Open Sans', Arial, sans-serif;
+		letter-spacing: 0.09em;
+		color: rgba(255, 255, 255, 0.9);
+	}
+
+	.page-hero-content :global(h1) {
+		margin-top: 0.85rem;
+		font-size: clamp(2rem, 5vw, 3.4rem);
+		line-height: 1.02;
+		letter-spacing: -0.03em;
+		color: var(--white);
+	}
+
+	.page-hero-content :global(p),
+	.page-hero-content :global(.hero-sub) {
+		margin-top: 1rem;
+		max-width: 62ch;
+		color: #dde1ee;
+		line-height: 1.65;
+	}
+
+	.page-hero-content :global(.hero-meta) {
+		margin: 0.75rem 0 0;
+		font: 400 0.88rem/1.4 'Open Sans', Arial, sans-serif;
+		color: rgba(255, 255, 255, 0.88);
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+		align-items: center;
+	}
+
+	.page-hero-content :global(.hero-tags) {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		margin-top: 0.85rem;
+	}
+
+	.page-hero-content :global(.hero-tag) {
+		display: inline-block;
+		font: 600 0.75rem/1 'League Spartan', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.07em;
+		color: rgba(255, 255, 255, 0.9);
+		background: rgba(255, 255, 255, 0.14);
+		border: 1px solid rgba(255, 255, 255, 0.22);
+		padding: 0.32rem 0.7rem;
+		border-radius: 2px;
+	}
+
+	.page-hero-content :global(.hero-subtitle) {
+		margin-top: 0.85rem;
+		font-size: clamp(1rem, 1.5vw, 1.15rem);
+		line-height: 1.6;
+		color: rgba(255, 255, 255, 0.82);
+		max-width: 54ch;
+	}
+
+	@media (max-width: 1120px) {
+		.page-hero {
+			padding-top: max(0.85rem, env(safe-area-inset-top, 0px));
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			min-height: clamp(280px, 52vw, 360px);
+		}
+
+		.page-hero--compact {
+			min-height: clamp(240px, 46vw, 300px);
+		}
+
+		.page-hero--project {
+			min-height: clamp(400px, 78vw, 520px);
+		}
+
+		.page-hero-content {
+			margin-top: auto;
+		}
+
+		.page-hero--project .page-hero-content {
+			margin-top: 0.5rem;
+			padding-top: 0.15rem;
+			padding-bottom: clamp(2.25rem, 5vw, 3rem);
+		}
+	}
+</style>

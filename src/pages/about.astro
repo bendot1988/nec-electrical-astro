@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
 import WhyChooseSection from '../components/WhyChooseSection.astro';
 import AccreditationsSection from '../components/AccreditationsSection.astro';
 import FeaturedProjectsSection from '../components/FeaturedProjectsSection.astro';
+import NewsSection from '../components/NewsSection.astro';
 import Footer from '../components/Footer.astro';
 import { navLinks, differentiators, accreditations } from '../data/home';
 import { projects } from '../data/projects';
+import { newsPosts } from '../data/news';
 
 const pageTitle = 'About Us | NEC Ltd Electrical';
 const pageDescription =
@@ -21,25 +23,19 @@ const heroImage = projects.find((project) => project.slug === 'navara-mill')?.he
 ---
 
 <Layout title={pageTitle} description={pageDescription} ogImage={heroImage}>
-	<Header links={pageLinks} />
-
 	<main id="main-content">
-		<section class="about-hero">
-			<div class="about-hero-bg" style={`background-image: url('${heroImage}');`} aria-hidden="true"></div>
-			<div class="about-hero-overlay" aria-hidden="true"></div>
-			<div class="container about-hero-content">
-				<nav class="crumbs" aria-label="Breadcrumb">
-					<a href="/">Home</a>
-					<span aria-hidden="true">›</span>
-					<span aria-current="page">About Us</span>
-				</nav>
-				<h1>About NEC Ltd Electrical</h1>
-				<p>
-					A Northamptonshire-based NICEIC Approved Contractor delivering dependable design and build electrical
-					services for clients who need quality, clarity, and safe delivery from tender to handover.
-				</p>
-			</div>
-		</section>
+		<PageHero links={pageLinks} image={heroImage} imagePosition="center 40%">
+			<nav class="crumbs" aria-label="Breadcrumb">
+				<a href="/">Home</a>
+				<span aria-hidden="true">›</span>
+				<span aria-current="page">About Us</span>
+			</nav>
+			<h1>About NEC Ltd Electrical</h1>
+			<p>
+				A Northamptonshire-based NICEIC Approved Contractor delivering dependable design and build electrical
+				services for clients who need quality, clarity, and safe delivery from tender to handover.
+			</p>
+		</PageHero>
 
 		<section class="section about-intro">
 			<div class="container about-intro-grid">
@@ -77,76 +73,13 @@ const heroImage = projects.find((project) => project.slug === 'navara-mill')?.he
 		<WhyChooseSection items={differentiators} />
 		<AccreditationsSection items={accreditations} />
 		<FeaturedProjectsSection projects={projects} limit={3} />
+		<NewsSection posts={newsPosts} />
 	</main>
 
 	<Footer links={pageLinks} />
 </Layout>
 
 <style>
-	.about-hero {
-		position: relative;
-		min-height: clamp(320px, 48vh, 420px);
-		overflow: clip;
-		display: grid;
-		align-items: end;
-	}
-
-	.about-hero-bg,
-	.about-hero-overlay {
-		position: absolute;
-		inset: 0;
-	}
-
-	.about-hero-bg {
-		background-position: center 40%;
-		background-size: cover;
-		background-repeat: no-repeat;
-	}
-
-	.about-hero-overlay {
-		background: linear-gradient(130deg, rgba(17, 22, 35, 0.88), rgba(17, 22, 35, 0.52));
-	}
-
-	.about-hero-content {
-		position: relative;
-		z-index: 1;
-		color: var(--white);
-		padding-bottom: clamp(2rem, 4vw, 2.8rem);
-	}
-
-	.crumbs {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 0.42rem;
-		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
-		color: rgba(255, 255, 255, 0.82);
-	}
-
-	.crumbs a {
-		color: rgba(255, 255, 255, 0.86);
-	}
-
-	.crumbs a:hover {
-		color: var(--white);
-	}
-
-	.about-hero-content h1 {
-		margin-top: 0.85rem;
-		font-size: clamp(2.1rem, 6vw, 3.8rem);
-		line-height: 0.98;
-		letter-spacing: -0.03em;
-		color: var(--white);
-		max-width: 14ch;
-	}
-
-	.about-hero-content p:last-child {
-		margin-top: 1rem;
-		max-width: 58ch;
-		color: #dde1ee;
-		line-height: 1.65;
-	}
-
 	.about-intro {
 		background: var(--white);
 	}
