@@ -20,13 +20,6 @@ export interface InfoCardItem {
 	image?: string;
 }
 
-export interface NewsPostItem {
-	title: string;
-	image: string;
-	readTime: string;
-	href?: string;
-}
-
 export const pageTitle = 'NEC Electrical Services | NEC Ltd Electrical';
 export const pageDescription =
 	'NICEIC Approved Contractor for design and build electrical services across industrial, commercial and educational projects in the UK.';
@@ -124,24 +117,6 @@ export const accreditations: InfoCardItem[] = [
 		title: 'ECS / CSCS',
 		image: '/images/accreditation-ecs-cscs.jpg',
 		description: 'Our teams are fully equipped and trained to operate safely and professionally across all site environments.',
-	},
-];
-
-export const newsPosts: NewsPostItem[] = [
-	{
-		title: 'From Concept to Completion: The Advantage of Design and Build Electrical Services',
-		image: '/images/news-design-build.jpeg',
-		readTime: '1 min read',
-	},
-	{
-		title: 'Is Your Electrical System Compliant? Three Reasons to Choose a NICEIC Contractor',
-		image: '/images/news-compliance.jpg',
-		readTime: '1 min read',
-	},
-	{
-		title: 'Sparking Up Our Digital Presence: Welcome to the New NEC Ltd Website',
-		image: '/images/news-digital-presence.jpeg',
-		readTime: '1 min read',
 	},
 ];
 

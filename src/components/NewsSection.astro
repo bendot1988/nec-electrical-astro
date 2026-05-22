@@ -1,5 +1,5 @@
 ---
-import type { NewsPostItem } from '../data/home';
+import type { NewsPostItem } from '../data/news';
 
 interface Props {
 	posts: NewsPostItem[];
@@ -11,7 +11,10 @@ const { posts } = Astro.props;
 <section class="section news">
 	<div class="container">
 		<p class="section-kicker">News</p>
-		<h2 class="section-title">Latest Company News</h2>
+		<div class="news-heading">
+			<h2 class="section-title">Latest Company News</h2>
+			<a href="/news/" class="news-all-link">View all news</a>
+		</div>
 		<div class="news-grid">
 			{
 				posts.map((post) => (
@@ -48,6 +51,25 @@ const { posts } = Astro.props;
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
 		color: var(--blue);
+	}
+
+	.news-heading {
+		margin-top: 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.75rem 1.5rem;
+	}
+
+	.news-all-link {
+		font: 600 0.95rem/1 'League Spartan', Arial, sans-serif;
+		color: var(--blue);
+		white-space: nowrap;
+	}
+
+	.news-all-link:hover {
+		text-decoration: underline;
 	}
 
 	.news-grid {

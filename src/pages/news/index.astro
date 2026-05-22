@@ -1,0 +1,227 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { navLinks } from '../../data/home';
+import { formatNewsDate, getNewsHref, getSortedNewsArticles } from '../../data/news';
+
+const pageTitle = 'News | NEC Ltd Electrical';
+const pageDescription =
+	'Company news and practical insight from NEC Ltd Electrical — design and build delivery, compliance, and project updates.';
+
+const pageLinks = navLinks.map((link) => ({
+	...link,
+	href: link.href.startsWith('/') ? link.href : `/${link.href}`,
+}));
+
+const articles = getSortedNewsArticles();
+const heroImage = articles[0]?.image ?? '/images/news-design-build.jpeg';
+---
+
+<Layout title={pageTitle} description={pageDescription} ogImage={heroImage}>
+	<Header links={pageLinks} />
+
+	<main id="main-content">
+		<section class="news-hero">
+			<div class="news-hero-bg" style={`background-image: url('${heroImage}');`} aria-hidden="true"></div>
+			<div class="news-hero-overlay" aria-hidden="true"></div>
+			<div class="container news-hero-content">
+				<nav class="crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">›</span>
+					<span aria-current="page">News</span>
+				</nav>
+				<h1>Latest Company News</h1>
+				<p>
+					Updates from NEC Ltd Electrical — project insight, compliance guidance, and announcements from our
+					design and build teams.
+				</p>
+			</div>
+		</section>
+
+		<section class="section news-list">
+			<div class="container">
+				<div class="news-grid" data-animate-stagger="0.08">
+					{
+						articles.map((article) => (
+							<article class="news-card brand-line-box" data-animate="fade-up">
+								<a href={getNewsHref(article.slug)} aria-label={article.title}>
+									<img src={article.image} alt="" loading="lazy" width="640" height="420" />
+								</a>
+								<div class="news-body">
+									<p class="news-meta">
+										<time datetime={article.publishedAt}>{formatNewsDate(article.publishedAt)}</time>
+										<span aria-hidden="true">·</span>
+										<span>{article.readTime}</span>
+									</p>
+									<h2>
+										<a href={getNewsHref(article.slug)}>{article.title}</a>
+									</h2>
+									<p class="news-excerpt">{article.excerpt}</p>
+									<a href={getNewsHref(article.slug)} class="news-cta">
+										Read article
+										<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5">
+											<path d="M5 12h14M13 6l6 6-6 6" />
+										</svg>
+									</a>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<Footer links={pageLinks} />
+</Layout>
+
+<style>
+	.news-hero {
+		position: relative;
+		min-height: clamp(290px, 42vw, 380px);
+		display: grid;
+		align-items: end;
+		overflow: clip;
+	}
+
+	.news-hero-bg,
+	.news-hero-overlay {
+		position: absolute;
+		inset: 0;
+	}
+
+	.news-hero-bg {
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.news-hero-overlay {
+		background: linear-gradient(130deg, rgba(17, 22, 35, 0.88), rgba(17, 22, 35, 0.5));
+	}
+
+	.news-hero-content {
+		position: relative;
+		z-index: 1;
+		color: var(--white);
+		padding-bottom: clamp(2rem, 4vw, 2.8rem);
+	}
+
+	.crumbs {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.42rem;
+		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.crumbs a {
+		color: rgba(255, 255, 255, 0.86);
+	}
+
+	.crumbs a:hover {
+		color: var(--white);
+	}
+
+	.news-hero-content h1 {
+		margin-top: 0.85rem;
+		font-size: clamp(2.1rem, 6vw, 3.6rem);
+		line-height: 0.98;
+		letter-spacing: -0.03em;
+		color: var(--white);
+		max-width: 16ch;
+	}
+
+	.news-hero-content p:last-child {
+		margin-top: 1rem;
+		max-width: 58ch;
+		color: #dde1ee;
+		line-height: 1.65;
+	}
+
+	.news-list {
+		background: var(--ghost-white);
+	}
+
+	.news-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1.2rem;
+	}
+
+	.news-card {
+		background: var(--white);
+		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.05);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.news-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 18px 34px rgba(21, 27, 44, 0.14);
+	}
+
+	.news-card img {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+	}
+
+	.news-body {
+		padding: 1rem 1rem 1.15rem;
+	}
+
+	.news-meta {
+		margin: 0;
+		font: 400 0.82rem/1.4 'Open Sans', Arial, sans-serif;
+		color: var(--charcoal-400);
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+		align-items: center;
+	}
+
+	.news-body h2 {
+		margin-top: 0.55rem;
+		font-size: 1.2rem;
+		line-height: 1.25;
+	}
+
+	.news-body h2 a:hover {
+		color: var(--blue);
+	}
+
+	.news-excerpt {
+		margin-top: 0.55rem;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: var(--charcoal-400);
+	}
+
+	.news-cta {
+		margin-top: 0.85rem;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		font: 600 0.92rem/1 'League Spartan', Arial, sans-serif;
+		color: var(--blue);
+	}
+
+	.news-cta:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 1060px) {
+		.news-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 700px) {
+		.news-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

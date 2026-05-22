@@ -1,0 +1,312 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { navLinks } from '../../data/home';
+import { formatNewsDate, getNewsHref, getSortedNewsArticles, newsArticles } from '../../data/news';
+
+export function getStaticPaths() {
+	return newsArticles.map((article) => ({
+		params: { slug: article.slug },
+		props: { article },
+	}));
+}
+
+const { article } = Astro.props;
+
+const pageLinks = navLinks.map((link) => ({
+	...link,
+	href: link.href.startsWith('/') ? link.href : `/${link.href}`,
+}));
+
+const pageTitle = `${article.title} | News | NEC Ltd Electrical`;
+const pageDescription = article.excerpt;
+
+const relatedArticles = getSortedNewsArticles()
+	.filter((item) => item.slug !== article.slug)
+	.slice(0, 2);
+---
+
+<Layout title={pageTitle} description={pageDescription} ogImage={article.image}>
+	<Header links={pageLinks} />
+
+	<main id="main-content">
+		<article class="article">
+			<section class="article-hero">
+				<div class="article-hero-bg" style={`background-image: url('${article.image}');`} aria-hidden="true"></div>
+				<div class="article-hero-overlay" aria-hidden="true"></div>
+				<div class="container article-hero-content">
+					<nav class="crumbs" aria-label="Breadcrumb">
+						<a href="/">Home</a>
+						<span aria-hidden="true">›</span>
+						<a href="/news/">News</a>
+						<span aria-hidden="true">›</span>
+						<span aria-current="page">{article.title}</span>
+					</nav>
+					<p class="article-meta">
+						<time datetime={article.publishedAt}>{formatNewsDate(article.publishedAt)}</time>
+						<span aria-hidden="true">·</span>
+						<span>{article.readTime}</span>
+					</p>
+					<h1>{article.title}</h1>
+				</div>
+			</section>
+
+			<div class="container article-layout">
+				<div class="article-body" data-animate="fade-up">
+					<p class="article-lead">{article.excerpt}</p>
+					{
+						article.paragraphs.map((paragraph) =>
+							typeof paragraph === 'string' ? <p>{paragraph}</p> : <p set:html={paragraph.html} />,
+						)
+					}
+				</div>
+
+				<figure class="article-feature brand-line-box" data-animate="fade-up" data-animate-delay="0.08">
+					<img
+						src={article.image}
+						alt={article.slug === 'new-nec-website-launch' ? 'Screenshot of the new NEC Ltd Electrical website homepage' : ''}
+						loading="lazy"
+						width="960"
+						height="600"
+					/>
+				</figure>
+			</div>
+
+			{
+				relatedArticles.length > 0 && (
+					<section class="section related">
+						<div class="container">
+							<p class="section-kicker">More news</p>
+							<h2 class="section-title">Related articles</h2>
+							<div class="related-grid" data-animate-stagger="0.08">
+								{relatedArticles.map((related) => (
+									<article class="related-card brand-line-box" data-animate="fade-up">
+										<a href={getNewsHref(related.slug)} aria-label={related.title}>
+											<img src={related.image} alt="" loading="lazy" width="640" height="420" />
+										</a>
+										<div class="related-body">
+											<h3>
+												<a href={getNewsHref(related.slug)}>{related.title}</a>
+											</h3>
+											<p>{related.readTime}</p>
+										</div>
+									</article>
+								))}
+							</div>
+							<p class="back-link-wrap">
+								<a href="/news/" class="back-link">← All news</a>
+							</p>
+						</div>
+					</section>
+				)
+			}
+		</article>
+	</main>
+
+	<Footer links={pageLinks} />
+</Layout>
+
+<style>
+	.article-hero {
+		position: relative;
+		min-height: clamp(280px, 40vw, 360px);
+		display: grid;
+		align-items: end;
+		overflow: clip;
+	}
+
+	.article-hero-bg,
+	.article-hero-overlay {
+		position: absolute;
+		inset: 0;
+	}
+
+	.article-hero-bg {
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.article-hero-overlay {
+		background: linear-gradient(130deg, rgba(17, 22, 35, 0.9), rgba(17, 22, 35, 0.55));
+	}
+
+	.article-hero-content {
+		position: relative;
+		z-index: 1;
+		color: var(--white);
+		padding-bottom: clamp(2rem, 4vw, 2.6rem);
+	}
+
+	.crumbs {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.42rem;
+		font: 400 0.88rem/1.2 'League Spartan', Arial, sans-serif;
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.crumbs a {
+		color: rgba(255, 255, 255, 0.86);
+	}
+
+	.crumbs a:hover {
+		color: var(--white);
+	}
+
+	.crumbs [aria-current='page'] {
+		max-width: 28ch;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.article-meta {
+		margin: 0.75rem 0 0;
+		font: 400 0.88rem/1.4 'Open Sans', Arial, sans-serif;
+		color: rgba(255, 255, 255, 0.88);
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+		align-items: center;
+	}
+
+	.article-hero-content h1 {
+		margin-top: 0.75rem;
+		font-size: clamp(1.85rem, 5vw, 3rem);
+		line-height: 1.05;
+		letter-spacing: -0.03em;
+		color: var(--white);
+		max-width: 22ch;
+	}
+
+	.article-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+		gap: 2rem;
+		align-items: start;
+		padding-block: clamp(2.5rem, 5vw, 4rem);
+	}
+
+	.article-body {
+		max-width: 68ch;
+	}
+
+	.article-lead {
+		font-size: 1.12rem;
+		line-height: 1.65;
+		color: var(--charcoal-100);
+	}
+
+	.article-body p + p {
+		margin-top: 1rem;
+		color: var(--charcoal-300);
+		line-height: 1.75;
+	}
+
+	.article-body :global(a) {
+		color: var(--blue);
+		font-weight: 600;
+	}
+
+	.article-body :global(a:hover) {
+		text-decoration: underline;
+	}
+
+	.article-feature {
+		margin: 0;
+		background: var(--white);
+		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+		box-shadow: 0 12px 28px rgba(21, 27, 44, 0.08);
+	}
+
+	.article-feature img {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+	}
+
+	.related {
+		background: var(--ghost-white);
+	}
+
+	.section-kicker {
+		font: 600 0.73rem/1 'Open Sans', Arial, sans-serif;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--blue);
+	}
+
+	.related-grid {
+		margin-top: 1.5rem;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.2rem;
+	}
+
+	.related-card {
+		background: var(--white);
+		clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+		box-shadow: 0 10px 26px rgba(21, 27, 44, 0.05);
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.related-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 16px 30px rgba(21, 27, 44, 0.12);
+	}
+
+	.related-card img {
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+	}
+
+	.related-body {
+		padding: 1rem;
+	}
+
+	.related-body h3 {
+		font-size: 1.1rem;
+		line-height: 1.25;
+	}
+
+	.related-body h3 a:hover {
+		color: var(--blue);
+	}
+
+	.related-body p {
+		margin-top: 0.45rem;
+		font-size: 0.88rem;
+		color: var(--charcoal-400);
+	}
+
+	.back-link-wrap {
+		margin-top: 1.75rem;
+	}
+
+	.back-link {
+		font: 600 0.95rem/1 'League Spartan', Arial, sans-serif;
+		color: var(--blue);
+	}
+
+	.back-link:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 900px) {
+		.article-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.article-feature {
+			order: -1;
+		}
+
+		.related-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

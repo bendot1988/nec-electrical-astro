@@ -36,6 +36,7 @@ export const sitemapColumns: SitemapColumn[] = [
 			{ label: 'About us', href: '/about/', description: 'Company ethos, mission, accreditations, and recent projects.' },
 			{ label: 'Services overview', href: '/services/', description: 'Filterable cards for every capability.' },
 			{ label: 'Projects', href: '/projects/', description: 'Featured case studies and previous NEC work.' },
+			{ label: 'News', href: '/news/', description: 'Company news and practical electrical insight.' },
 			{ label: 'Contact', href: '/contact/', description: 'Project enquiry form, phone, email, and address.' },
 		],
 	},
