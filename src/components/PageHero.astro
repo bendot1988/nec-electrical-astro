@@ -7,7 +7,7 @@ interface Props {
 	/** Background image URL. Omit for gradient-only heroes (e.g. legal). */
 	image?: string;
 	imagePosition?: string;
-	size?: 'standard' | 'compact' | 'project';
+	size?: 'standard' | 'compact' | 'projects' | 'project';
 	ctaHref?: string;
 }
 
@@ -24,6 +24,7 @@ const {
 	class:list={[
 		'page-hero',
 		size === 'compact' && 'page-hero--compact',
+		size === 'projects' && 'page-hero--projects',
 		size === 'project' && 'page-hero--project',
 	]}
 >
@@ -57,6 +58,10 @@ const {
 
 	.page-hero--compact {
 		min-height: clamp(260px, 38vw, 320px);
+	}
+
+	.page-hero--projects {
+		min-height: clamp(300px, 44vw, 400px);
 	}
 
 	.page-hero--project {
@@ -183,6 +188,10 @@ const {
 			min-height: clamp(240px, 46vw, 300px);
 		}
 
+		.page-hero--projects {
+			min-height: clamp(340px, 62vw, 420px);
+		}
+
 		.page-hero--project {
 			min-height: clamp(400px, 78vw, 520px);
 		}
@@ -191,10 +200,29 @@ const {
 			margin-top: auto;
 		}
 
+		.page-hero--projects,
+		.page-hero--project {
+			/* top float gap + nav margin + nav bar (menu height + padding) + space before breadcrumbs */
+			--mobile-breadcrumb-offset: calc(
+				max(0.85rem, env(safe-area-inset-top, 0px)) + 0.85rem + 0.75rem + 2.85rem + 0.75rem + 0.85rem +
+					0.75rem
+			);
+			padding-top: 0;
+		}
+
+		.page-hero--projects :global(.site-header),
+		.page-hero--project :global(.site-header) {
+			position: absolute;
+			top: max(0.85rem, env(safe-area-inset-top, 0px));
+			left: 0;
+			right: 0;
+			z-index: 2;
+		}
+
+		.page-hero--projects .page-hero-content,
 		.page-hero--project .page-hero-content {
-			margin-top: 0.5rem;
-			padding-top: 0.15rem;
-			padding-bottom: clamp(2.25rem, 5vw, 3rem);
+			margin-top: 0;
+			padding-top: var(--mobile-breadcrumb-offset);
 		}
 	}
 </style>
