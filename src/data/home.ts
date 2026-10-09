@@ -129,7 +129,7 @@ export const localBusinessSchema = {
 	image: `${SITE_ORIGIN}/images/og-default.jpg`,
 	description: pageDescription,
 	telephone: '+44 1536 417807',
-	email: 'enquries@necltd.net',
+	email: 'enquiries@necltd.net',
 	address: {
 		'@type': 'PostalAddress',
 		streetAddress: '81A Charles Street',
